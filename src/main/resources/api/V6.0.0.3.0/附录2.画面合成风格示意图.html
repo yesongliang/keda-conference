@@ -1,0 +1,887 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>画面合成风格示意图</title>
+<meta content="text/html" charset="utf-8">
+</meta>
+<style type = "text/css">
+body {
+	background: #f5f5f5;
+	margin: 0px;
+	margin-top: -20px;
+	padding: 0px;
+}
+#div_title {
+	background: #2171c2;
+	color: #fff;
+	height: 60px;
+	box-shadow: 0 .25em .75em #CCC;
+	padding-top: 15px;
+	margin-top: 0px;
+	font-family: "Microsoft Yahei" normal;
+	font-size: 12px;
+	z-index: 20;
+	position: fixed;
+	width: 100%;
+}
+#div_title h1 {
+	font-weight: normal;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1004px
+}
+#div_title_occupy {
+	height: 69px;
+}
+#div_main {
+	width: 1004px;
+	font-family: "Microsoft Yahei", helvetica, 'Lucida Grande', Tahoma, Verdana, Simsun, Arial, Clean;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px;
+}
+#div_content {
+	position: fixed;
+	width: 180px;
+	overflow: auto;
+	background-color: #f2f2f2;
+	padding-left: 15px;
+	margin-top: 2px;
+}
+#div_content_body h3 {
+	height: 10px;
+}
+#div_body {
+	margin-left: 180px;
+	width: 824px;
+	overflow: auto;
+}
+#example_div {
+	width: 650px;
+	border: 1px dashed #cecfcf;
+	background : #f5f6f7;
+	font-family: Consolas, Menlo, "Liberation Mono", Courier, monospace!important;
+	padding-left: 2px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 13px;
+	min-height: 50px;
+}
+#uri_list_div a {
+	color: #5f940a;
+	text-decoration: none;
+	font-size: 13px;
+	height: 10px;
+}
+#uri_list_div a:hover {
+	text-decoration: underline;
+}
+table.uri_t td {
+	padding-left: 10px;
+}
+table.t {
+	font-size: 13px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 655px;
+	border: 1px solid #e4e4e4;
+	border-right: 0;
+	border-collapse: collapse;
+}
+table.t tr {
+	min-height: 25px;
+	line-height: 20px;
+}
+table.t th {
+	background-color: #efefef;
+	text-align: center;
+	border-right: 1px solid #e4e4e4;
+	border-bottom: 1px solid #e4e4e4;
+	color: #000;
+}
+table.t td {
+	border-right: 1px solid #e4e4e4;
+	border-bottom: 1px solid #e4e4e4;
+	color: #000;
+	background-color: #fff;
+	text-align: left;
+	padding-left: 5px;
+}
+#div_get, #div_post, #div_push {
+	background-color: #fff;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+	padding: 64px;
+	margin: 2px 20px 20px 20px;
+ align="center";
+}
+.fullsize {
+	height: 180px;
+	width: 320px;
+	border: black solid 1px;
+	background-color: gray;
+	text-align: center;
+}
+.halfsize {
+	height: 90px;
+	width: 160px;
+	border: black solid 1px;
+	float: left;
+	margin: -1px;
+	line-height: 90px;
+	background-color: #0FF;
+}
+.onesize {
+	height: 180px;
+	width: 320px;
+	border: black solid 1px;
+	float: left;
+	margin: -1px;
+	line-height: 180px;
+	background-color: #0FF;
+	z-index: 10;
+}
+.onethird {
+	margin: -1px;
+	line-height: 60px;
+	border: black solid 1px;
+	background-color: #0FF;
+	float: left;
+	height: 60px;
+	width: 106px;
+}
+.onefourth {
+	margin: -1px;
+	line-height: 45px;
+	border: black solid 1px;
+	background-color: #0FF;
+	float: left;
+	height: 45px;
+	width: 80px;
+}
+.onefifth {
+	height: 36px;
+	width: 64px;
+	float: left;
+	margin: -1px;
+	line-height: 36px;
+	border: black solid 1px;
+	background-color: #0FF;
+}
+.onesixth {
+	height: 30px;
+	width: 53px;
+	float: left;
+	margin: -1px;
+	line-height: 36px;
+	border: black solid 1px;
+	background-color: #0FF;
+}
+.twothird {
+	height: 120px;
+	width: 212px;
+	float: left;
+	margin: -1px;
+	line-height: 120px;
+	border: black solid 1px;
+	background-color: #0FF;
+}
+.twofifth {
+	height: 72px;
+	width: 128px;
+	float: left;
+	margin: -1px;
+	line-height: 72px;
+	border: black solid 1px;
+	background-color: #0FF;
+}
+.threefouth {
+	margin: -1px;
+	line-height: 135px;
+	border: black solid 1px;
+	background-color: #0FF;
+	float: left;
+	height: 135px;
+	width: 240px;
+}
+.threefifth {
+	height: 108px;
+	width: 192px;
+	float: left;
+	margin: -1px;
+	line-height: 108px;
+	border: black solid 1px;
+	background-color: #0FF;
+}
+#styleone_small {
+	margin-top: 45px;
+}
+#style2_1 {
+	margin-top: -61px;
+	margin-left: 213px;
+	position: relative;
+}
+#style_left_top {
+    margin-top: -181px;
+    position: relative;
+}
+#style_left_bottom {
+   margin-top: -61px;
+   position: relative;
+}
+#style_right_top {
+  margin-top: -181px;
+  margin-left: 213px;
+  position: relative;
+}
+#style3_0 {
+	margin-left: 80px;
+	z-index: 20;
+}
+#style3_0_other {
+	margin-top: 45px;
+}
+#style5_0 {
+	margin-left: 40px;
+	text-align: center;
+}
+#style11_0 {
+	margin-left: 64px;
+	text-align: center;
+}
+#style_6 {
+	padding-left: 15px;
+}
+.onesixth_1x4 {
+	float: left;
+	height: 120px;
+	width: 53px;
+}
+.fivefive_2x5 {
+	float: left;
+	height: 72px;
+	width: 320px;
+}
+.onesixth_1x2 {
+	float: left;
+	height: 60px;
+	width: 53px;
+}
+.halfsize_2x1 {
+	float: left;
+	height: 90px;
+	width: 80px;
+}
+.onefourth_1x4 {
+	float: left;
+	height: 45px;
+	width: 320px;
+}
+.onefourth_4x1 {
+	float: left;
+	height: 120px;
+	width: 53px;
+}
+.onefourth_onefive {
+	margin: -1px;
+	line-height: 45px;
+	border: black solid 1px;
+	background-color: #0FF;
+	float: left;
+	height: 45px;
+	width: 64px;
+}
+.onetwo_twofive {
+	margin: -1px;
+	line-height: 90px;
+	border: black solid 1px;
+	background-color: #0FF;
+	float: left;
+	height: 90px;
+	width: 128px;
+}
+.onetwo_onethree {
+	margin: -1px;
+	line-height: 90px;
+	border: black solid 1px;
+	background-color: #0FF;
+	float: left;
+	height: 90px;
+	width: 106px;
+}
+.onefourth_onesixth {
+	margin: -1px;
+	line-height: 45px;
+	border: black solid 1px;
+	background-color: #0FF;
+	float: left;
+	height: 45px;
+	width: 53px;
+}
+</style>
+<link rel="icon" href="api.ico" type="image/x-icon">
+</head>
+<body>
+<div id="div_title">
+  <h1>画面合成风格示意图</h1>
+</div>
+<div id="div_title_occupy"></div>
+<div id="div_main">
+  <div id="div_content">
+    <div id="div_content_body">
+      <h3>画面合成风格</h3>
+      <div id="uri_list_div"> <a href="#ONE_GRAPHICS">&nbsp;&nbsp;1-一画面</a><br />
+        <a href="#TWO_GRAPHICS">&nbsp;&nbsp;2-二画面（等大）</a><br />
+        <a href="#TWO_GRAPHICS_1">&nbsp;&nbsp;62-二画面（一大一小左上）</a><br />
+        <a href="#TWO_GRAPHICS_2">&nbsp;&nbsp;63-二画面（一大一小左下）</a><br />
+        <a href="#TWO_GRAPHICS_3">&nbsp;&nbsp;3-二画面（一大一小右下）</a><br />
+        <a href="#TWO_GRAPHICS_4">&nbsp;&nbsp;61-二画面（一大一小右上）</a><br />
+        <a href="#THREE_GRAPHICS">&nbsp;&nbsp;23-三画面（一左二右）</a><br />
+        <a href="#THREE_GRAPHICS_1">&nbsp;&nbsp;4-三画面（一上二下）</a><br />
+        <a href="#FOUR_GRAPHICS">&nbsp;&nbsp;5-四画面</a><br />
+        <a href="#FIVE_GRAPHICS">&nbsp;&nbsp;35-五画面</a><br />
+        <a href="#SIX_GRAPHICS">&nbsp;&nbsp;6-六画面</a><br />
+        <a href="#SEVEN_GRAPHICS">&nbsp;&nbsp;13-七画面</a><br />
+        <a href="#EIGHT_GRAPHICS">&nbsp;&nbsp;7-八画面</a><br />
+        <a href="#NINE_GRAPHICS">&nbsp;&nbsp;8-九画面</a><br />
+        <a href="#TEN_GRAPHICS">&nbsp;&nbsp;18-十画面</a><br />
+        <a href="#ELEVEN_GRAPHICS">&nbsp;&nbsp;38-十一画面</a><br />
+        <a href="#TWELVE_GRAPHICS">&nbsp;&nbsp;39-十二画面</a><br />
+        <a href="#THIRTEEN_GRAPHICS">&nbsp;&nbsp;19-十三画面</a><br />
+        <a href="#FOURTEEN_GRAPHICS">&nbsp;&nbsp;17-十四画面</a><br />
+        <a href="#FIFTEEN_GRAPHICS">&nbsp;&nbsp;20-十五画面</a><br />
+        <a href="#SIXTEEN_GRAPHICS">&nbsp;&nbsp;11-十六画面</a><br />
+        <a href="#SEVENTEEN_GRAPHICS">&nbsp;&nbsp;46-十七画面</a><br />
+        <a href="#EIGHTEEN_GRAPHICS">&nbsp;&nbsp;48-十八画面</a><br />
+        <a href="#NINETEEN_GRAPHICS">&nbsp;&nbsp;51-十九画面</a><br />
+        <a href="#TWENTY_GRAPHICS">&nbsp;&nbsp;14-二十画面</a><br />
+        <a href="#TWENTYONE_GRAPHICS">&nbsp;&nbsp;54-二十一画面</a><br />
+        <a href="#TWENTYTWO_GRAPHICS">&nbsp;&nbsp;56-二十二画面</a><br />
+        <a href="#TWENTYFOUR_GRAPHICS">&nbsp;&nbsp;59-二十四画面</a><br />
+        <a href="#TWENTYFIVE_GRAPHICS">&nbsp;&nbsp;27-二十五画面</a><br />
+      </div>
+    </div>
+  </div>
+  <div id="div_body">
+    <div id="div_posts">
+      <div id="div_post"><a name="ONE_GRAPHICS"></a>
+        <p id='text_style'>1-一画面</p>
+        <div id='div_gra' class='fullsize'>
+          <div id='div_gra' class='onesize'>0</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWO_GRAPHICS"></a>
+        <p id='text_style'>2-两画面（等大）</p>
+        <div class='fullsize'>
+          <div id='styleone_small' class='halfsize'>0</div>
+          <div id='styleone_small' class='halfsize'>1</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWO_GRAPHICS_1"></a>
+        <p id='text_style'>62-两画面（一大一小左上）</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onesize'>0</div>
+          <div id='style_left_top' class='onethird'>1</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWO_GRAPHICS_2"></a>
+        <p id='text_style'>63-两画面（一大一小左下）</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onesize'>0</div>
+          <div id='style_left_bottom' class='onethird'>1</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWO_GRAPHICS_3"></a>
+        <p id='text_style'>3-两画面（一大一小右下）</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onesize'>0</div>
+          <div id='style2_1' class='onethird'>1</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWO_GRAPHICS_4"></a>
+        <p id='text_style'>61-两画面（一大一小右上）</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onesize'>0</div>
+          <div id='style_right_top' class='onethird'>1</div>
+        </div>
+        <br />
+        <br />
+        <a name="THREE_GRAPHICS"></a>
+        <p id='text_style'>23-三画面（一左二右）</p>
+        <div class='fullsize'>
+          <div id='style3_0_other' class='halfsize'>0</div>
+          <div id='div_gra' class='halfsize'>1</div>
+          <div id='div_gra' class='halfsize'>2</div>
+        </div>
+        <br />
+        <br />
+        <a name="THREE_GRAPHICS_1"></a>
+        <p id='text_style'>4-三画面: （一上二下）</p>
+        <div class='fullsize'>
+          <div id='style3_0' class='halfsize'>0</div>
+          <div id='div_gra' class='halfsize'>1</div>
+          <div id='div_gra' class='halfsize'>2</div>
+        </div>
+        <br />
+        <br />
+        <a name="FOUR_GRAPHICS"></a>
+        <p id='text_style'>5-四画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='halfsize'>0</div>
+          <div id='div_gra' class='halfsize'>1</div>
+          <div id='div_gra' class='halfsize'>2</div>
+          <div id='div_gra' class='halfsize'>3</div>
+        </div>
+        <br />
+        <br />
+        <a name="FIVE_GRAPHICS"></a>
+        <p id='text_style'>35-五画面</p>
+        <div class='fullsize'>
+          <div id='style5_0' class='threefouth'>0</div>
+          <div class='onefourth_1x4'>
+            <div id='div_gra' class='onefourth'>1</div>
+            <div id='div_gra' class='onefourth'>2</div>
+            <div id='div_gra' class='onefourth'>3</div>
+            <div id='div_gra' class='onefourth'>4</div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <a name="SIX_GRAPHICS"></a>
+        <p id='text_style'>6-六画面</p>
+        <div id='style6' class='fullsize'>
+          <div class='twothird'>0</div>
+          <div class='onethird'>1</div>
+          <div class='onethird'>2</div>
+          <div class='onethird'>5</div>
+          <div class='onethird'>4</div>
+          <div class='onethird'>3</div>
+        </div>
+        <br />
+        <br />
+        <a name="SEVEN_GRAPHICS"></a>
+        <p id='text_style'>13-七画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='halfsize'>0</div>
+          <div id='div_gra' class='halfsize'>1</div>
+          <div id='div_gra' class='halfsize'>2</div>
+          <div id='div_gra' class='onefourth'>3</div>
+          <div id='div_gra' class='onefourth'>4</div>
+          <div id='div_gra' class='onefourth'>5</div>
+          <div id='div_gra' class='onefourth'>6</div>
+        </div>
+        <br />
+        <br />
+        <a name="EIGHT_GRAPHICS"></a>
+        <p id='text_style'>7-八画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='threefouth'>0</div>
+          <div id='div_gra' class='onefourth'>1</div>
+          <div id='div_gra' class='onefourth'>2</div>
+          <div id='div_gra' class='onefourth'>3</div>
+          <div id='div_gra' class='onefourth'>7</div>
+          <div id='div_gra' class='onefourth'>6</div>
+          <div id='div_gra' class='onefourth'>5</div>
+          <div id='div_gra' class='onefourth'>4</div>
+        </div>
+        <br />
+        <br />
+        <a name="NINE_GRAPHICS"></a>
+        <p id='text_style'>8-九画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onethird'>0</div>
+          <div id='div_gra' class='onethird'>1</div>
+          <div id='div_gra' class='onethird'>2</div>
+          <div id='div_gra' class='onethird'>3</div>
+          <div id='div_gra' class='onethird'>4</div>
+          <div id='div_gra' class='onethird'>5</div>
+          <div id='div_gra' class='onethird'>6</div>
+          <div id='div_gra' class='onethird'>7</div>
+          <div id='div_gra' class='onethird'>8</div>
+        </div>
+        <br />
+        <br />
+        <a name="TEN_GRAPHICS"></a>
+        <p id='text_style'>18-十画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onefourth'>2</div>
+          <div id='div_gra' class='onefourth'>3</div>
+          <div id='div_gra' class='onefourth'>4</div>
+          <div id='div_gra' class='onefourth'>5</div>
+          <div id='div_gra' class='halfsize'>0</div>
+          <div id='div_gra' class='halfsize'>1</div>
+          <div id='div_gra' class='onefourth'>6</div>
+          <div id='div_gra' class='onefourth'>7</div>
+          <div id='div_gra' class='onefourth'>8</div>
+          <div id='div_gra' class='onefourth'>9</div>
+        </div>
+        <br />
+        <br />
+        <a name="ELEVEN_GRAPHICS"></a>
+        <p id='text_style'>38-十一画面</p>
+        <div class='fullsize'>
+          <div id='style11_0' class='threefifth'>0</div>
+          <div class='fivefive_2x5'>
+            <div id='div_gra' class='onefifth'>1</div>
+            <div id='div_gra' class='onefifth'>2</div>
+            <div id='div_gra' class='onefifth'>3</div>
+            <div id='div_gra' class='onefifth'>4</div>
+            <div id='div_gra' class='onefifth'>5</div>
+            <div id='div_gra' class='onefifth'>6</div>
+            <div id='div_gra' class='onefifth'>7</div>
+            <div id='div_gra' class='onefifth'>8</div>
+            <div id='div_gra' class='onefifth'>9</div>
+            <div id='div_gra' class='onefifth'>10</div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <a name="TWELVE_GRAPHICS"></a>
+        <p id='text_style'>39-十二画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='halfsize'>0</div>
+          <div id='div_gra' class='halfsize'>1</div>
+          <div id='div_gra' class='halfsize'>2</div>
+          <div id='div_gra' class='onesixth'>3</div>
+          <div id='div_gra' class='onesixth'>4</div>
+          <div id='div_gra' class='onesixth'>5</div>
+          <div id='div_gra' class='onesixth'>6</div>
+          <div id='div_gra' class='onesixth'>7</div>
+          <div id='div_gra' class='onesixth'>8</div>
+          <div id='div_gra' class='onesixth'>9</div>
+          <div id='div_gra' class='onesixth'>10</div>
+          <div id='div_gra' class='onesixth'>11</div>
+        </div>
+        <br />
+        <br />
+        <a name="THIRTEEN_GRAPHICS"></a>
+        <p id='text_style'>19-十三画面</p>
+        <div class='fullsize'>
+          <div class='onefourth_1x4'>
+            <div id='div_gra' class='onefourth'>1</div>
+            <div id='div_gra' class='onefourth'>2</div>
+            <div id='div_gra' class='onefourth'>3</div>
+            <div id='div_gra' class='onefourth'>4</div>
+          </div>
+          <div class='halfsize_2x1'>
+            <div id='div_gra' class='onefourth'>5</div>
+            <div id='div_gra' class='onefourth'>7</div>
+          </div>
+          <div id='div_gra' class='halfsize'>0</div>
+          <div id='div_gra' class='onefourth'>6</div>
+          <div id='div_gra' class='onefourth'>8</div>
+          <div id='div_gra' class='onefourth_1x4'>
+            <div id='div_gra' class='onefourth'>9</div>
+            <div id='div_gra' class='onefourth'>10</div>
+            <div id='div_gra' class='onefourth'>11</div>
+            <div id='div_gra' class='onefourth'>12</div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <a name="FOURTEEN_GRAPHICS"></a>
+        <p id='text_style'>17-十四画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onetwo_twofive'>0</div>
+          <div id='div_gra' class='onetwo_twofive'>1</div>
+          <div id='div_gra' class='onefourth_onefive'>2</div>
+          <div id='div_gra' class='onefourth_onefive'>3</div>
+          <div class='fivefive_2x5'>
+            <div id='div_gra' class='onefourth_onefive'>4</div>
+            <div id='div_gra' class='onefourth_onefive'>5</div>
+            <div id='div_gra' class='onefourth_onefive'>6</div>
+            <div id='div_gra' class='onefourth_onefive'>7</div>
+            <div id='div_gra' class='onefourth_onefive'>8</div>
+            <div id='div_gra' class='onefourth_onefive'>9</div>
+            <div id='div_gra' class='onefourth_onefive'>10</div>
+            <div id='div_gra' class='onefourth_onefive'>11</div>
+            <div id='div_gra' class='onefourth_onefive'>12</div>
+            <div id='div_gra' class='onefourth_onefive'>13</div>
+          </div>
+        </div>
+        <br />
+        <br />
+        <a name="FIFTEEN_GRAPHICS"></a>
+        <p id='text_style'>20-十五画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onetwo_onethree'>0</div>
+          <div id='div_gra' class='onetwo_onethree'>1</div>
+          <div id='div_gra' class='onetwo_onethree'>2</div>
+          <div id='div_gra' class='onefourth_onesixth'>3</div>
+          <div id='div_gra' class='onefourth_onesixth'>4</div>
+          <div id='div_gra' class='onefourth_onesixth'>5</div>
+          <div id='div_gra' class='onefourth_onesixth'>6</div>
+          <div id='div_gra' class='onefourth_onesixth'>7</div>
+          <div id='div_gra' class='onefourth_onesixth'>8</div>
+          <div id='div_gra' class='onefourth_onesixth'>9</div>
+          <div id='div_gra' class='onefourth_onesixth'>10</div>
+          <div id='div_gra' class='onefourth_onesixth'>11</div>
+          <div id='div_gra' class='onefourth_onesixth'>12</div>
+          <div id='div_gra' class='onefourth_onesixth'>13</div>
+          <div id='div_gra' class='onefourth_onesixth'>14</div>
+        </div>
+        <br />
+        <br />
+        <a name="SIXTEEN_GRAPHICS"></a>
+        <p id='text_style'>11-十六画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onefourth'>0</div>
+          <div id='div_gra' class='onefourth'>1</div>
+          <div id='div_gra' class='onefourth'>2</div>
+          <div id='div_gra' class='onefourth'>3</div>
+          <div id='div_gra' class='onefourth'>4</div>
+          <div id='div_gra' class='onefourth'>5</div>
+          <div id='div_gra' class='onefourth'>6</div>
+          <div id='div_gra' class='onefourth'>7</div>
+          <div id='div_gra' class='onefourth'>8</div>
+          <div id='div_gra' class='onefourth'>9</div>
+          <div id='div_gra' class='onefourth'>10</div>
+          <div id='div_gra' class='onefourth'>11</div>
+          <div id='div_gra' class='onefourth'>12</div>
+          <div id='div_gra' class='onefourth'>13</div>
+          <div id='div_gra' class='onefourth'>14</div>
+          <div id='div_gra' class='onefourth'>15</div>
+        </div>
+        <br />
+        <br />
+        <a name="SEVENTEEN_GRAPHICS"></a>
+        <p id='text_style'>46-十七画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='threefifth'>0</div>
+          <div id='div_gra' class='onefifth'>1</div>
+          <div id='div_gra' class='onefifth'>2</div>
+          <div id='div_gra' class='onefifth'>3</div>
+          <div id='div_gra' class='onefifth'>4</div>
+          <div id='div_gra' class='onefifth'>5</div>
+          <div id='div_gra' class='onefifth'>6</div>
+          <div id='div_gra' class='onefifth'>7</div>
+          <div id='div_gra' class='onefifth'>8</div>
+          <div id='div_gra' class='onefifth'>9</div>
+          <div id='div_gra' class='onefifth'>10</div>
+          <div id='div_gra' class='onefifth'>11</div>
+          <div id='div_gra' class='onefifth'>12</div>
+          <div id='div_gra' class='onefifth'>13</div>
+          <div id='div_gra' class='onefifth'>14</div>
+          <div id='div_gra' class='onefifth'>15</div>
+          <div id='div_gra' class='onefifth'>16</div>
+        </div>
+        <br />
+        <br />
+        <a name="EIGHTEEN_GRAPHICS"></a>
+        <p id='text_style'>48-十八画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onesixth'>6</div>
+          <div id='div_gra' class='onesixth'>7</div>
+          <div id='div_gra' class='onesixth'>8</div>
+          <div id='div_gra' class='onesixth'>9</div>
+          <div id='div_gra' class='onesixth'>10</div>
+          <div id='div_gra' class='onesixth'>11</div>
+          <div id='div_gra' class='onethird'>0</div>
+          <div id='div_gra' class='onethird'>1</div>
+          <div id='div_gra' class='onethird'>2</div>
+          <div id='div_gra' class='onethird'>3</div>
+          <div id='div_gra' class='onethird'>4</div>
+          <div id='div_gra' class='onethird'>5</div>
+          <div id='div_gra' class='onesixth'>12</div>
+          <div id='div_gra' class='onesixth'>13</div>
+          <div id='div_gra' class='onesixth'>14</div>
+          <div id='div_gra' class='onesixth'>15</div>
+          <div id='div_gra' class='onesixth'>16</div>
+          <div id='div_gra' class='onesixth'>17</div>
+        </div>
+        <br />
+        <br />
+        <a name="NINETEEN_GRAPHICS"></a>
+        <p id='text_style'>51-十九画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='twofifth'>0</div>
+          <div id='div_gra' class='twofifth'>1</div>
+          <div id='div_gra' class='onefifth'>2</div>
+          <div id='div_gra' class='onefifth'>3</div>
+          <div id='div_gra' class='onefifth'>4</div>
+          <div id='div_gra' class='onefifth'>5</div>
+          <div id='div_gra' class='onefifth'>6</div>
+          <div id='div_gra' class='onefifth'>7</div>
+          <div id='div_gra' class='onefifth'>8</div>
+          <div id='div_gra' class='onefifth'>9</div>
+          <div id='div_gra' class='onefifth'>10</div>
+          <div id='div_gra' class='onefifth'>11</div>
+          <div id='div_gra' class='onefifth'>12</div>
+          <div id='div_gra' class='onefifth'>13</div>
+          <div id='div_gra' class='onefifth'>14</div>
+          <div id='div_gra' class='onefifth'>15</div>
+          <div id='div_gra' class='onefifth'>16</div>
+          <div id='div_gra' class='onefifth'>17</div>
+          <div id='div_gra' class='onefifth'>18</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWENTY_GRAPHICS"></a>
+        <p id='text_style'>14-二十画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='halfsize'>0</div>
+          <div id='div_gra' class='halfsize'>1</div>
+          <div id='div_gra' class='onesixth'>2</div>
+          <div id='div_gra' class='onesixth'>3</div>
+          <div id='div_gra' class='onesixth'>4</div>
+          <div id='div_gra' class='onesixth'>5</div>
+          <div id='div_gra' class='onesixth'>6</div>
+          <div id='div_gra' class='onesixth'>7</div>
+          <div id='div_gra' class='onesixth'>8</div>
+          <div id='div_gra' class='onesixth'>9</div>
+          <div id='div_gra' class='onesixth'>10</div>
+          <div id='div_gra' class='onesixth'>11</div>
+          <div id='div_gra' class='onesixth'>12</div>
+          <div id='div_gra' class='onesixth'>13</div>
+          <div id='div_gra' class='onesixth'>14</div>
+          <div id='div_gra' class='onesixth'>15</div>
+          <div id='div_gra' class='onesixth'>16</div>
+          <div id='div_gra' class='onesixth'>17</div>
+          <div id='div_gra' class='onesixth'>18</div>
+          <div id='div_gra' class='onesixth'>19</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWENTYONE_GRAPHICS"></a>
+        <p id='text_style'>54-二十一画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onesixth'>1</div>
+          <div id='div_gra' class='onesixth'>2</div>
+          <div id='div_gra' class='onesixth'>3</div>
+          <div id='div_gra' class='onesixth'>4</div>
+          <div id='div_gra' class='onesixth'>5</div>
+          <div id='div_gra' class='onesixth'>6</div>
+          <div class='onesixth_1x4'>
+            <div id='div_gra' class='onesixth'>7</div>
+            <div id='div_gra' class='onesixth'>9</div>
+            <div id='div_gra' class='onesixth'>11</div>
+            <div id='div_gra' class='onesixth'>13</div>
+          </div>
+          <div id='div_gra' class='twothird'>0</div>
+          <div id='div_gra' class='onesixth'>8</div>
+          <div id='div_gra' class='onesixth'>10</div>
+          <div id='div_gra' class='onesixth'>12</div>
+          <div id='div_gra' class='onesixth'>14</div>
+          <div id='div_gra' class='onesixth'>15</div>
+          <div id='div_gra' class='onesixth'>16</div>
+          <div id='div_gra' class='onesixth'>17</div>
+          <div id='div_gra' class='onesixth'>18</div>
+          <div id='div_gra' class='onesixth'>19</div>
+          <div id='div_gra' class='onesixth'>20</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWENTYTWO_GRAPHICS"></a>
+        <p id='text_style'>56-二十二画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='twofifth'>0</div>
+          <div id='div_gra' class='onefifth'>1</div>
+          <div id='div_gra' class='onefifth'>2</div>
+          <div id='div_gra' class='onefifth'>3</div>
+          <div id='div_gra' class='onefifth'>4</div>
+          <div id='div_gra' class='onefifth'>5</div>
+          <div id='div_gra' class='onefifth'>6</div>
+          <div id='div_gra' class='onefifth'>7</div>
+          <div id='div_gra' class='onefifth'>8</div>
+          <div id='div_gra' class='onefifth'>9</div>
+          <div id='div_gra' class='onefifth'>10</div>
+          <div id='div_gra' class='onefifth'>11</div>
+          <div id='div_gra' class='onefifth'>12</div>
+          <div id='div_gra' class='onefifth'>13</div>
+          <div id='div_gra' class='onefifth'>14</div>
+          <div id='div_gra' class='onefifth'>15</div>
+          <div id='div_gra' class='onefifth'>16</div>
+          <div id='div_gra' class='onefifth'>17</div>
+          <div id='div_gra' class='onefifth'>18</div>
+          <div id='div_gra' class='onefifth'>19</div>
+          <div id='div_gra' class='onefifth'>20</div>
+          <div id='div_gra' class='onefifth'>21</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWENTYFOUR_GRAPHICS"></a>
+        <p id='text_style'>59-二十四画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onesixth'>4</div>
+          <div id='div_gra' class='onesixth'>5</div>
+          <div id='div_gra' class='onesixth'>6</div>
+          <div id='div_gra' class='onesixth'>7</div>
+          <div id='div_gra' class='onesixth'>8</div>
+          <div id='div_gra' class='onesixth'>9</div>
+          <div class='onesixth_1x2'>
+            <div id='div_gra' class='onesixth'>10</div>
+            <div id='div_gra' class='onesixth'>12</div>
+          </div>
+          <div id='div_gra' class='onethird'>0</div>
+          <div id='div_gra' class='onethird'>1</div>
+          <div id='div_gra' class='onesixth'>11</div>
+          <div id='div_gra' class='onesixth'>13</div>
+          <div class='onesixth_1x2'>
+            <div id='div_gra' class='onesixth'>14</div>
+            <div id='div_gra' class='onesixth'>16</div>
+          </div>
+          <div id='div_gra' class='onethird'>2</div>
+          <div id='div_gra' class='onethird'>3</div>
+          <div id='div_gra' class='onesixth'>15</div>
+          <div id='div_gra' class='onesixth'>17</div>
+          <div id='div_gra' class='onesixth'>18</div>
+          <div id='div_gra' class='onesixth'>19</div>
+          <div id='div_gra' class='onesixth'>20</div>
+          <div id='div_gra' class='onesixth'>21</div>
+          <div id='div_gra' class='onesixth'>22</div>
+          <div id='div_gra' class='onesixth'>23</div>
+        </div>
+        <br />
+        <br />
+        <a name="TWENTYFIVE_GRAPHICS"></a>
+        <p id='text_style'>27-二十五画面</p>
+        <div class='fullsize'>
+          <div id='div_gra' class='onefifth'>0</div>
+          <div id='div_gra' class='onefifth'>1</div>
+          <div id='div_gra' class='onefifth'>2</div>
+          <div id='div_gra' class='onefifth'>3</div>
+          <div id='div_gra' class='onefifth'>4</div>
+          <div id='div_gra' class='onefifth'>5</div>
+          <div id='div_gra' class='onefifth'>6</div>
+          <div id='div_gra' class='onefifth'>7</div>
+          <div id='div_gra' class='onefifth'>8</div>
+          <div id='div_gra' class='onefifth'>9</div>
+          <div id='div_gra' class='onefifth'>10</div>
+          <div id='div_gra' class='onefifth'>11</div>
+          <div id='div_gra' class='onefifth'>12</div>
+          <div id='div_gra' class='onefifth'>13</div>
+          <div id='div_gra' class='onefifth'>14</div>
+          <div id='div_gra' class='onefifth'>15</div>
+          <div id='div_gra' class='onefifth'>16</div>
+          <div id='div_gra' class='onefifth'>17</div>
+          <div id='div_gra' class='onefifth'>18</div>
+          <div id='div_gra' class='onefifth'>19</div>
+          <div id='div_gra' class='onefifth'>20</div>
+          <div id='div_gra' class='onefifth'>21</div>
+          <div id='div_gra' class='onefifth'>22</div>
+          <div id='div_gra' class='onefifth'>23</div>
+          <div id='div_gra' class='onefifth'>24</div>
+        </div>
+      </div>
+    </div>
+    <br />
+  </div>
+</div>
+<script>function AjustContentHeight(){
+    var div_content = document.getElementById("div_content");
+    var div_body = document.getElementById("div_body")
+    var clientHeight = document.documentElement.clientHeight;
+    clientHeight -= 69;
+    div_content.style.height = clientHeight + "px";
+    div_body.style.height = clientHeight + "px";
+
+}
+
+window.onload=function(){AjustContentHeight();}
+window.onresize=function(){AjustContentHeight();}</script>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>科达视讯平台统一登录API</title>
+<meta charset="utf-8" content="text/html"></meta>
+<style type = "text/css">body{background: #f5f5f5;margin: 0px;    margin-top: -20px;padding: 0px;}#div_title{    background: #2171c2;    color: #fff;    height: 60px;    box-shadow: 0 .25em .75em #CCC;    padding-top: 15px;    margin-top: 0px;    font-family: "Microsoft Yahei" normal;    font-size: 12px;    z-index: 20;    position: fixed;    width: 100%;}#div_title_inner{    width: 1004px;    margin-left: auto;    margin-right: auto;}#div_title h3{    width: 0px;    display: inline-block;    float: right;    margin-top: 1%;    font-size: 18px;}#div_title h2{    width: 130px;    display: inline-block;    float: right;    margin-top: 3.5%;}#div_title h1{    font-weight: normal;    margin-left: auto;    margin-right: auto;    display: inline-block;    font-family: "Microsoft YaHei" !important;}#div_title_occupy{    height: 69px;}#div_main{width: 1004px;font-family: "Microsoft Yahei",helvetica,'Lucida Grande',Tahoma,Verdana,Simsun,Arial,Clean;margin-left: auto;margin-right: auto;    margin-top: 15px;}#div_content{    position: fixed;    width: 250px;    overflow: auto;    background-color: #f2f2f2;    padding-left: 15px;    margin-top: 2px;}#div_content_body h3{    height: 10px;}#div_body{    margin-left: 250px;    width: 824px;    overflow: auto}#example_div{width: 650px;border: 1px dashed #cecfcf;background : #f5f6f7;font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace!important;padding-left: 2px;padding-top: 5px;padding-bottom: 5px;font-size: 13px;min-height: 50px;}#uri_list_div a {    color: #5f940a;    text-decoration: none;    font-size: 13px;    height: 10px}#uri_list_div a:hover{    text-decoration: underline;}#data_style{    width:70px;}table.uri_t td{padding-left: 10px;    width: 550px;}table.uri_t th{text-align: left;    width: 110px;}table.t {    font-size: 13px;    margin-top: 5px;    margin-bottom: 5px;    width: 655px;    border: 1px solid #e4e4e4;    border-right: 0;    border-collapse: collapse;}table.t tr {    min-height: 25px;    line-height: 20px;}table.t th {    background-color: #efefef;    text-align: center;    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;}table.t td {    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;    background-color: #fff;    text-align: left;    padding-left: 5px;}#div_get, #div_post, #div_push{   background-color: #fff;   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);   padding: 64px;   margin: 2px 20px 20px 20px;}</style><link rel="icon" href="api.ico" type="image/x-icon"></head>
+<body><div id="div_title"><div id="div_title_inner"><h1>科达视讯平台统一登录API</h1>
+<h2>V6.0.0.3.0.20190912</h2>
+<h3>API_Level:1</h3>
+</div>
+</div>
+<div id="div_title_occupy"></div>
+<div id="div_main"><div id="div_content"><div id="div_content_body"><h3>登陆认证</h3>
+<div id="uri_list_div"><a href="#POST_/api/v1/system/token">1. token获取</a>
+<br />
+<a href="#POST_/api/v1/system/token/{account_token}/heartbeat">2. 保持token心跳</a>
+<br />
+<a href="#POST_/api/v1/system/login">3. 登陆</a>
+<br />
+<a href="#POST_/api/v1/system/heartbeat">4. 保持用户心跳</a>
+<br />
+<a href="#GET_/api/system/version">5. 登录认证API版本信息</a>
+<br />
+</div>
+</div>
+</div>
+<div id="div_body"><div id="div_posts"><a name="POST_/api/v1/system/token"></a>
+<div id="div_post"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>token获取</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/system/token</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>token获取</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>oauth_consumer_key*</td>
+<td>str</td>
+<td>oauth中认证的软件key</td>
+</tr>
+<tr id="param_row"><td>oauth_consumer_secret*</td>
+<td>str</td>
+<td>oauth中认证软件key对应的value</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"account_token":&nbsp"1607660e3ba14f26db618372f4c60405"<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>account_token</td>
+<td>str</td>
+<td>token，应用权限</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="POST_/api/v1/system/token/{account_token}/heartbeat"></a>
+<div id="div_post"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>保持token心跳</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/system/token/{account_token}/heartbeat</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取token成功后，token有效期为30m，若30m内无操作，则需手动调用该接口保持心跳</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><td>null</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="POST_/api/v1/system/login"></a>
+<div id="div_post"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>登陆</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/system/login</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>登陆</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>软件权限token</td>
+</tr>
+<tr id="param_row"><td>username*</td>
+<td>str</td>
+<td>用户名</td>
+</tr>
+<tr id="param_row"><td>password*</td>
+<td>str</td>
+<td>密码</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"username":&nbsp"name"<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>username</td>
+<td>int</td>
+<td>登陆的用户名</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="POST_/api/v1/system/heartbeat"></a>
+<div id="div_post"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>保持用户心跳</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/system/heartbeat</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>成功登陆后，用户有效期为30m，若30m内无操作，则需手动调用该接口保持心跳</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/system/version"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>登录认证API版本信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/system/version</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取登录认证API版本信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"version":&nbsp"6.0.0.0.0.20190603",<br/>&nbsp&nbsp"api_level":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>version</td>
+<td>str</td>
+<td>版本信息</td>
+</tr>
+<tr id="param_row"><td>api_level</td>
+<td>int</td>
+<td>登录API版本标识，请与登录API说明文档中的各个接口的最低支持版本号作对比，若小于最低支持版本号，则该接口不支持当前版本的API调用</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp112230<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table class="t" border="1" id="param_table"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+</div>
+</div>
+<script>function AjustContentHeight(){
+    var div_content = document.getElementById("div_content");
+    var div_body = document.getElementById("div_body")
+    var clientHeight = document.documentElement.clientHeight;
+    clientHeight -= 69;
+    div_content.style.height = clientHeight + "px";
+    div_body.style.height = clientHeight + "px";
+
+}
+
+window.onload=function(){AjustContentHeight();}
+window.onresize=function(){AjustContentHeight();}</script></body>
+</html>

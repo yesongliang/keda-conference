@@ -1,0 +1,1441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><title>科达视讯平台推送API</title>
+<meta charset="utf-8" content="text/html"></meta>
+<style type = "text/css">body{background: #f5f5f5;margin: 0px;    margin-top: -20px;padding: 0px;}#div_title{    background: #2171c2;    color: #fff;    height: 60px;    box-shadow: 0 .25em .75em #CCC;    padding-top: 15px;    margin-top: 0px;    font-family: "Microsoft Yahei" normal;    font-size: 12px;    z-index: 20;    position: fixed;    width: 100%;}#div_title h2{    width: 130px;    display: inline-block;    float: right;    margin-top: 3.5%;}#div_title h1{    font-weight: normal;    margin-left: auto;    margin-right: auto;    display: inline-block;    font-family: "Microsoft YaHei" !important;}#div_title_inner{    width: 1004px;    margin-left: auto;    margin-right: auto;}#div_title_occupy{    height: 69px;}#div_main{width: 1004px;font-family: "Microsoft Yahei",helvetica,'Lucida Grande',Tahoma,Verdana,Simsun,Arial,Clean;margin-left: auto;margin-right: auto;    margin-top: 15px;}#div_content{    position: fixed;    width: 250px;    overflow: auto;    background-color: #f2f2f2;    padding-left: 15px;    margin-top: 2px;}#div_content_body h3{    height: 10px;}#div_body{    margin-left: 250px;    width: 824px;    overflow: auto}#example_div{width: 650px;border: 1px dashed #cecfcf;background : #f5f6f7;font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace!important;padding-left: 2px;padding-top: 5px;padding-bottom: 5px;font-size: 13px;min-height: 50px;}#uri_list_div a {    color: #5f940a;    text-decoration: none;    font-size: 13px;    height: 10px}#uri_list_div a:hover{    text-decoration: underline;}table.uri_t td{padding-left: 10px;}table.t {    font-size: 13px;    margin-top: 5px;    margin-bottom: 5px;    width: 655px;    border: 1px solid #e4e4e4;    border-right: 0;    border-collapse: collapse;}table.t tr {    min-height: 25px;    line-height: 20px;}table.t th {    background-color: #efefef;    text-align: center;    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;}table.t td {    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;    background-color: #fff;    text-align: left;    padding-left: 5px;}#div_get, #div_post, #div_push{   background-color: #fff;   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);   padding: 64px;   margin: 2px 20px 20px 20px;}</style><link rel="icon" href="api.ico" type="image/x-icon"></head>
+<body><div id="div_title"><div id="div_title_inner"><h1>科达视讯平台推送API</h1>
+<h2>V6.0.0.3.0.20191108</h2>
+</div>
+</div>
+<div id="div_title_occupy"></div>
+<div id="div_main"><div id="div_content"><div id="div_content_body"><h3>推送信息</h3>
+<div id="uri_list_div"><a href="#update_/confs/{conf_id}">1. 会议信息</a>
+<br />
+<a href="#update_/confs/{conf_id}/cascades">2. 级联信息</a>
+<br />
+<a href="#update_/confs/{conf_id}/speaker">3. 发言人</a>
+<br />
+<a href="#update_/confs/{conf_id}/chairman">4. 主席</a>
+<br />
+<a href="#update_/confs/{conf_id}/dualstream">5. 双流源</a>
+<br />
+<a href="#update_/confs/{conf_id}/poll">6. 会议轮询</a>
+<br />
+<a href="#update_/confs/{conf_id}/vad">7. 语音激励</a>
+<br />
+<a href="#update_/confs/{conf_id}/mixs/{mix_id}">8. 混音</a>
+<br />
+<a href="#update_/confs/{conf_id}/vmps/{vmp_id}">9. 画面合成</a>
+<br />
+<a href="#update_/confs/{conf_id}/cascades/{cascade_id}/mts/{mt_id}">10. 终端列表</a>
+<br />
+<a href="#update_/confs/{conf_id}/hduvmps/{hdu_id}">11. 电视墙自主画面合成</a>
+<br />
+<a href="#update_/confs/{conf_id}/hdus/{hdu_id}">12. 会议电视墙</a>
+<br />
+<a href="#update_/confs/{conf_id}/recorders/{rec_id}">13. 录像</a>
+<br />
+<a href="#update_/confs/{conf_id}/mtvmps/{mt_id}">14. 终端自主画面合成</a>
+<br />
+<a href="#update_/confs/{conf_id}/inspections/{mt_id}/{mode}">15. 终端选看</a>
+<br />
+<a href="#update_/confs/{conf_id}/upload">16. 上传终端</a>
+<br />
+<a href="#update_/confs/{conf_id}/monitor/{dst_ip}/{dst_port}">17. 监控</a>
+<br />
+</div>
+<h3>推送通知信息</h3>
+<div id="uri_list_div"><a href="#notify_/confs/{conf_id}/alarm">1. 系统告警通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/mixs/{mix_id}">2. 开始混音失败通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/mts">3. 添加终端失败通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/vmps/{vmp_id}">4. 开启画面合成失败通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/hdus/{hdu_id}">5. HDU选看失败通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/recorders/{rec_id}">6. 录像异常通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/playback">7. 放像异常通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/inspections/{mt_id}/{mode}">8. 终端选看失败通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/monitor/{dst_ip}/{dst_port}">9. 开启监控失败通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/applychairman">10. 终端申请主席通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/applyspeaker">11. 终端申请发言人通知</a>
+<br />
+<a href="#notify_/confs/{conf_id}/applymix">12. 终端申请加入混音通知</a>
+<br />
+</div>
+</div>
+</div>
+<div id="div_body"><div id="div_gets"><a name="update_/confs/{conf_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>会议信息</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示有会议开启的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议结束</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/cascades"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>级联信息</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/cascades</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示有会议级联的更新信息</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/speaker"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>发言人</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/speaker</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有发言人的更新信息</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/chairman"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>主席</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/chairman</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有主席的更新信息</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/dualstream"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>双流源</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/dualstream</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有双流源的更新信息</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/poll"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>会议轮询</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/poll</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有轮询的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>表示会议中的轮询结束</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/vad"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>语音激励</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/vad</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有语音激励的更新信息</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/mixs/{mix_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>混音</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/mixs/{mix_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>mix_id</td>
+<td>([0-9]+)</td>
+<td>混音id,默认为1</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有混音的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议中的混音关闭</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/vmps/{vmp_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>画面合成</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/vmps/{vmp_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>vmp_id</td>
+<td>([0-9]+)</td>
+<td>画面合成号，默认为1</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有画面合成的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议中的画面和合成关闭</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/cascades/{cascade_id}/mts/{mt_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>终端列表</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/cascades/{cascade_id}/mts/{mt_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>cascade_id</td>
+<td>([0-9\.]+)</td>
+<td>会议级联号，其中0代表本级会议</td>
+</tr>
+<tr id="param_row"><td>mt_id</td>
+<td>([0-9]+)</td>
+<td>终端号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有终端的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议中的终端被删除</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/hduvmps/{hdu_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>电视墙自主画面合成</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/hduvmps/{hdu_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>hdu_id</td>
+<td>([0-9_]+）</td>
+<td>电视墙通道号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有电视墙自主画面合成的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议中的电视墙自主画面合成关闭</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/hdus/{hdu_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>会议电视墙</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/hdus/{hdu_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>hdu_id</td>
+<td>([0-9_]+)</td>
+<td>电视墙通道号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有电视墙的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议中的电视墙关闭</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/recorders/{rec_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>录像</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/recorders/{rec_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>rec_id</td>
+<td>([0-9]+)</td>
+<td>录像号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有录像的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议中的录像关闭</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/mtvmps/{mt_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>终端自主画面合成</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/mtvmps/{mt_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>mt_id</td>
+<td>([0-9\.]+)</td>
+<td>自主画面合成终端号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有终端自主画面合成的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议中的终端自主画面合成关闭</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/inspections/{mt_id}/{mode}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>终端选看</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/inspections/{mt_id}/{mode}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>mt_id</td>
+<td>([0-9]+)</td>
+<td>终端号</td>
+</tr>
+<tr id="param_row"><td>mode</td>
+<td>([0-9]+)</td>
+<td>选看模式 1-视频 2-音频</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有终端选看的更新信息</td>
+</tr>
+</table>
+<p id="example_title">删除方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"delete"<br/>}</a>
+</div>
+<p id="param_title">删除方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>delete表示会议中的终端选看关闭</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/upload"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>上传终端</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/upload</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有上传终端的更新信息</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="update_/confs/{conf_id}/monitor/{dst_ip}/{dst_port}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>监控</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/monitor/{dst_ip}/{dst_port}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>dst_id</td>
+<td>([0-9.]+)</td>
+<td>监控IP</td>
+</tr>
+<tr id="param_row"><td>dst_port</td>
+<td>([0-9]+)</td>
+<td>监控端口</td>
+</tr>
+</table>
+<p id="example_title">更新方法示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"update"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>update表示会议中有监控的更新信息</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/alarm"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>系统告警通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/alarm</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/mixs/{mix_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>开始混音失败通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/mixs/{mix_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>mix_id</td>
+<td>([0-9]+)</td>
+<td>混音id,默认为1</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123,<br/>&nbsp&nbsp"mode":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+<tr id="param_row"><td>mode</td>
+<td>int</td>
+<td>混音模式, 1-讨论 2-定制混音</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/mts"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>添加终端失败通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/mts</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123,<br/>&nbsp&nbsp"mt":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp"account":&nbsp"172.16.180.30",<br/>&nbsp&nbsp&nbsp&nbsp"account_type":&nbsp7<br/>&nbsp&nbsp},<br/>&nbsp&nbsp"occupy_confname":&nbsp"name"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+<tr id="param_row"><td>mt</td>
+<td>object</td>
+<td>终端对象</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount</td>
+<td>str</td>
+<td>终端E164号,IP或电话号码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount_type</td>
+<td>int</td>
+<td>终端类型，5-e164号码; 6-电话; 7-ip地址</td>
+</tr>
+<tr id="param_row"><td>occupy_confname</td>
+<td>str</td>
+<td>占用该终端的会议名称，仅当错误号为20423时返回该值</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/vmps/{vmp_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>开启画面合成失败通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/vmps/{vmp_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>vmp_id</td>
+<td>([0-9]+)</td>
+<td>画面合成号，默认为1</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/hdus/{hdu_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>HDU选看失败通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/hdus/{hdu_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>hdu_id</td>
+<td>([0-9_]+）</td>
+<td>电视墙通道号</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123,<br/>&nbsp&nbsp"mode":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+<tr id="param_row"><td>mode</td>
+<td>int</td>
+<td>电视墙模式, 1-选看，2-四分屏(仅传统会议有效)，3-单通道轮询</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/recorders/{rec_id}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>录像异常通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/recorders/{rec_id}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>rec_id</td>
+<td>([0-9]+)</td>
+<td>录像号</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/playback"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>放像异常通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/playback</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/inspections/{mt_id}/{mode}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>终端选看失败通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/inspections/{mt_id}/{mode}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>mt_id</td>
+<td>([0-9]+)</td>
+<td>选看目的终端号</td>
+</tr>
+<tr id="param_row"><td>mode</td>
+<td>([0-9]+)</td>
+<td>选看模式 1-视频 2-音频</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123,<br/>&nbsp&nbsp"src":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp"type":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp"mt_id":&nbsp"1"<br/>&nbsp&nbsp}<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+<tr id="param_row"><td>src</td>
+<td>object</td>
+<td>选看源</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptype</td>
+<td>int</td>
+<td>选看源类型: 1-终端 2-画面合成</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmt_id</td>
+<td>str</td>
+<td>源终端号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/monitor/{dst_ip}/{dst_port}"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>开启监控失败通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/monitor/{dst_ip}/{dst_port}</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+<tr id="param_row"><td>dst_id</td>
+<td>([0-9.]+)</td>
+<td>监控IP</td>
+</tr>
+<tr id="param_row"><td>dst_port</td>
+<td>([0-9]+)</td>
+<td>监控端口</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"error_code":&nbsp123,<br/>&nbsp&nbsp"src":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp"type":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp"mt_id":&nbsp"1"<br/>&nbsp&nbsp}<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>表示返回的错误号</td>
+</tr>
+<tr id="param_row"><td>src</td>
+<td>object</td>
+<td>监控源</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptype</td>
+<td>int</td>
+<td>监控源类型: 1-终端, 2-画面合成, 3-混音</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmt_id</td>
+<td>str</td>
+<td>监控终端id, type为终端时必填</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/applychairman"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>终端申请主席通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/applychairman</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"mt_id":&nbsp"1"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>mt_id</td>
+<td>str</td>
+<td>申请终端id</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/applyspeaker"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>终端申请发言人通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/applyspeaker</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"mt_id":&nbsp"1"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>mt_id</td>
+<td>str</td>
+<td>申请终端id</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="notify_/confs/{conf_id}/applymix"></a>
+<div id="div_get"><table class="uri_t" id="uri_table"><tr id="title_row"><th>名称</th>
+<td>终端申请加入混音通知</td>
+</tr>
+<tr id="uri_row"><th>通道</th>
+<td>/confs/{conf_id}/applymix</td>
+</tr>
+<tr id="method_row"></tr>
+<tr id="comment_row"></tr>
+</table>
+<p id="param_title">参数说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据格式</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>conf_id</td>
+<td>([0-9]+)</td>
+<td>会议号</td>
+</tr>
+</table>
+<p id="example_title">消息示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"method":&nbsp"notify",<br/>&nbsp&nbsp"mt_id":&nbsp"1"<br/>}</a>
+</div>
+<p id="param_title">更新方法说明</p>
+<table class="t" id="param_table" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th>数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>method</td>
+<td>str</td>
+<td>notify表示系统通知</td>
+</tr>
+<tr id="param_row"><td>mt_id</td>
+<td>str</td>
+<td>申请终端id</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+</div>
+</div>
+<script>function AjustContentHeight(){
+    var div_content = document.getElementById("div_content");
+    var div_body = document.getElementById("div_body")
+    var clientHeight = document.documentElement.clientHeight;
+    clientHeight -= 69;
+    div_content.style.height = clientHeight + "px";
+    div_body.style.height = clientHeight + "px";
+
+}
+
+window.onload=function(){AjustContentHeight();}
+window.onresize=function(){AjustContentHeight();}</script></body>
+</html>

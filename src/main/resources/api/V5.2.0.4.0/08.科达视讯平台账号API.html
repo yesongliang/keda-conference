@@ -1,0 +1,1936 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>科达视讯平台账号API</title>
+<meta charset="utf-8" content="text/html"></meta>
+<style type = "text/css">body{background: #f5f5f5;margin: 0px;    margin-top: -20px;padding: 0px;}#div_title{    background: #2171c2;    color: #fff;    height: 60px;    box-shadow: 0 .25em .75em #CCC;    padding-top: 15px;    margin-top: 0px;    font-family: "Microsoft Yahei" normal;    font-size: 12px;    z-index: 20;    position: fixed;    width: 100%;}#div_title_inner{    width: 1004px;    margin-left: auto;    margin-right: auto;}#div_title h3{    width: 0px;    display: inline-block;    float: right;    margin-top: 1%;    font-size: 18px;}#div_title h2{    width: 130px;    display: inline-block;    float: right;    margin-top: 3.5%;}#div_title h1{    font-weight: normal;    margin-left: auto;    margin-right: auto;    display: inline-block;    font-family: "Microsoft YaHei" !important;}#div_title_occupy{    height: 69px;}#div_main{width: 1004px;font-family: "Microsoft Yahei",helvetica,'Lucida Grande',Tahoma,Verdana,Simsun,Arial,Clean;margin-left: auto;margin-right: auto;    margin-top: 15px;}#div_content{    position: fixed;    width: 250px;    overflow: auto;    background-color: #f2f2f2;    padding-left: 15px;    margin-top: 2px;}#div_content_body h3{    height: 10px;}#div_body{    margin-left: 250px;    width: 824px;    overflow: auto}#example_div{width: 650px;border: 1px dashed #cecfcf;background : #f5f6f7;font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace!important;padding-left: 2px;padding-top: 5px;padding-bottom: 5px;font-size: 13px;min-height: 50px;}#uri_list_div a {    color: #5f940a;    text-decoration: none;    font-size: 13px;    height: 10px}#uri_list_div a:hover{    text-decoration: underline;}#data_style{    width:70px;}table.uri_t td{padding-left: 10px;    width: 550px;}table.uri_t th{text-align: left;    width: 110px;}table.t {    font-size: 13px;    margin-top: 5px;    margin-bottom: 5px;    width: 655px;    border: 1px solid #e4e4e4;    border-right: 0;    border-collapse: collapse;}table.t tr {    min-height: 25px;    line-height: 20px;}table.t th {    background-color: #efefef;    text-align: center;    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;}table.t td {    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;    background-color: #fff;    text-align: left;    padding-left: 5px;}#div_get, #div_post, #div_push{   background-color: #fff;   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);   padding: 64px;   margin: 2px 20px 20px 20px;}</style><link rel="icon" href="api.ico" type="image/x-icon"></head>
+<body><div id="div_title"><div id="div_title_inner"><h1>科达视讯平台账号API</h1>
+<h2>V6.0.0.3.0.20190912</h2>
+<h3>API_Level:1</h3>
+</div>
+</div>
+<div id="div_title_occupy"></div>
+<div id="div_main"><div id="div_content"><div id="div_content_body"><h3>组织架构管理</h3>
+<div id="uri_list_div"><a href="#POST_/api/v1/amc/departments">1. 创建部门</a>
+<br />
+<a href="#PUT_/api/v1/amc/departments/{department_moid}">2. 编辑部门</a>
+<br />
+<a href="#DELETE_/api/v1/amc/departments/{department_moid}">3. 删除部门</a>
+<br />
+<a href="#GET_/api/v1/amc/departments">4. 查询部门信息</a>
+<br />
+<a href="#GET_/api/v1/amc/departments/{department_moid}/accounts">5. 查询单个部门的用户信息</a>
+<br />
+<a href="#POST_/api/v1/amc/accounts">6. 创建账号</a>
+<br />
+<a href="#PUT_/api/v1/amc/accounts/{account_moid}">7. 编辑账号</a>
+<br />
+<a href="#DELETE_/api/v1/amc/accounts/{account_moid}">8. 删除账号</a>
+<br />
+<a href="#GET_/api/v1/amc/accounts/{account_moid}">9. 查询账号信息</a>
+<br />
+<a href="#GET_/api/v1/amc/accounts">10. 查询所有账号信息</a>
+<br />
+<a href="#PUT_/api/v1/amc/accounts/{account_moid}/disable">11. 停用账号</a>
+<br />
+<a href="#PUT_/api/v1/amc/accounts/{account_moid}/password">12. 重置密码</a>
+<br />
+<a href="#GET_/api/v1/amc/approval_infos">13. 查询会议审批信息</a>
+<br />
+<a href="#PUT_/api/v1/amc/approval_infos">14. 启用停用会议审批功能</a>
+<br />
+<a href="#GET_/api/v1/amc/public_groups">15. 获取集团顶级公共群组列表</a>
+<br />
+<a href="#GET_/api/v1/amc/public_groups/{public_group_moid}">16. 获取指定公共群组组织架构信息</a>
+<br />
+<a href="#GET_/api/v1/amc/public_groups/{public_group_moid}/users">17. 获取指定集团公共群组所有人员信息</a>
+<br />
+<a href="#GET_/api/amc/version">18. 获取账号API版本信息</a>
+<br />
+</div>
+</div>
+</div>
+<div id="div_body"><div id="div_posts"><a name="POST_/api/v1/amc/departments"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>创建部门</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/departments</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>创建部门</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以json数据形式发送</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"parent_department_moid":&nbsp"a6741cec-dd1b-4a87-9a35-1245b7bdbb2d",<br/>&nbsp&nbsp"department_name":&nbsp"77777"<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>parent_department_moid*</td>
+<td>str</td>
+<td>父部门moid</td>
+</tr>
+<tr id="param_row"><td>department_name*</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"department_moid":&nbsp"a6741cec-dd1b-4a87-9a35-1245b7bdbb2f"<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>department_moid</td>
+<td>str</td>
+<td>部门id</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v1/amc/departments/{department_moid}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>编辑部门</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/departments/{department_moid}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>编辑部门</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>_method</td>
+<td></td>
+<td>若不支持PUT，则使用POST请求，并在请求带上_method参数，值为PUT</td>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以json数据形式发送</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"department_name":&nbsp"888888"<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>department_name*</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="DELETE_/api/v1/amc/departments/{department_moid}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>删除部门</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/departments/{department_moid}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>DELETE</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>删除部门</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>_method</td>
+<td></td>
+<td>若不支持DELETE，则使用POST请求，并在请求带上_method参数，值为DELETE</td>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/amc/departments"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>查询部门信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/departments</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>查询部门信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"seqencing":&nbsp1,<br/>&nbsp&nbsp"department_moid":&nbsp"b5fb2f6f-279d-4f9a-be27-036ba90c95d9",<br/>&nbsp&nbsp"department_name":&nbsp"部门一",<br/>&nbsp&nbsp"departments":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"seqencing":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"e35fdd98-be8d-4f9c-9534-fd888144bcae",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"44442",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"departments":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"seqencing":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"99baed4c-5550-4007-9494-b43b7dae3411",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"departments":&nbsp[],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"11"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"seqencing":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"607c296a-6e2b-4003-8a9c-caddb80326ac",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"departments":&nbsp[],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"s"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>seqencing</td>
+<td>int</td>
+<td>分组类型<br />0-其他分组；<br />1-特殊分组（号码组、来宾用户、未分组用户）；</td>
+</tr>
+<tr id="param_row"><td>department_moid</td>
+<td>str</td>
+<td>部门moid</td>
+</tr>
+<tr id="param_row"><td>department_name</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+<tr id="param_row"><td>departments</td>
+<td>array</td>
+<td>部门列表</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspseqencing</td>
+<td>int</td>
+<td>分组类型<br />0-其他分组；<br />1-特殊分组（号码组、来宾用户、未分组用户）；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_moid</td>
+<td>str</td>
+<td>部门moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_name</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartments</td>
+<td>array</td>
+<td>部门列表</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/amc/departments/{department_moid}/accounts"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>查询单个部门的用户信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/departments/{department_moid}/accounts</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>查询单个部门的用户信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>start</td>
+<td>int</td>
+<td>获取的视频会议列表的起始行，0标示第一行数据，默认为0</td>
+</tr>
+<tr id="param_row"><td>count</td>
+<td>int</td>
+<td>获取的视频会议列表的行数，即包括start在内的后count行数据，0代表获取所有，默认为10</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"total":&nbsp2,<br/>&nbsp&nbsp"accounts":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account":&nbsp"aaaaaaaaa",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account_jid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eede@kedacom",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account_moid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"binded":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"date_of_birth":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eed3",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"4444299",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C++软件工程师",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"email":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"enable":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ext_num":&nbsp"025-5555522-2189",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"fax":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"job_num":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"limited":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"mobile":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"aaaaaaaaa",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"office_location":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"password":&nbsp"21218cca77804d2ba1922c33e0151105",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sex":&nbsp1<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account":&nbsp"bbb",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account_jid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eede@kedacom",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account_moid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"binded":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"date_of_birth":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3b0-1e7d-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"44442ggg",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C++软件工程师",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"email":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"enable":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ext_num":&nbsp"025-5555522-2189",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"fax":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"job_num":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"limited":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"mobile":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"aaaaaaaaa",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"office_location":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"password":&nbsp"21218cca77804d2ba1922c33e0151105",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sex":&nbsp1<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>total</td>
+<td>int</td>
+<td>数量</td>
+</tr>
+<tr id="param_row"><td>accounts</td>
+<td>array</td>
+<td>账号列表信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount</td>
+<td>str</td>
+<td>账号自定义账号，登陆账号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount_jid</td>
+<td>str</td>
+<td>文字聊天账号jid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount_moid</td>
+<td>str</td>
+<td>账号moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbinded</td>
+<td>int</td>
+<td>164号是否绑定自定义账号 <br />0-否；<br />1-是；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdate_of_birth</td>
+<td>str</td>
+<td>出生日期</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_moid</td>
+<td>str</td>
+<td>部门序号（UUID格式）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_name</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_position</td>
+<td>str</td>
+<td>职位信息</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>e164号码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspemail</td>
+<td>str</td>
+<td>邮箱</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspenable</td>
+<td>int</td>
+<td>账号启用停用标识 <br />0-停用；<br />1-启用；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspext_num</td>
+<td>str</td>
+<td>电话号分机号如：025-5555522-2189电话：025-5555522；分机：2189</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspfax</td>
+<td>str</td>
+<td>传真</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspjob_num</td>
+<td>str</td>
+<td>账号编号/工号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplimited</td>
+<td>int</td>
+<td>是否为来宾用户 <br />0-否；<br />1-是；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmobile</td>
+<td>str</td>
+<td>手机</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>账号真实姓名</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspoffice_location</td>
+<td>str</td>
+<td>办公地址</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppassword</td>
+<td>str</td>
+<td>密码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspsex</td>
+<td>int</td>
+<td>性别 <br />0-女；<br />1-男；</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="POST_/api/v1/amc/accounts"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>创建账号</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/accounts</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>创建账号</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>软件权限token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"account":&nbsp"ooooooooo",<br/>&nbsp&nbsp"enable":&nbsp1,<br/>&nbsp&nbsp"name":&nbsp"ooooowowowowow",<br/>&nbsp&nbsp"email":&nbsp"",<br/>&nbsp&nbsp"mobile":&nbsp"",<br/>&nbsp&nbsp"password":&nbsp"888888",<br/>&nbsp&nbsp"binded":&nbsp2,<br/>&nbsp&nbsp"e164":&nbsp"",<br/>&nbsp&nbsp"sex":&nbsp0,<br/>&nbsp&nbsp"date_of_birth":&nbsp"2016-11-11T15:30:00+08:00",<br/>&nbsp&nbsp"ext_num":&nbsp"025-1252563-222",<br/>&nbsp&nbsp"fax":&nbsp"",<br/>&nbsp&nbsp"office_location":&nbsp"",<br/>&nbsp&nbsp"departments":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3ba-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"44442",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C++软件工程师"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3b1-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"11rrrr",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C++软件工程师"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp],<br/>&nbsp&nbsp"job_num":&nbsp"",<br/>&nbsp&nbsp"limited":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account*</td>
+<td>str</td>
+<td>账号自定义账号，登陆账号<br />1.字符限制：<br />&nbsp a.不支持输入特殊字符：% & * ^ ~ ' " " ?  / \ < > | ` " $<br />&nbsp b.且首字符和尾字符不支持输入，下划线（_） 减号（-） 小数点（.） @<br />（除首尾字符可以输入）<br />2.最大字符长度：64个字节</td>
+</tr>
+<tr id="param_row"><td>enable</td>
+<td>int</td>
+<td>账号启用停用标识 <br />0-停用；<br />1-启用；</td>
+</tr>
+<tr id="param_row"><td>name*</td>
+<td>str</td>
+<td>账号真实姓名</td>
+</tr>
+<tr id="param_row"><td>email</td>
+<td>str</td>
+<td>邮箱 <br />1.字符限制：仅支持 英文字母（大小写）、数字、“_”、“@”、“.”、“-”</td>
+</tr>
+<tr id="param_row"><td>mobile</td>
+<td>str</td>
+<td>手机 <br />1.字符限制：仅支持 数字、“.”、“_”、“-”、“*”、“#”、空格</td>
+</tr>
+<tr id="param_row"><td>password*</td>
+<td>str</td>
+<td>密码 <br />1.字符限制：仅支持 英文字母(大小写)、数字、“_”、“.”</td>
+</tr>
+<tr id="param_row"><td>binded</td>
+<td>int</td>
+<td>默认为自动分配 <br />0-不绑定号码；<br />1-手动分配；<br />2-自动分配；</td>
+</tr>
+<tr id="param_row"><td>e164</td>
+<td>str</td>
+<td>e164号码（只有binded值为1时，才需要填值，其他情况不用填）</td>
+</tr>
+<tr id="param_row"><td>sex</td>
+<td>int</td>
+<td>性别 默认为1 <br />0-女；<br />1-男；</td>
+</tr>
+<tr id="param_row"><td>date_of_birth</td>
+<td>str</td>
+<td>出生日期 格式为ISO8601:20:00标准</td>
+</tr>
+<tr id="param_row"><td>ext_num</td>
+<td>str</td>
+<td>电话号分机号如：025-5555522-2189电话：025-5555522；分机：2189 <br />1.字符限制：数字、（、）、，、-、；、*、+、#、空格、.</td>
+</tr>
+<tr id="param_row"><td>fax</td>
+<td>str</td>
+<td>传真 <br />1.字符限制：数字、“-”</td>
+</tr>
+<tr id="param_row"><td>office_location</td>
+<td>str</td>
+<td>办公地址</td>
+</tr>
+<tr id="param_row"><td>departments</td>
+<td>array</td>
+<td>部门信息列表</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_moid*</td>
+<td>str</td>
+<td>部门序号（UUID格式）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_name</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_position</td>
+<td>str</td>
+<td>职位信息</td>
+</tr>
+<tr id="param_row"><td>job_num</td>
+<td>str</td>
+<td>账号编号/工号 <br />1.字符限制：数字、字母</td>
+</tr>
+<tr id="param_row"><td>limited</td>
+<td>int</td>
+<td>是否为来宾用户,默认为0 <br />0-否；<br />1-是；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"account_moid":&nbsp"708c4ded-d3aa-438a-94d7-9a10d400f271"<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>account_moid</td>
+<td>str</td>
+<td>账号moid</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v1/amc/accounts/{account_moid}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>编辑账号</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/accounts/{account_moid}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>编辑账号，params非必填，如果不需要修改某个字段属性，则在params中不要加入该字段；启用停用账号，请修改账号启停字段</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>软件权限token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"enable":&nbsp1,<br/>&nbsp&nbsp"name":&nbsp"ooooowowowowow",<br/>&nbsp&nbsp"email":&nbsp"",<br/>&nbsp&nbsp"mobile":&nbsp"",<br/>&nbsp&nbsp"password":&nbsp"888888",<br/>&nbsp&nbsp"binded":&nbsp2,<br/>&nbsp&nbsp"e164":&nbsp"1741428",<br/>&nbsp&nbsp"sex":&nbsp1,<br/>&nbsp&nbsp"date_of_birth":&nbsp"2016-11-11T15:30:00+08:00",<br/>&nbsp&nbsp"ext_num":&nbsp"025-1252563-222",<br/>&nbsp&nbsp"fax":&nbsp"",<br/>&nbsp&nbsp"office_location":&nbsp"",<br/>&nbsp&nbsp"departments":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3ba-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"44442555",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"软件工程师"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3b1-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"11rrrr555",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C软件工程师"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp],<br/>&nbsp&nbsp"job_num":&nbsp"",<br/>&nbsp&nbsp"limited":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>enable</td>
+<td>int</td>
+<td>账号启用停用标识 <br />0-停用；<br />1-启用；</td>
+</tr>
+<tr id="param_row"><td>name</td>
+<td>str</td>
+<td>账号真实姓名</td>
+</tr>
+<tr id="param_row"><td>email</td>
+<td>str</td>
+<td>邮箱 <br />1.字符限制：仅支持 英文字母（大小写）、数字、“_”、“@”、“.”、“-”</td>
+</tr>
+<tr id="param_row"><td>mobile</td>
+<td>str</td>
+<td>手机 <br />1.字符限制：仅支持 数字、“.”、“_”、“-”、“*”、“#”、空格</td>
+</tr>
+<tr id="param_row"><td>password</td>
+<td>str</td>
+<td>密码 <br />1.字符限制：仅支持 英文字母(大小写)、数字、“_”、“.”</td>
+</tr>
+<tr id="param_row"><td>binded</td>
+<td>int</td>
+<td>默认为自动分配 <br />0-不绑定号码；<br />1-手动分配；<br />2-自动分配；</td>
+</tr>
+<tr id="param_row"><td>e164</td>
+<td>str</td>
+<td>e164号码（只有binded值为1时，才需要填值，其他情况不用填）</td>
+</tr>
+<tr id="param_row"><td>sex</td>
+<td>int</td>
+<td>性别 默认为1 <br />0-女；<br />1-男；</td>
+</tr>
+<tr id="param_row"><td>date_of_birth</td>
+<td>str</td>
+<td>出生日期 格式为ISO8601:20:00标准</td>
+</tr>
+<tr id="param_row"><td>ext_num</td>
+<td>str</td>
+<td>电话号分机号如：025-5555522-2189电话：025-5555522；分机：2189 <br />1.字符限制：数字、（、）、，、-、；、*、+、#、空格、.</td>
+</tr>
+<tr id="param_row"><td>fax</td>
+<td>str</td>
+<td>传真 <br />1.字符限制：数字、“-”</td>
+</tr>
+<tr id="param_row"><td>office_location</td>
+<td>str</td>
+<td>办公地址</td>
+</tr>
+<tr id="param_row"><td>departments</td>
+<td>array</td>
+<td>部门信息列表</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_moid*</td>
+<td>str</td>
+<td>部门序号（UUID格式）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_name</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_position</td>
+<td>str</td>
+<td>职位信息</td>
+</tr>
+<tr id="param_row"><td>job_num</td>
+<td>str</td>
+<td>账号编号/工号 <br />1.字符限制：数字、字母</td>
+</tr>
+<tr id="param_row"><td>limited</td>
+<td>int</td>
+<td>是否为来宾用户,默认为0 <br />0-否；<br />1-是；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="DELETE_/api/v1/amc/accounts/{account_moid}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>删除账号</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/accounts/{account_moid}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>DELETE</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>删除账号，自动停用账号并解绑E164号、删除账号</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>_method</td>
+<td></td>
+<td>若不支持DELETE，则使用POST请求，并在请求带上_method参数，值为DELETE</td>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/amc/accounts/{account_moid}"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>查询账号信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/accounts/{account_moid}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>通过moid获取账号信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"account":&nbsp"aaaaaaaaa",<br/>&nbsp&nbsp"binded":&nbsp0,<br/>&nbsp&nbsp"date_of_birth":&nbsp"",<br/>&nbsp&nbsp"e164":&nbsp"",<br/>&nbsp&nbsp"email":&nbsp"",<br/>&nbsp&nbsp"enable":&nbsp1,<br/>&nbsp&nbsp"ext_num":&nbsp"025-5555522-2189",<br/>&nbsp&nbsp"fax":&nbsp"",<br/>&nbsp&nbsp"job_num":&nbsp"",<br/>&nbsp&nbsp"limited":&nbsp1,<br/>&nbsp&nbsp"mobile":&nbsp"",<br/>&nbsp&nbsp"account_moid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp"account_jid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eede@kedacom",<br/>&nbsp&nbsp"name":&nbsp"aaaaaaaaa",<br/>&nbsp&nbsp"office_location":&nbsp"",<br/>&nbsp&nbsp"password":&nbsp"21218cca77804d2ba1922c33e0151105",<br/>&nbsp&nbsp"sex":&nbsp1,<br/>&nbsp&nbsp"departments":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3ba-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"44442",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C++软件工程师"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3b1-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"11rrrr",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C++软件工程师"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>account</td>
+<td>str</td>
+<td>账号自定义账号，登陆账号</td>
+</tr>
+<tr id="param_row"><td>binded</td>
+<td>int</td>
+<td>164号是否绑定自定义账号 <br />0-否；<br />1-是；</td>
+</tr>
+<tr id="param_row"><td>date_of_birth</td>
+<td>str</td>
+<td>出生日期</td>
+</tr>
+<tr id="param_row"><td>e164</td>
+<td>int</td>
+<td>e164号码</td>
+</tr>
+<tr id="param_row"><td>email</td>
+<td>str</td>
+<td>邮箱</td>
+</tr>
+<tr id="param_row"><td>enable</td>
+<td>int</td>
+<td>账号启用停用标识 0-停用；1-启用；<br />0-停用；<br />1-启用；</td>
+</tr>
+<tr id="param_row"><td>ext_num</td>
+<td>str</td>
+<td>电话号分机号如：025-5555522-2189电话：025-5555522；分机：2189</td>
+</tr>
+<tr id="param_row"><td>fax</td>
+<td>str</td>
+<td>传真</td>
+</tr>
+<tr id="param_row"><td>job_num</td>
+<td>str</td>
+<td>账号编号/工号</td>
+</tr>
+<tr id="param_row"><td>limited</td>
+<td>int</td>
+<td>是否为来宾用户 <br />0-否；<br />1-是；</td>
+</tr>
+<tr id="param_row"><td>mobile</td>
+<td>str</td>
+<td>手机</td>
+</tr>
+<tr id="param_row"><td>account_moid</td>
+<td>str</td>
+<td>账号moid</td>
+</tr>
+<tr id="param_row"><td>account_jid</td>
+<td>str</td>
+<td>文字聊天账号jid</td>
+</tr>
+<tr id="param_row"><td>name</td>
+<td>str</td>
+<td>账号真实姓名</td>
+</tr>
+<tr id="param_row"><td>office_location</td>
+<td>str</td>
+<td>办公地址</td>
+</tr>
+<tr id="param_row"><td>password</td>
+<td>str</td>
+<td>密码</td>
+</tr>
+<tr id="param_row"><td>sex</td>
+<td>int</td>
+<td>性别 <br />0-女；<br />1-男；</td>
+</tr>
+<tr id="param_row"><td>departments</td>
+<td>array</td>
+<td>部门信息列表</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_moid</td>
+<td>str</td>
+<td>部门序号（UUID格式）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_name</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartment_position</td>
+<td>str</td>
+<td>职位信息</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/amc/accounts"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>查询所有账号信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/accounts</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>查询所有账号信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>start</td>
+<td>int</td>
+<td>获取的视频会议列表的起始行，0标示第一行数据，默认为0</td>
+</tr>
+<tr id="param_row"><td>count</td>
+<td>int</td>
+<td>获取的视频会议列表的行数，即包括start在内的后count行数据，0代表获取所有，默认为10</td>
+</tr>
+<tr id="param_row"><td>account</td>
+<td>str</td>
+<td>可选，用户账号名，携带此参数可以根据账号名查询账号</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"total":&nbsp1,<br/>&nbsp&nbsp"accounts":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account":&nbsp"aaaaaaaaa",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"binded":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"date_of_birth":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"email":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"enable":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ext_num":&nbsp"025-5555522-2189",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"fax":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"job_num":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"limited":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"mobile":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account_moid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account_jid":&nbsp"2618a3b0-1e7c-49f9-9ee6-26fcddb6eede@kedacom",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"aaaaaaaaa",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"office_location":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"password":&nbsp"21218cca77804d2ba1922c33e0151105",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sex":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"departments":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3ba-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"44442",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C++软件工程师"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_moid":&nbsp"2618a3b1-1e7c-49f9-9ee6-26fcddb6eede",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_name":&nbsp"11rrrr",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"department_position":&nbsp"C++软件工程师"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>total</td>
+<td>int</td>
+<td>数量</td>
+</tr>
+<tr id="param_row"><td>accounts</td>
+<td>array</td>
+<td>账号列表信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount</td>
+<td>str</td>
+<td>账号自定义账号，登陆账号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbinded</td>
+<td>int</td>
+<td>164号是否绑定自定义账号 <br />0-否；<br />1-是；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdate_of_birth</td>
+<td>str</td>
+<td>出生日期</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>e164号码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspemail</td>
+<td>str</td>
+<td>邮箱</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspenable</td>
+<td>int</td>
+<td>账号启用停用标识 <br />0-停用；<br />1-启用；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspext_num</td>
+<td>str</td>
+<td>电话号分机号如：025-5555522-2189电话：025-5555522；分机：2189</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspfax</td>
+<td>str</td>
+<td>传真</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspjob_num</td>
+<td>str</td>
+<td>账号编号/工号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplimited</td>
+<td>int</td>
+<td>是否为来宾用户 <br />0-否；<br />1-是；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmobile</td>
+<td>str</td>
+<td>手机</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount_moid</td>
+<td>str</td>
+<td>账号moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount_jid</td>
+<td>str</td>
+<td>文字聊天账号jid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>账号真实姓名</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspoffice_location</td>
+<td>str</td>
+<td>办公地址</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppassword</td>
+<td>str</td>
+<td>密码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspsex</td>
+<td>int</td>
+<td>性别 <br />0-女；<br />1-男；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdepartments</td>
+<td>array</td>
+<td>部门信息列表</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdepartment_moid</td>
+<td>str</td>
+<td>部门moid（UUID格式）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdepartment_name</td>
+<td>str</td>
+<td>部门名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdepartment_position</td>
+<td>str</td>
+<td>职位信息</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v1/amc/accounts/{account_moid}/disable"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>停用账号</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/accounts/{account_moid}/disable</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>停用账号</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>_method</td>
+<td></td>
+<td>若不支持PUT，则使用POST请求，并在请求带上_method参数，值为PUT</td>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"e164":&nbsp"11123355"<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>e164*</td>
+<td>str</td>
+<td>e164号码，如果账号没有绑定E164号，则不填写</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v1/amc/accounts/{account_moid}/password"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>重置密码</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/accounts/{account_moid}/password</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>重置密码</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>_method</td>
+<td></td>
+<td>若不支持PUT，则使用POST请求，并在请求带上_method参数，值为PUT</td>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"value":&nbsp"888888"<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>value*</td>
+<td>str</td>
+<td>密码 <br />1.字符限制：仅支持 英文字母(大小写)、数字、“_”、“.”</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"moid不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/amc/approval_infos"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>查询会议审批信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/approval_infos</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>查询会议审批信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>user_domain_moid*</td>
+<td>str</td>
+<td>查询审批信息的用户域moid,默认为本级用户域</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"real_approval":&nbsp1,<br/>&nbsp&nbsp"video_approval":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>real_approval</td>
+<td>int</td>
+<td>实体会议审批开启或者关闭<br />0-关闭；<br />1-开启；</td>
+</tr>
+<tr id="param_row"><td>video_approval</td>
+<td>int</td>
+<td>视频会议审批开启或者关闭 <br />0-关闭；<br />1-开启；</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"用户域为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v1/amc/approval_infos"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>启用停用会议审批功能</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/approval_infos</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>启用停用会议审批功能</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>_method</td>
+<td></td>
+<td>若不支持PUT，则使用POST请求，并在请求带上_method参数，值为PUT</td>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>认证token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"real_approval":&nbsp1,<br/>&nbsp&nbsp"video_approval":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>real_approval*</td>
+<td>int</td>
+<td>实体会议审批开启或者关闭<br />0-关闭；<br />1-开启；</td>
+</tr>
+<tr id="param_row"><td>video_approval*</td>
+<td>int</td>
+<td>视频会议审批开启或者关闭 <br />0-关闭；<br />1-开启；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp401,<br/>&nbsp&nbsp"describe":&nbsp"用户域不能为空"<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+<tr id="param_row"><td>describe</td>
+<td>str</td>
+<td>错误说明</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/amc/public_groups"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取集团顶级公共群组列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/public_groups</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取集团顶级公共群组列表</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"public_groups":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"public_group_moid":&nbsp"2102aa4d-7838-4794-947a-48459859bde1",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"公共群组1",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"version":&nbsp"1"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"public_group_moid":&nbsp"a78d7d23-cd56-464f-bf98-db1c0dc0d062",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"公共群组2",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"version":&nbsp"1"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>public_groups</td>
+<td>array</td>
+<td>公共群组数组，返回空是代表用户无权查看公共群组或不在公共群组中</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppublic_group_moid</td>
+<td>str</td>
+<td>公用群组moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>公共群组名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspversion</td>
+<td>str</td>
+<td>版本号</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/amc/public_groups/{public_group_moid}"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取指定公共群组组织架构信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/public_groups/{public_group_moid}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取指定公共群组组织架构信息,{public_group_moid}为公共群组moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"public_group_moid":&nbsp"2102aa4d-7838-4794-947a-48459859bde1",<br/>&nbsp&nbsp"groups":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"56464d-7838-4794-947a-48459859bde1",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"一组",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"parent_moid":&nbsp"2102aa4d-7838-4794-947a-48459859bde1"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"a78d7d23-cd56-464f-bf98-db1c0dc0d062",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"二组",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"parent_moid":&nbsp"2102aa4d-7838-4794-947a-48459859bde1"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>public_group_moid</td>
+<td>str</td>
+<td>请求所查询的公共组群moid</td>
+</tr>
+<tr id="param_row"><td>groups</td>
+<td>array</td>
+<td>群组数组，不返回根节点，且返回空代表无群组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmoid</td>
+<td>str</td>
+<td>群组moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>群组名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspparent_moid</td>
+<td>str</td>
+<td>父群组moid</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/amc/public_groups/{public_group_moid}/users"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取指定集团公共群组所有人员信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/amc/public_groups/{public_group_moid}/users</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取指定集团公共群组所有人员信息，{public_group_moid}为公共群组moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"public_group_moid":&nbsp"2102aa4d-7838-4794-947a-48459859bde1",<br/>&nbsp&nbsp"users":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"bde133b4-f24a-48ac-85ec-5c3245743d8d",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"email":&nbsp"jiangruihuan@kedacom.com",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"account":&nbsp"jiangruihuan",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"mobile":&nbsp"12345678458",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"jiang",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"group_moid":&nbsp"a78d7d23-cd56-464f-bf98-db1c0dc0d062"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>public_group_moid</td>
+<td>str</td>
+<td>请求所查询的公共组群moid</td>
+</tr>
+<tr id="param_row"><td>users</td>
+<td>array</td>
+<td>组织内账号数组，返回空代表没有成员</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmoid</td>
+<td>str</td>
+<td>账号moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspjid</td>
+<td>str</td>
+<td>xmpp账号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaccount</td>
+<td>str</td>
+<td>自定义账号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspemail</td>
+<td>str</td>
+<td>邮箱</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>xmpp账号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmobile</td>
+<td>str</td>
+<td>联系电话</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>姓名</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspgroup_moid</td>
+<td>str</td>
+<td>群组moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspext_num</td>
+<td>str</td>
+<td>分机</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspseat</td>
+<td>str</td>
+<td>座位号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbrief</td>
+<td>str</td>
+<td>简介</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspportrait40</td>
+<td>str</td>
+<td>用户头像（40像素）地址</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspportrait64</td>
+<td>str</td>
+<td>用户头像（64像素）地址</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspportrait128</td>
+<td>str</td>
+<td>用户头像（128像素）地址</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/amc/version"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取账号API版本信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/amc/version</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取账号API版本信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"version":&nbsp"6.0.0.0.0.20190603",<br/>&nbsp&nbsp"api_level":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>version</td>
+<td>str</td>
+<td>版本信息</td>
+</tr>
+<tr id="param_row"><td>api_level</td>
+<td>int</td>
+<td>账号API版本标识，请与账号API说明文档中的各个接口的最低支持版本号作对比，若小于最低支持版本号，则该接口不支持当前版本的API调用</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp112230<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" class="t" border="1"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+</div>
+</div>
+<script>function AjustContentHeight(){
+    var div_content = document.getElementById("div_content");
+    var div_body = document.getElementById("div_body")
+    var clientHeight = document.documentElement.clientHeight;
+    clientHeight -= 69;
+    div_content.style.height = clientHeight + "px";
+    div_body.style.height = clientHeight + "px";
+
+}
+
+window.onload=function(){AjustContentHeight();}
+window.onresize=function(){AjustContentHeight();}</script></body>
+</html>

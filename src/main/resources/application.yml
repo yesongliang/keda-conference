@@ -1,0 +1,98 @@
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
+  application:
+    name: conference
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: 
+server:
+  port: 8081
+  servlet:
+    context-path: /conference
+
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://peer1:8001/eureka/
+
+#分布式||集群支持
+distribute: 
+  enable: true
+  capacity: 32
+
+#创建会议默认参数
+default-create-conference-param:
+#创建会议类型，默认为1 1-及时会议；2-公共模板；3-个人模板；4-根据虚拟会议室创会；
+  create_type: 1
+#当creat_type不为1时必填，分别对应模板id和虚拟会议室id
+  template_id: null
+#会议名称(给个默认值,可自行设置)
+  name: default_conf_name
+#会议时长 创建虚拟会议室时可填，0为永久会议
+  duration: 0
+#会议码率，目前以主视频格式中的码率为准
+  bitrate: 1024
+#会议免打扰  0-关闭；1-开启；
+  closed_conf: 0
+#会议安全 ,0-公开会议；1-隐藏会议；
+  safe_conf: 0
+#传输加密类型 0-不加密；2-AES加密；3-商密（SM4）；4-商密（SM1）；
+  encrypted_type: 0
+#会议类型 0-传统会议；1-端口会议；
+  conf_type: 0
+#呼叫模式 0-手动；2-自动；
+  call_mode: 2
+#呼叫次数
+  call_times: 20
+#呼叫间隔
+  call_interval: 10
+#是否开启初始化哑音 0-否；1-是；
+  mute: 0
+#是否开启初始化静音 0-否；1-是；
+  silence: 0
+#视频质量,其中租赁环境默认设为质量优先，自建环境以api下参为准 0-质量优先；1-速度优先；
+  video_quality: 0
+#传输加密AES加密密钥 1.字符限制：仅支持 英文字母(大小写) 数字 下划线（_） 小数点（.） 2.最大字符长度：16个字节
+  encrypted_key: ''
+#双流权限 0-发言会场；1-任意会场；
+  dual_mode: 1
+#是否开启语音激励 0-否；1-是；
+  voice_activity_detection: 0
+#级联模式 0-简单级联； 1-合并级联；
+  cascade_mode: 0
+#是否级联上传 0-否； 1-是；
+  cascade_upload: 0
+#是否级联回传 0-否； 1-是；
+  cascade_return: 0
+#级联回传带宽参数
+  cascade_return_para: 0
+#是否来宾会议室 0-否； 1-是；
+  public_conf: 0
+#最大与会终端数 8-小型8方会议； 32-32方会议； 64-64方会议； 192-大型192方会议；
+  max_join_mt: 192
+#会议中无终端时，是否自动结会，永久会议时默认为0 0-否； 1-是；
+  auto_end: 0
+#是否预占资源，0：纯转发会议，1：资源预占会议
+  preoccpuy_resource: 0
+#归一重整 0-不使用； 1-使用；
+  one_reforming: 0
+#主视频格式列表
+  video_formats[0]:
+#主视频格式 1-MPEG; 2-H.261; 3-H.263; 4-H.264_HP; 5-H.264_BP; 6-H.265; 7-H.263+;
+    format: 5
+#主视频分辨率 1-QCIF; 2-CIF; 3-4CIF; 12-720P; 13-1080P; 14-WCIF; 15-W4CIF; 16-4k;
+    resolution: 12
+#帧率
+    frame: 30
+#码率
+    bitrate: 1024
+
+    

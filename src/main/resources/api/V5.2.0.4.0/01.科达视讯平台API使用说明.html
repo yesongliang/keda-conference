@@ -1,0 +1,827 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>科达视讯平台API使用说明</title>
+  <meta content="text/html" charset="utf-8" />
+  <style type="text/css">
+  body {
+      background: #f5f5f5;
+      margin: 0px;
+      margin-top: -20px;
+      padding: 0px;
+    }
+
+    #div_main {
+      width: 1004px;
+      font-family: "Microsoft Yahei", helvetica, 'Lucida Grande', Tahoma, Verdana, Simsun, Arial, Clean;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 12px;
+    }
+
+    #div_main p {
+      font-family: "Microsoft Yahei", helvetica, 'Lucida Grande', Tahoma, Verdana, Simsun, Arial, Clean;
+      font-size: 14px;
+    }
+
+    #div_title h1 {
+      font-weight: normal;
+      margin-left: auto;
+      margin-right: auto;
+      width: 1004px
+    }
+
+    #div_title_occupy {
+      height: 69px;
+    }
+
+    #div_title {
+      background: #2171c2;
+      color: #fff;
+      height: 60px;
+      box-shadow: 0 .25em .75em #CCC;
+      padding-top: 15px;
+      margin-top: 0px;
+      font-family: "Microsoft Yahei" normal;
+      font-size: 12px;
+      z-index: 20;
+      position: fixed;
+      width: 100%;
+    }
+
+    #div_code {
+      width: 625px;
+      border: 1px dashed #cecfcf;
+      background: #f5f6f7;
+      font-family: Consolas, Menlo, "Liberation Mono", Courier, monospace!important;
+      padding-left: 20px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      font-size: 13px;
+      min-height: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      margin-right: 200px;
+    }
+
+    #div_content {
+      position: fixed;
+      width: 180px;
+      overflow: auto;
+      background-color: #f2f2f2;
+      padding-left: 15px;
+      margin-top: 2px;
+    }
+
+    #div_body {
+      margin-left: 180px;
+      width: 824px;
+      overflow: auto
+    }
+
+    #div_content_list a {
+      color: #5f940a;
+      text-decoration: none;
+      font-size: 13px;
+      height: 10px
+    }
+
+    #div_content_list a:hover {
+      text-decoration: underline;
+    }
+
+    #div_content_body h3 {
+      height: 10px
+    }
+
+    table.uri_t td {
+      padding-left: 10px;
+    }
+
+    table.t {
+      font-size: 13px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      width: 655px;
+      border: 1px solid #e4e4e4;
+      border-right: 0;
+      border-collapse: collapse;
+    }
+
+    table.t tr {
+      min-height: 25px;
+      line-height: 20px;
+    }
+
+    table.t th {
+      background-color: #efefef;
+      text-align: center;
+      border-right: 1px solid #e4e4e4;
+      border-bottom: 1px solid #e4e4e4;
+      color: #000;
+    }
+
+    table.t td {
+      border-right: 1px solid #e4e4e4;
+      border-bottom: 1px solid #e4e4e4;
+      color: #000;
+      background-color: #fff;
+      text-align: left;
+      padding-left: 5px;
+    }
+
+    #div_chapter {
+      background-color: #fff;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+      padding-left: 60px;
+      padding-right: 60px;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      margin: 2px 20px 20px 20px;
+    }
+  }
+  </style>
+  <style>
+    .highlight .hll {
+      background-color: #ffffcc
+    }
+
+    .highlight {
+      background: #f8f8f8;
+    }
+
+    .highlight .c {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment */
+
+    .highlight .err {
+      border: 1px solid #FF0000
+    }
+    /* Error */
+
+    .highlight .k {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword */
+
+    .highlight .o {
+      color: #666666
+    }
+    /* Operator */
+
+    .highlight .cm {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment.Multiline */
+
+    .highlight .cp {
+      color: #BC7A00
+    }
+    /* Comment.Preproc */
+
+    .highlight .c1 {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment.Single */
+
+    .highlight .cs {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment.Special */
+
+    .highlight .gd {
+      color: #A00000
+    }
+    /* Generic.Deleted */
+
+    .highlight .ge {
+      font-style: italic
+    }
+    /* Generic.Emph */
+
+    .highlight .gr {
+      color: #FF0000
+    }
+    /* Generic.Error */
+
+    .highlight .gh {
+      color: #000080;
+      font-weight: bold
+    }
+    /* Generic.Heading */
+
+    .highlight .gi {
+      color: #00A000
+    }
+    /* Generic.Inserted */
+
+    .highlight .go {
+      color: #888888
+    }
+    /* Generic.Output */
+
+    .highlight .gp {
+      color: #000080;
+      font-weight: bold
+    }
+    /* Generic.Prompt */
+
+    .highlight .gs {
+      font-weight: bold
+    }
+    /* Generic.Strong */
+
+    .highlight .gu {
+      color: #800080;
+      font-weight: bold
+    }
+    /* Generic.Subheading */
+
+    .highlight .gt {
+      color: #0044DD
+    }
+    /* Generic.Traceback */
+
+    .highlight .kc {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword.Constant */
+
+    .highlight .kd {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword.Declaration */
+
+    .highlight .kn {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword.Namespace */
+
+    .highlight .kp {
+      color: #008000
+    }
+    /* Keyword.Pseudo */
+
+    .highlight .kr {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword.Reserved */
+
+    .highlight .kt {
+      color: #B00040
+    }
+    /* Keyword.Type */
+
+    .highlight .m {
+      color: #666666
+    }
+    /* Literal.Number */
+
+    .highlight .s {
+      color: #BA2121
+    }
+    /* Literal.String */
+
+    .highlight .na {
+      color: #7D9029
+    }
+    /* Name.Attribute */
+
+    .highlight .nb {
+      color: #008000
+    }
+    /* Name.Builtin */
+
+    .highlight .nc {
+      color: #0000FF;
+      font-weight: bold
+    }
+    /* Name.Class */
+
+    .highlight .no {
+      color: #880000
+    }
+    /* Name.Constant */
+
+    .highlight .nd {
+      color: #AA22FF
+    }
+    /* Name.Decorator */
+
+    .highlight .ni {
+      color: #999999;
+      font-weight: bold
+    }
+    /* Name.Entity */
+
+    .highlight .ne {
+      color: #D2413A;
+      font-weight: bold
+    }
+    /* Name.Exception */
+
+    .highlight .nf {
+      color: #0000FF
+    }
+    /* Name.Function */
+
+    .highlight .nl {
+      color: #A0A000
+    }
+    /* Name.Label */
+
+    .highlight .nn {
+      color: #0000FF;
+      font-weight: bold
+    }
+    /* Name.Namespace */
+
+    .highlight .nt {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Name.Tag */
+
+    .highlight .nv {
+      color: #19177C
+    }
+    /* Name.Variable */
+
+    .highlight .ow {
+      color: #AA22FF;
+      font-weight: bold
+    }
+    /* Operator.Word */
+
+    .highlight .w {
+      color: #bbbbbb
+    }
+    /* Text.Whitespace */
+
+    .highlight .mb {
+      color: #666666
+    }
+    /* Literal.Number.Bin */
+
+    .highlight .mf {
+      color: #666666
+    }
+    /* Literal.Number.Float */
+
+    .highlight .mh {
+      color: #666666
+    }
+    /* Literal.Number.Hex */
+
+    .highlight .mi {
+      color: #666666
+    }
+    /* Literal.Number.Integer */
+
+    .highlight .mo {
+      color: #666666
+    }
+    /* Literal.Number.Oct */
+
+    .highlight .sb {
+      color: #BA2121
+    }
+    /* Literal.String.Backtick */
+
+    .highlight .sc {
+      color: #BA2121
+    }
+    /* Literal.String.Char */
+
+    .highlight .sd {
+      color: #BA2121;
+      font-style: italic
+    }
+    /* Literal.String.Doc */
+
+    .highlight .s2 {
+      color: #BA2121
+    }
+    /* Literal.String.Double */
+
+    .highlight .se {
+      color: #BB6622;
+      font-weight: bold
+    }
+    /* Literal.String.Escape */
+
+    .highlight .sh {
+      color: #BA2121
+    }
+    /* Literal.String.Heredoc */
+
+    .highlight .si {
+      color: #BB6688;
+      font-weight: bold
+    }
+    /* Literal.String.Interpol */
+
+    .highlight .sx {
+      color: #008000
+    }
+    /* Literal.String.Other */
+
+    .highlight .sr {
+      color: #BB6688
+    }
+    /* Literal.String.Regex */
+
+    .highlight .s1 {
+      color: #BA2121
+    }
+    /* Literal.String.Single */
+
+    .highlight .ss {
+      color: #19177C
+    }
+    /* Literal.String.Symbol */
+
+    .highlight .bp {
+      color: #008000
+    }
+    /* Name.Builtin.Pseudo */
+
+    .highlight .vc {
+      color: #19177C
+    }
+    /* Name.Variable.Class */
+
+    .highlight .vg {
+      color: #19177C
+    }
+    /* Name.Variable.Global */
+
+    .highlight .vi {
+      color: #19177C
+    }
+    /* Name.Variable.Instance */
+
+    .highlight .il {
+      color: #666666
+    }
+    /* Literal.Number.Integer.Long */
+  </style>
+  <link rel="icon" href="api.ico" type="image/x-icon" />
+</head>
+
+<body>
+  <div id="div_title">
+    <h1 class="center">科达视讯平台API使用说明</h1>
+  </div>
+  <div id="div_title_occupy"></div>
+  <div id="div_main">
+    <div id="div_content">
+      <div id="div_content_body">
+        <h3>目录</h3>
+        <div id="div_content_list">
+          <a href="#summary">1 概述</a>
+          <br />
+          <a href="#allstyle">2 整体风格</a>
+          <br />
+          <a href="#urlstyle">&nbsp;&nbsp;&nbsp;2.1 URI风格</a>
+          <br />
+          <a href="#timestyle">&nbsp;&nbsp;&nbsp;2.2 时间格式</a>
+          <br />
+          <a href="#httpreqstyle">&nbsp;&nbsp;&nbsp;2.3 Http请求类型</a>
+          <br />
+          <a href="#instruct">3 使用说明</a>
+          <br />
+          <a href="#login">&nbsp;&nbsp;&nbsp;3.1 登录</a>
+          <br />
+          <a href="#getreq">&nbsp;&nbsp;&nbsp;3.2 获取类请求</a>
+          <br />
+          <a href="#modreq">&nbsp;&nbsp;&nbsp;3.3 修改类请求</a>
+          <br />
+          <a href="#answer">&nbsp;&nbsp;&nbsp;3.4 答复</a>
+          <br />
+          <a href="#apilevelstyle">&nbsp;&nbsp;&nbsp;3.5 版本控制</a>
+          <br />
+          <a href="#sysstate">4 系统状态码</a>
+          <br />
+          <a href="#sysstate">5 调试模式</a>
+          <br />
+        </div>
+      </div>
+    </div>
+    <div id="div_body">
+      <a name="summary"></a>
+      <div id="div_chapter">
+        <h3>1 概述</h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;科达视讯平台API，主要为希望对视频会议进行二次开发的开发者提供一套完整的接口。<br /> &nbsp;&nbsp;&nbsp;&nbsp;API接口基于HTTP协议，采用RESTful
+          的设计风格。
+          <br />&nbsp;&nbsp;&nbsp;&nbsp;包括以下API：
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统一登陆：提供软件权限校验、用户账户登录及登陆保活接口
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会议管理：提供视频会议创建、预约及公共、个人会议模板的相关接口
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会议控制：提供视频会议中的与会方管理、画面合成、混音、电视墙等相关功能的接口
+          <!--<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;账号管理：提供用户账号、组织架构创建、查询、修改的相关接口-->
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;网管系统：提供设备、告警、统计信息查询的相关接口
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录播系统：提供对录播服务器录像室、直播室、节目列表创建、查询、修改的相关接口
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会议信息推送：提供视频会议中与会方、画面合成、混音、电视墙等状态变化的反向推送功能
+        </p>
+      </div>
+      <a name="allstyle"></a>
+      <div id="div_chapter">
+        <h3>2 整体风格</h3>
+        <a name="urlstyle"></a>
+        <div id="div_instruct_p">
+          <h4>2.1 URI风格</h4>
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;URI请求风格为：<br />
+          </p>
+          <div id="div_code">
+            <div class="highlight">
+              <pre><span class="p">http://{domain|ip}/api/{version}/{app}/{resources}/{rc_id}</span></pre>
+            </div>
+          </div>
+          <p>
+            &nbsp;&nbsp;&nbsp;&nbsp;备注：version = v1<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;app分类为：
+            <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.
+            system 统一登陆
+            <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.
+            mc 会议管理<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.
+            vc 会议控制<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.
+            nms 网管系统<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.
+            vrs 录播系统<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.
+            publish 推送<br />
+          </p>
+        </div>
+        <a name="timestyle"></a>
+        <div id="div_instruct_p">
+          <h4>2.2 时间格式</h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;采用ISO8601:2000标准</p>
+          <div id="div_code">
+            <div class="highlight">
+              <pre><span class="p">2016-11-11T15:30:00+08:00</span></pre>
+            </div>
+          </div>
+        </div>
+        <a name="httpreqstyle"></a>
+        <div id="div_instruct_p">
+          <h4>2.3 HTTP请求类型</h4>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;GET（SELECT）：从服务器取出资源（一项或多项）。<br /> &nbsp;&nbsp;&nbsp;&nbsp;POST（CREATE）：在服务器新建一个资源。
+            <br /> &nbsp;&nbsp;&nbsp;&nbsp;PUT（UPDATE）：在服务器更新资源（客户端提供改变后的完整资源）。
+            <br /> &nbsp;&nbsp;&nbsp;&nbsp;DELETE（DELETE）：从服务器删除资源。
+            <br />
+          </p>
+        </div>
+      </div>
+      <a name="instruct"></a>
+      <div id="div_chapter">
+        <h3>3 使用说明</h3>
+        <a name="login"></a>
+        <div id="div_instruct_p">
+          <h4>3.1 登录</h4>
+          <p> &nbsp;&nbsp;&nbsp;&nbsp;科达视讯平台API采用统一登陆方式对软件权限及用户账户进行验证，使用者仅需登陆一次，便可调用各子系统的API。<br />&nbsp;&nbsp;&nbsp;&nbsp;使用者需先申请一个API
+            License，并导入到科达视频会议系统中，其中包含软件key和密钥。
+            <br /> &nbsp;&nbsp;&nbsp;&nbsp;通过软件key+密钥向平台注册获取account_token
+          </p>
+        </div>
+        <div id="div_code">
+          <div class="highlight">
+            <pre><span class="s2">POST /api/v1/system/token HTTP/1.1</span>
+<span class="nx">Accept-Encoding: identity</span>
+<span class="nx">Content-Length: 58</span>
+<span class="nx">Host: 127.0.0.1</span>
+<span class="nx">User-Agent: Python-urllib/3.5</span>
+<span class="nx">Content-Type: application/x-www-form-urlencoded</span>
+<span class="nx">Connection: close</span>
+<span class="nx">API-Level: 1</span>
+
+<span class="nx">oauth_consumer_key=key&oauth_consumer_secret=12345678</span>
+
+<span class="nx">HTTP/1.1 200 OK</span>
+<span class="nx">Server: nginx</span>
+<span class="nx">Date: Mon, 27 Jun 2016 07:39:49 GMT</span>
+<span class="nx">Content-Type: application/json; charset=UTF-8</span>
+<span class="nx">Content-Length: 67</span>
+<span class="nx">Connection: close</span>
+
+<span class="s2">{"success": 1, "account_token": "6567e24b425db665a3044db69f0c6fe4"}</span></pre>
+          </div>
+        </div>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;二次开发通过account_token + 帐号 + 密码登录</p>
+        <div id="div_code">
+          <div class="highlight">
+            <pre><span class="s2">POST /api/v1/system/login HTTP/1.1</span>
+<span class="nx">Accept-Encoding: identity</span>
+<span class="nx">Content-Length: 85</span>
+<span class="nx">Host: 172.16.185.146</span>
+<span class="nx">User-Agent: Python-urllib/3.5</span>
+<span class="nx">Content-Type: application/x-www-form-urlencoded</span>
+<span class="nx">Connection: close</span>
+<span class="nx">API-Level: 1</span>
+<span class="nx">password=888888&username=name&account_token=6567e24b425db665a3044db69f0c6fe4</span>
+
+<span class="nx">HTTP/1.1 200 OK</span>
+<span class="nx">Server: nginx</span>
+<span class="nx">Date: Mon, 27 Jun 2016 07:39:49 GMT</span>
+<span class="nx">Content-Type: application/json; charset=UTF-8</span>
+<span class="nx">Content-Length: 43</span>
+<span class="nx">Connection: close</span>
+<span class="nx">Set-Cookie: SSO_COOKIE_KEY=890db118-9033-4317-8fe5-7456913d5793;</span>
+<span class='nx'>Expires=Mon, 11-Jul-2016 07:39:49 GMT; </span>
+
+<span class="s2">{"success": 1, "username": "0512110001003"}</span></pre>
+          </div>
+        </div>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;平台回复会将登录信息写入cookies中。<br /> &nbsp;&nbsp;&nbsp;&nbsp;后续请求，二次开发者需要在每次请求的时候携带account_token+cookies来进行操作。
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;对于客户端无法自动处理cookie的，需要将登录的cookie保存起来，后续请求通过设置Http的Cookie字段，手动设置
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;平台会验证开发者权限以及用户权限。
+          <br /> &nbsp;&nbsp;&nbsp;&nbsp;每次请求会刷新token存活时间，若无操作，开发者需要自行调用接口刷新token存活时间。
+          <br />
+        </p>
+        <a name="getreq"></a>
+        <div id="div_instruct_p">
+          <h4>3.2 获取类请求</h4>
+          <p> &nbsp;&nbsp;&nbsp;&nbsp;参数平铺跟在URI后面，以&区分多参数<br /> &nbsp;&nbsp;&nbsp;&nbsp;范例（获取会议列表为例）
+          </p>
+        </div>
+        <div id="div_code">
+          <div class="highlight">
+            <pre><span class="s2">GET /api/v1/vc/confs?account_token=6567e24b425db665a3044db69f0c6fe4 HTTP/1.1</span>
+<span class="nx">Accept-Encoding: identity</span>
+<span class="nx">User-Agent: Python-urllib/3.5</span>
+<span class="nx">Host: 127.0.0.1</span>
+<span class="nx">Cookie: SSO_COOKIE_KEY=890db118-9033-4317-8fe5-7456913d5793</span>
+<span class="nx">Connection: close</span></pre>
+          </div>
+        </div>
+        <a name="modreq"></a>
+        <div id="div_instruct_p">
+          <h4>3.3 修改类请求（POST PUT）</h4>
+          <p> &nbsp;&nbsp;&nbsp;&nbsp;参数以表单形式提交，字符编码utf-8</p>
+        </div>
+        <div id="div_code">
+          <div class="highlight">
+            <pre><span class="nx">Content-Type: application/x-www-form-urlencoded;charset=utf-8;</span></pre>
+          </div>
+        </div>
+        <p> &nbsp;&nbsp;&nbsp;&nbsp;json类参数，以params作为key，json内容urlencoder后作为value进行传递。<br /> &nbsp;&nbsp;&nbsp;&nbsp;范例 （添加终端为例）</p>
+        <div id="div_code">
+          <div class="highlight">
+            <pre><span class="s2">POST /api/v1/vc/confs/1118986/mts HTTP/1.1</span>
+<span class="nx">Accept-Encoding: identity</span>
+<span class="nx">User-Agent: Python-urllib/3.5</span>
+<span class="nx">Cookie: SSO_COOKIE_KEY=890db118-9033-4317-8fe5-7456913d5793</span>
+<span class="nx">Content-Length: 305</span>
+<span class="nx">Host: 127.0.0.1</span>
+<span class="nx">Content-Type: application/x-www-form-urlencoded</span>
+<span class="nx">Connection: close</span>
+<span class="nx">API-Level: 1</span>
+
+<span class="nx">params=%7B%22mts%22%3A+%5B%7B%22account_type%22%3A+5%2C+%22account</span>
+<span class='nx'>%22%3A+%222322231%22%2C+%22bitrate%22%3A+2048%2C+%22protocol%22%3A</span>
+<span class='nx'>+0%7D%2C+%7B%22account_type%22%3A+5%2C+%22account%22%3A+%222322232</span>
+<span class='nx'>%22%2C+%22bitrate%22%3A+2048%2C+%22protocol%22%3A+0%7D%5D%7D&</span>
+<span class="nx">account_token=6567e24b425db665a3044db69f0c6fe4</span></pre>
+          </div>
+        </div>
+        <a name="answer"></a>
+        <div id="div_instruct_p">
+          <h4>3.4 答复</h4>
+          <p> &nbsp;&nbsp;&nbsp;&nbsp;任何操作都有success标识成功失败<br /> &nbsp;&nbsp;&nbsp;&nbsp;失败操作统一用error_code标识错误码
+            <br /> &nbsp;&nbsp;&nbsp;&nbsp;数据形式为json，字符编码utf-8
+          </p>
+          <div id="div_code">
+            <div class="highlight">
+              <pre><span class="nx">Content-Type: application/json;charset=utf-8;</span></pre>
+            </div>
+          </div>
+          <p> &nbsp;&nbsp;&nbsp;&nbsp;范例（添加终端回复为例）</p>
+          <div id="div_code">
+            <div class="highlight">
+              <pre><span class="s2">HTTP/1.1 200 OK</span>
+<span class="nx">Server: nginx</span>
+<span class="nx">Date: Mon, 27 Jun 2016 07:52:28 GMT</span>
+<span class="nx">Content-Type: application/json; charset=UTF-8</span>
+<span class="nx">Content-Length: 31</span>
+<span class="nx">Connection: close</span>
+
+<span class="s2">{"success": 1, "error_code": 0}</span></pre>
+            </div>
+          </div>
+		<a name="apilevelstyle"></a>
+        <div id="div_instruct_p">
+          <h4>3.5 版本控制</h4>
+		  <p>&nbsp;&nbsp;&nbsp;&nbsp;由于平台已迭代多个版本，为了区分其不同，在6.0平台之后的版本中，对于不同的app模块提供了API-Level字段作为标记。<br />&nbsp;&nbsp;&nbsp;&nbsp;说明文档中每个app模块的API-Level与文档对应的平台版本号，可以在右上角查询到：<br /> 
+		  </p>
+		<div id="div_code">
+            <div class="highlight">
+              <pre><span class="nx">API-Level：1;</span></pre>
+			  <pre><span class="nx">V6.0.0.3.0.20190826;</span></pre>
+            </div>
+        </div>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;每个app模块的API-Level以及平台版本号也可以通过接口查询：<br /> 
+        </p>
+		<div id="div_code">
+            <div class="highlight">
+              <pre><span class="nx">GET /api/v1/system/version;</span></pre>
+			  <pre><span class="nx">GET /api/v1/vc/version;</span></pre>
+			  <pre><span class="nx">GET /api/v1/mc/version;</span></pre>
+			  <pre><span class="nx">...</span></pre>
+            </div>
+        </div>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;单条API的说明中，会标注其支持的最低版本，使用前需要和平台版本进行比较，若最低版本高于平台版本，则说明平台版本较老还不支持该条API。如下例代表该接口最低支持的API-Level为3，若平台的API-Level版本为2，则说明平台不支持该接口，会出现返回结构体和说明文档描述不一致的问题。<br /> 
+		<div id="div_code">
+            <div class="highlight">
+              <pre><span class="nx">名称          获取个人模板列表</span></pre>
+			  <pre><span class="nx">URI           /api/v1/mc/personal_templates</span></pre>
+			  <pre><span class="nx">方法          GET</span></pre>
+			  <pre><span class="nx">说明          获取个人模板列表</span></pre>
+			  <pre><span class="nx">最低支持版本  3</span></pre>
+			  <pre><span class="nx">...</span></pre>
+            </div>
+        </div>
+		</p>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;API-Level需要携带在请求的http头中，如下例。当携带的API-Level小于平台版本时，平台会做向前兼容，返回老版本的API结果；当携带的API-Level大于平台版本时，平台则会返回当前版本支持的最新结果。<br /> 
+		</p>
+		<div id="div_code">
+          <div class="highlight">
+            <pre><span class="s2">GET /api/v1/mc/personal_templates?account_token=6567e24b425db665a3044db69f0c6fe4 HTTP/1.1</span>
+<span class="nx">Accept-Encoding: identity</span>
+<span class="nx">User-Agent: Python-urllib/3.5</span>
+<span class="nx">Cookie: SSO_COOKIE_KEY=890db118-9033-4317-8fe5-7456913d5793</span>
+<span class="nx">Content-Length: 305</span>
+<span class="nx">Host: 127.0.0.1</span>
+<span class="nx">Content-Type: application/x-www-form-urlencoded</span>
+<span class="nx">Connection: close</span>
+<span class="nx">API-Level: 1</span>
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <a name="sysstate"></a>
+      <div id="div_chapter">
+        <h3>4 系统状态码</h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<a href='https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html'>https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a></p>
+      </div>
+	  <a name="debugmode"></a>
+      <div id="div_chapter">
+        <h3>5 调试模式</h3>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;在6.0的版本后API新增了调试模式，用来校验POST PUT DELETE方法下，填写的参数是否合法，使用方法为在uri中携带参数debug=1，例如：</a></p>
+        <div id="div_code">
+		  <div class="highlight">
+            <pre><span class="s2">POST /api/v1/vc/confs/1118986/mts?debug=1 HTTP/1.1</span>
+<span class="nx">Accept-Encoding: identity</span>
+<span class="nx">User-Agent: Python-urllib/3.5</span>
+<span class="nx">Cookie: SSO_COOKIE_KEY=890db118-9033-4317-8fe5-7456913d5793</span>
+<span class="nx">Content-Length: 305</span>
+<span class="nx">Host: 127.0.0.1</span>
+<span class="nx">Content-Type: application/x-www-form-urlencoded</span>
+<span class="nx">Connection: close</span>
+
+<span class="nx">params=%7b%22mts%22%3a+%5b%7b%22account_type%22%3a+5%2c+%22account</span>
+<span class='nx'>%22%3a+%222322231%22%2c+%22bitrate%22%3a+2048%2c+%22protocol%22%3a</span>
+<span class='nx'>0%7d%2c+%7b%22account_type%22%3a+5%2c+%22account%22%3a+%222322232%</span>
+<span class='nx'>22%2c++%22protocol%22%3a+0%7d%5d%7d&account_token=6567e24b425db665</span>
+<span class="nx">a3044db69f0c6fe4</span></pre>
+          </div>
+        </div>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;开启调试模式后，接口仅做参数的校验，并不会实际执行，返回结果如下,表示参数mts列表中缺少必填参数bitrate</a></p>
+		<div id="div_code">
+			<div class="highlight">
+              <pre><span class="nx">{"success":1,"dubug_list":{"mts":[{"bitrate":"下参中缺少该必填参数"}]}}</span></pre>
+            </div>
+		</div>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;debuglist中返回参数错误提示，按参数的数据格式返回。 "debuglist:{"第一层key（数据结构为字典）":{"第二层key":"错误说明"},"第一层key（数据结构为列表）":[{"第二层key":"错误说明"}]}</a></p>
+	  </div>
+      <br />
+    </div>
+    <br />
+  </div>
+  <script>
+    function AjustContentHeight() {
+      var div_content = document.getElementById("div_content");
+      var div_body = document.getElementById("div_body")
+      var clientHeight = document.documentElement.clientHeight;
+      clientHeight -= 69;
+      div_content.style.height = clientHeight + "px";
+      div_body.style.height = clientHeight + "px";
+    }
+    window.onload = function () {
+      AjustContentHeight();
+    }
+    window.onresize = function () {
+      AjustContentHeight();
+    }
+  </script>
+</body>
+
+</html>

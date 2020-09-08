@@ -1,0 +1,1747 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"><head><title>科达视讯平台网管API</title>
+<meta charset="utf-8" content="text/html"></meta>
+<style type = "text/css">body{background: #f5f5f5;margin: 0px;    margin-top: -20px;padding: 0px;}#div_title{    background: #2171c2;    color: #fff;    height: 60px;    box-shadow: 0 .25em .75em #CCC;    padding-top: 15px;    margin-top: 0px;    font-family: "Microsoft Yahei" normal;    font-size: 12px;    z-index: 20;    position: fixed;    width: 100%;}#div_title_inner{    width: 1004px;    margin-left: auto;    margin-right: auto;}#div_title h3{    width: 0px;    display: inline-block;    float: right;    margin-top: 1%;    font-size: 18px;}#div_title h2{    width: 130px;    display: inline-block;    float: right;    margin-top: 3.5%;}#div_title h1{    font-weight: normal;    margin-left: auto;    margin-right: auto;    display: inline-block;    font-family: "Microsoft YaHei" !important;}#div_title_occupy{    height: 69px;}#div_main{width: 1004px;font-family: "Microsoft Yahei",helvetica,'Lucida Grande',Tahoma,Verdana,Simsun,Arial,Clean;margin-left: auto;margin-right: auto;    margin-top: 15px;}#div_content{    position: fixed;    width: 250px;    overflow: auto;    background-color: #f2f2f2;    padding-left: 15px;    margin-top: 2px;}#div_content_body h3{    height: 10px;}#div_body{    margin-left: 250px;    width: 824px;    overflow: auto}#example_div{width: 650px;border: 1px dashed #cecfcf;background : #f5f6f7;font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace!important;padding-left: 2px;padding-top: 5px;padding-bottom: 5px;font-size: 13px;min-height: 50px;}#uri_list_div a {    color: #5f940a;    text-decoration: none;    font-size: 13px;    height: 10px}#uri_list_div a:hover{    text-decoration: underline;}#data_style{    width:70px;}table.uri_t td{padding-left: 10px;    width: 550px;}table.uri_t th{text-align: left;    width: 110px;}table.t {    font-size: 13px;    margin-top: 5px;    margin-bottom: 5px;    width: 655px;    border: 1px solid #e4e4e4;    border-right: 0;    border-collapse: collapse;}table.t tr {    min-height: 25px;    line-height: 20px;}table.t th {    background-color: #efefef;    text-align: center;    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;}table.t td {    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;    background-color: #fff;    text-align: left;    padding-left: 5px;}#div_get, #div_post, #div_push{   background-color: #fff;   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);   padding: 64px;   margin: 2px 20px 20px 20px;}</style><link rel="icon" href="api.ico" type="image/x-icon"></head>
+<body><div id="div_title"><div id="div_title_inner"><h1>科达视讯平台网管API</h1>
+<h2>V6.0.0.3.0.20190912</h2>
+<h3>API_Level:1</h3>
+</div>
+</div>
+<div id="div_title_occupy"></div>
+<div id="div_main"><div id="div_content"><div id="div_content_body"><h3>域信息</h3>
+<div id="uri_list_div"><a href="#GET_/api/v1/nms/domains">1. 请求所有域信息</a>
+<br />
+</div>
+<h3>设备信息</h3>
+<div id="uri_list_div"><a href="#GET_/api/v1/nms/platform_domains/{domain_moid}/physicals">1. 请求指定平台域下的物理服务器设备列表</a>
+<br />
+<a href="#GET_/api/v1/nms/physicals/{p_server_moid}/logicals">2. 请求物理服务器上的逻辑服务器设备列表</a>
+<br />
+<a href="#GET_/api/v1/nms/platform_domains/{domain_moid}/logicals">3. 请求指定平台域下的逻辑服务器设备列表</a>
+<br />
+<a href="#GET_/api/v1/nms/user_domains/{domain_moid}/terminals">4. 请求指定用户域的终端设备列表</a>
+<br />
+<a href="#GET_/api/v1/nms/physicals/{p_server_moid}/detail">5. 请求指定物理服务器的详细信息</a>
+<br />
+<a href="#GET_/api/v1/nms/mediaresources/{mediaresource_moid}/portinfo">6. 请求指定媒体资源服务器上报的端口资源信息</a>
+<br />
+<a href="#GET_/api/v1/nms/old_terminals">7. 请求非受管终端设备列表</a>
+<br />
+<a href="#GET_/api/nms/version">8. 获取网管API版本信息</a>
+<br />
+</div>
+<h3>统计信息</h3>
+<div id="uri_list_div"><a href="#GET_/api/v1/nms/service_domains/{domain_moid}/terminal_online_statistic">1. 请求终端在线统计数据</a>
+<br />
+<a href="#GET_/api/v1/nms/platform_domains/{domain_moid}/mediaresources">2. 请求平台域端口资源统计信息</a>
+<br />
+</div>
+<h3>告警信息</h3>
+<div id="uri_list_div"><a href="#GET_/api/v1/nms/servers/{server_moid}/unrepaired_warnings">1. 请求服务器未修复告警信息</a>
+<br />
+<a href="#GET_/api/v1/nms/terminals/{terminal_moid}/unrepaired_warnings">2. 请求终端未修复告警信息</a>
+<br />
+</div>
+<h3>会议信息</h3>
+<div id="uri_list_div"><a href="#GET_/api/v1/nms/service_domains/{service_moid}/meetings">1. 请求服务域正在召开的会议信息</a>
+<br />
+<a href="#GET_/api/v1/nms/meetings/{conf_id}/terminal_detail">2. 请求会议终端信息详情</a>
+<br />
+</div>
+</div>
+</div>
+<div id="div_body"><div id="div_gets"><a name="GET_/api/v1/nms/domains"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求所有域信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/domains</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求所有域信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"domains":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"czrm20w12rnm7wdmvnedp0aw",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"parent_moid":&nbsp"bbec3c51-379f-4fef-9748-79b1629391df",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"电信用户域",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"user"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"r0bxuejbtrml54q0u68q7i2m",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"parent_moid":&nbsp"ae00251c-5fd8-4e8d-bab9-3d9942fd2d50",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"dongjie",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"user"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"efhn8cpqbsxnc02xv9u8wtpk",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"parent_moid":&nbsp"ae00251c-5fd8-4e8d-bab9-3d9942fd2d50",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"chen",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"user"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"bbec3c51-379f-4fef-9748-79b1629391df",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"parent_moid":&nbsp"ae00251c-5fd8-4e8d-bab9-3d9942fd2d50",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"电信",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"service"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"b7pl6vl59tyke80r7zyl0m2g",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"parent_moid":&nbsp"ae00251c-5fd8-4e8d-bab9-3d9942fd2d50",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"zxtest",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"user"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"parent_moid":&nbsp"ae00251c-5fd8-4e8d-bab9-3d9942fd2d50",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"科达平台域",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"platform"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>domains</td>
+<td>array</td>
+<td>域数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmoid</td>
+<td>str</td>
+<td>域的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspparent_moid</td>
+<td>str</td>
+<td>上级域的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptype</td>
+<td>str</td>
+<td>域的类型：kernel(核心域), service(服务域), platform(平台域), user(用户域)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>域的名称</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/platform_domains/{domain_moid}/physicals"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求指定平台域下的物理服务器设备列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/platform_domains/{domain_moid}/physicals</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求指定平台域下的物理服务器设备列表，参数{domain_moid}为平台域moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"physicals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"f1dcb406-9c54-418a-a768-7027386640c2",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10152000000002111111111100000072",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"disk":&nbsp"100",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"d2718350-58ac-47d4-8700-7a73cb2a052d",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"card_pos":&nbsp"5",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"19.0.0.3;192.168.42.174;",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"critical",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"memory":&nbsp"11",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"portout":&nbsp"901",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"CEU_E_long",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"cpu":&nbsp"9",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"location":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"portin":&nbsp"588",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"CEU_E"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"offline",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10159000000002000000000000000052",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"disk":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"143c3c43-bd1a-4c7d-9e17-72a8c94ffb2b",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"card_pos":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"memory":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"portout":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"UMM",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"location":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"cpu":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"portin":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"UMM"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"offline",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10166000000002000000000000000050",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"disk":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"1c66c704-48d1-41bc-8538-d5ee990f45ee",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"card_pos":&nbsp"1",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"memory":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"portout":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"XMM-176.165",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"location":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"cpu":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"portin":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"XMM"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>physicals</td>
+<td>array</td>
+<td>物理服务器数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcard_pos</td>
+<td>str</td>
+<td>板卡的位置</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmoid</td>
+<td>str</td>
+<td>物理服务器的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspguid</td>
+<td>str</td>
+<td>物理服务器的guid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmachine_room_moid</td>
+<td>str</td>
+<td>虚拟机房moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>物理服务器所属域的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>物理服务器的名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptype</td>
+<td>str</td>
+<td>物理服务器的类型</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplocation</td>
+<td>str</td>
+<td>物理服务器所在的地理位置（所在省的名称）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip</td>
+<td>str</td>
+<td>物理服务器的ip地址,存在多个ip时，以“;”分隔</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcpu</td>
+<td>str</td>
+<td>物理服务器当前的cpu使用率(%)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspportin</td>
+<td>str</td>
+<td>物理服务器当前的网口入口流量总量(k)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspportout</td>
+<td>str</td>
+<td>物理服务器当前的网口出口流量总量(k)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdisk</td>
+<td>str</td>
+<td>物理服务器当前的磁盘使用率(%)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmemory</td>
+<td>str</td>
+<td>物理服务器当前的内存使用率(%)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspwarning_level</td>
+<td>str</td>
+<td>物理服务器当前的告警级别：critical，important，normal，没有告警则此字段为空</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsponline</td>
+<td>str</td>
+<td>物理服务器当前的在线状态：online(在线)，offline(离线)</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/physicals/{p_server_moid}/logicals"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求物理服务器上的逻辑服务器设备列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/physicals/{p_server_moid}/logicals</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求物理服务器上的逻辑服务器设备列表，参数{p_server_moid}为物理服务器moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"logicals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"877792f8-d46f-46d2-95ed-48a093957262",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10163000000000000000000000000002",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"988909ca-09c1-4448-a3a0-fe87f1551f6b",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"mooooooo-oooo-oooo-oooo-topplatfoorm",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"modbcore",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"MODBCORE",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"master",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"19.0.0.3;192.168.42.174;",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"normal",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"7cc5d1cd-cb1c-4327-a46e-177b7ca03d7f",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10119000000002000000000000000015",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"988909ca-09c1-4448-a3a0-fe87f1551f6b",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"xns",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"XNS",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"slave",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"5fe0c0ea-a4ab-4823-91ad-33e17ceef88c",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10147000000002000000000000000026",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"988909ca-09c1-4448-a3a0-fe87f1551f6b",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"modb",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"MODB",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"793bd9f0-da38-4d22-924b-0ca9c5620127",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10107000000002000000000000000004",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"988909ca-09c1-4448-a3a0-fe87f1551f6b",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"aps",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"APS",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"fcd1abc8-6249-40a8-85a4-af4ff0e4750f",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10102000000002000000000000000008",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"988909ca-09c1-4448-a3a0-fe87f1551f6b",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"cms",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"CMS",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"32c30be7-97fe-42da-9e63-7771b05832bf",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10114000000002000000000000000007",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"988909ca-09c1-4448-a3a0-fe87f1551f6b",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"css",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"CSS",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"5249fdc1-bb21-4693-b286-55212a422aff",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10103000000002000000000000000005",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"988909ca-09c1-4448-a3a0-fe87f1551f6b",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"pas",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"PAS",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>logicals</td>
+<td>array</td>
+<td>逻辑服务器数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmoid</td>
+<td>str</td>
+<td>逻辑服务器的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspguid</td>
+<td>str</td>
+<td>逻辑服务器的guid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmachine_room_moid</td>
+<td>str</td>
+<td>虚拟机房moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspp_server_moid</td>
+<td>str</td>
+<td>逻辑服务器所属物理服务器的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>逻辑服务器所属域的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>逻辑服务器的名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptype</td>
+<td>str</td>
+<td>逻辑服务器的类型：sus, xmpp, rabbitmq, zookeeper…</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbackup_state</td>
+<td>str</td>
+<td>主备状态:master、slave，不存在主备时，字段为空</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip</td>
+<td>str</td>
+<td>逻辑服务器所在物理服务器的ip,存在多个ip时，以“;”分隔</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspwarning_level</td>
+<td>str</td>
+<td>逻辑服务器当前的告警级别：critical，important，normal，没有告警则此字段为空</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsponline</td>
+<td>str</td>
+<td>逻辑服务器当前的在线状态：online(在线)，offline(离线)</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/platform_domains/{domain_moid}/logicals"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求指定平台域下的逻辑服务器设备列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/platform_domains/{domain_moid}/logicals</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求指定平台域下的逻辑服务器设备列表，参数{domain_moid}为平台域moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"logicals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"KEEPALIVE",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10145000000002111111111100000015",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"0bbe5915-46d8-4ed5-9f84-34070633a783",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"172.16.18.29",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"master",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"normal",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"f1dcb406-9c54-418a-a768-7027386640c2",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"keepalive"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"CSS",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10114000000002111111111100000003",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"c028d47b-35fd-4b87-b436-069a7ed0b54c",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"20149cb6-7991-423e-aa2f-e3d897141612",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"192.168.42.173;192.168.42.175;",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"slave",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"f1dcb406-9c54-418a-a768-7027386640c2",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"css"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"MYSQL",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"guid":&nbsp"10124000000002111111111100000007",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"p_server_moid":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"2e01f9b6-a8be-40fb-a13b-8860006a8b46",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"backup_state":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"f1dcb406-9c54-418a-a768-7027386640c2",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"mysql"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>logicals</td>
+<td>array</td>
+<td>逻辑服务器数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmoid</td>
+<td>str</td>
+<td>逻辑服务器的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspguid</td>
+<td>str</td>
+<td>逻辑服务器的guid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmachine_room_moid</td>
+<td>str</td>
+<td>虚拟机房moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspp_server_moid</td>
+<td>str</td>
+<td>逻辑服务器所属物理服务器的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>逻辑服务器所属域的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>逻辑服务器的名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptype</td>
+<td>str</td>
+<td>逻辑服务器的类型：sus, xmpp, rabbitmq, zookeeper…</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbackup_state</td>
+<td>str</td>
+<td>主备状态:master、slave，不存在主备时，字段为空</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip</td>
+<td>str</td>
+<td>逻辑服务器所在物理服务器的ip,存在多个ip时，以“;”分隔</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspwarning_level</td>
+<td>str</td>
+<td>逻辑服务器当前的告警级别：critical，important，normal，没有告警则此字段为空</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsponline</td>
+<td>str</td>
+<td>逻辑服务器当前的在线状态：online(在线)，offline(离线)</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/user_domains/{domain_moid}/terminals"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求指定用户域的终端设备列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/user_domains/{domain_moid}/terminals</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求指定用户域的终端设备列表，参数{domain_moid}为用户域moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>start</td>
+<td>int</td>
+<td>获取终端列表的起始位置, 0表示第一个终端, 默认为0</td>
+</tr>
+<tr id="param_row"><td>count</td>
+<td>int</td>
+<td>获取的终端的个数, 即包括start在内的后count个终端, ,默认为10</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"total_count":&nbsp5001,<br/>&nbsp&nbsp"terminals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"r0bxuejbtrml54q0u68q7i2m",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"helloworld2",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"1ca09fc8-00de-4364-bacb-84956f1965ad",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"8605120004344",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"offline"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"r0bxuejbtrml54q0u68q7i2m",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"helloworld123",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"23275ce0-93ca-4373-a918-6822bfef711f",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"8605120004345",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"offline"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"r0bxuejbtrml54q0u68q7i2m",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"dongjie",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"9526f234-57ac-4aaf-917b-080acb61082f",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"8605120004346",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"offline"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>total_count</td>
+<td>int</td>
+<td>终端的总数量</td>
+</tr>
+<tr id="param_row"><td>terminals</td>
+<td>array</td>
+<td>终端数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmoid</td>
+<td>str</td>
+<td>终端设备的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>终端设备所属域的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>终端设备的E164号码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>终端设备的名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsponline</td>
+<td>str</td>
+<td>终端设备的当前的在线状态：online(在线)，offline(离线)</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/physicals/{p_server_moid}/detail"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求指定物理服务器的详细信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/physicals/{p_server_moid}/detail</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求指定物理服务器的详细信息，参数{p_server_moid}为物理服务器moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"domain_moid":&nbsp"9017f427-b24d-449c-b77c-042bcc67d1f4",<br/>&nbsp&nbsp"online":&nbsp"online",<br/>&nbsp&nbsp"guid":&nbsp"10137000000002000000000000000034",<br/>&nbsp&nbsp"disk":&nbsp"100",<br/>&nbsp&nbsp"moid":&nbsp"0ae83a1c-b401-462c-aff9-450456601cc7",<br/>&nbsp&nbsp"domain_name":&nbsp"平台域",<br/>&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp"machine_room_name":&nbsp"机房",<br/>&nbsp&nbsp"card_pos":&nbsp"11",<br/>&nbsp&nbsp"ip":&nbsp"19.0.0.3;192.168.42.174;",<br/>&nbsp&nbsp"memory":&nbsp"11",<br/>&nbsp&nbsp"portout":&nbsp"901",<br/>&nbsp&nbsp"name":&nbsp"xmpu2",<br/>&nbsp&nbsp"warning_level":&nbsp"critical",<br/>&nbsp&nbsp"location":&nbsp"",<br/>&nbsp&nbsp"cpu":&nbsp"9",<br/>&nbsp&nbsp"portin":&nbsp"1001",<br/>&nbsp&nbsp"type":&nbsp"XMPU"<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>card_pos</td>
+<td>str</td>
+<td>板卡的位置</td>
+</tr>
+<tr id="param_row"><td>moid</td>
+<td>str</td>
+<td>物理服务器的moid</td>
+</tr>
+<tr id="param_row"><td>guid</td>
+<td>str</td>
+<td>物理服务器的guid</td>
+</tr>
+<tr id="param_row"><td>domain_name</td>
+<td>str</td>
+<td>所属平台域名称</td>
+</tr>
+<tr id="param_row"><td>machine_room_moid</td>
+<td>str</td>
+<td>虚拟机房moid</td>
+</tr>
+<tr id="param_row"><td>machine_room_name</td>
+<td>str</td>
+<td>虚笔机房名称</td>
+</tr>
+<tr id="param_row"><td>domain_moid</td>
+<td>str</td>
+<td>物理服务器所属域的moid</td>
+</tr>
+<tr id="param_row"><td>name</td>
+<td>str</td>
+<td>物理服务器的名字</td>
+</tr>
+<tr id="param_row"><td>type</td>
+<td>str</td>
+<td>物理服务器的类型</td>
+</tr>
+<tr id="param_row"><td>location</td>
+<td>str</td>
+<td>物理服务器所在的地理位置（所在省的名称）</td>
+</tr>
+<tr id="param_row"><td>ip</td>
+<td>str</td>
+<td>物理服务器的ip地址,存在多个ip时，以“;”分隔</td>
+</tr>
+<tr id="param_row"><td>cpu</td>
+<td>str</td>
+<td>物理服务器当前的cpu使用率(%)</td>
+</tr>
+<tr id="param_row"><td>portin</td>
+<td>str</td>
+<td>物理服务器当前的网口入口流量总量(k)</td>
+</tr>
+<tr id="param_row"><td>portout</td>
+<td>str</td>
+<td>物理服务器当前的网口出口流量总量(k)</td>
+</tr>
+<tr id="param_row"><td>disk</td>
+<td>str</td>
+<td>物理服务器当前的磁盘使用率(%)</td>
+</tr>
+<tr id="param_row"><td>memory</td>
+<td>str</td>
+<td>物理服务器当前的内存使用率(%)</td>
+</tr>
+<tr id="param_row"><td>warning_level</td>
+<td>str</td>
+<td>物理服务器当前的告警级别：critical，important，normal，没有告警则此字段为空</td>
+</tr>
+<tr id="param_row"><td>online</td>
+<td>str</td>
+<td>物理服务器当前的在线状态：online(在线)，offline(离线)</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/mediaresources/{mediaresource_moid}/portinfo"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求指定媒体资源服务器上报的端口资源信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/mediaresources/{mediaresource_moid}/portinfo</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求指定媒体资源服务器上报的端口资源信息，参数{mediaresource_moid}为媒体资源服务器moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"total_port":&nbsp100,<br/>&nbsp&nbsp"used_port":&nbsp80<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>total_port</td>
+<td>int</td>
+<td>端口总数</td>
+</tr>
+<tr id="param_row"><td>used_port</td>
+<td>int</td>
+<td>已用端口数</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/old_terminals"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求非受管终端设备列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/old_terminals</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求非受管终端设备列表</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>start</td>
+<td>int</td>
+<td>获取非受管终端列表的起始位置, 0表示第一个终端, 默认为0</td>
+</tr>
+<tr id="param_row"><td>count</td>
+<td>int</td>
+<td>获取非受管终端的个数, 即包括start在内的后count个终端, ,默认为10</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"old_terminals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0111",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"PCMT",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"api_level":&nbsp"V5.1",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"172.16.81.236",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"online"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0112",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"PCMT",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"api_level":&nbsp"V5.0",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"172.16.81.181",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"online":&nbsp"offline"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp],<br/>&nbsp&nbsp"total_count":&nbsp3<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>total_count</td>
+<td>int</td>
+<td>非受管终端的总数量</td>
+</tr>
+<tr id="param_row"><td>old_terminals</td>
+<td>array</td>
+<td>非受管终端数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>非受管终端的E164号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptype</td>
+<td>str</td>
+<td>非受管终端的类型</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspapi_level</td>
+<td>str</td>
+<td>非受管终端的版本</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip</td>
+<td>str</td>
+<td>非受管终端的IP</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsponline</td>
+<td>str</td>
+<td>非受管终端当前的在线状态：online(在线)，offline(离线)</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/nms/version"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取网管API版本信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/nms/version</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取网管API版本信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"version":&nbsp"6.0.0.0.0.20190603",<br/>&nbsp&nbsp"api_level":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>version</td>
+<td>str</td>
+<td>版本信息</td>
+</tr>
+<tr id="param_row"><td>api_level</td>
+<td>int</td>
+<td>网管API版本标识，请与网管API说明文档中的各个接口的最低支持版本号作对比，若小于最低支持版本号，则该接口不支持当前版本的API调用</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp112230<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/service_domains/{domain_moid}/terminal_online_statistic"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求终端在线统计数据</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/service_domains/{domain_moid}/terminal_online_statistic</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求终端在线统计数据，参数{domain_moid}为服务域moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>period</td>
+<td>str</td>
+<td>统计时间区域，枚举类型：lastweek：最近一周,lastmonth：最近一月，lastthreemonth：最近三个月，lasthalfyear：最近半年，lastyear：最近一年</td>
+</tr>
+<tr id="param_row"><td>start_time</td>
+<td>str</td>
+<td>统计开始时间(与period参数二选一)</td>
+</tr>
+<tr id="param_row"><td>end_time</td>
+<td>str</td>
+<td>统计结束时间(与period参数二选一)</td>
+</tr>
+<tr id="param_row"><td>start</td>
+<td>int</td>
+<td>列表获取的起始位置，默认值为0</td>
+</tr>
+<tr id="param_row"><td>count</td>
+<td>int</td>
+<td>列表获取的数量，默认值为10</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"total_count":&nbsp123,<br/>&nbsp&nbsp"statistic":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"ecec072d-d182-43f1-93a7-488c76336258",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"xmpp_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sip_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"monitor_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"h323_online":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"statistic_time":&nbsp"2016/07/05T13:11:00+08:00"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"ecec072d-d182-43f1-93a7-488c76336258",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"xmpp_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sip_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"monitor_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"h323_online":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"statistic_time":&nbsp"2016/07/05T12:56:00+08:00"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"ecec072d-d182-43f1-93a7-488c76336258",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"xmpp_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sip_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"monitor_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"h323_online":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"statistic_time":&nbsp"2016/07/05T12:41:00+08:00"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"ecec072d-d182-43f1-93a7-488c76336258",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"xmpp_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sip_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"monitor_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"h323_online":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"statistic_time":&nbsp"2016/07/05T12:26:00+08:00"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"ecec072d-d182-43f1-93a7-488c76336258",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"xmpp_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sip_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"monitor_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"h323_online":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"statistic_time":&nbsp"2016/07/05T12:11:00+08:00"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"ecec072d-d182-43f1-93a7-488c76336258",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"xmpp_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sip_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"monitor_online":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"h323_online":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"statistic_time":&nbsp"2016/07/05T11:56:00+08:00"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>total_count</td>
+<td>int</td>
+<td>终端数据的总数量</td>
+</tr>
+<tr id="param_row"><td>statistic</td>
+<td>list</td>
+<td>终端在线数据数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>要进行统计的用户域的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspxmpp_online</td>
+<td>int</td>
+<td>xmpp在线数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspsip_online</td>
+<td>int</td>
+<td>sip在线数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmonitor_online</td>
+<td>int</td>
+<td>monitor在线数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsph323_online</td>
+<td>int</td>
+<td>h323在线数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspstatistic_time</td>
+<td>str</td>
+<td>统计时间</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/platform_domains/{domain_moid}/mediaresources"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求平台域端口资源统计信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/platform_domains/{domain_moid}/mediaresources</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求平台域端口资源统计信息，参数{domain_moid}为平台域moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"total_count":&nbsp123,<br/>&nbsp&nbsp"used_count":&nbsp456<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>total_port</td>
+<td>int</td>
+<td>平台端口总数量</td>
+</tr>
+<tr id="param_row"><td>used_port</td>
+<td>int</td>
+<td>平台端口已用数量</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/servers/{server_moid}/unrepaired_warnings"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求服务器未修复告警信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/servers/{server_moid}/unrepaired_warnings</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求服务器未修复告警信息，参数{server_moid}为服务器moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"unrepaired_warnings":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_moid":&nbsp"3db01a5a-2168-4144-8120-9a1385aa83f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_name":&nbsp"JD10000-1",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_type":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_ip":&nbsp"172.16.185.220;172.16.185.221;",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"65c25e98-4dfe-42f0-a72d-67b07149641f",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_name":&nbsp"科达平台域",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_name":&nbsp"机房",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"critical",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"description":&nbsp"SA进程不存在",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"start_time":&nbsp"2017/4/28T10:41:13+08:00"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_moid":&nbsp"3db01a5a-2168-4144-8120-9a1385aa83f4",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_name":&nbsp"JD10000-1",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_type":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_ip":&nbsp"172.16.185.220;172.16.185.221;",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"65c25e98-4dfe-42f0-a72d-67b07149641f",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_name":&nbsp"科达平台域",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_moid":&nbsp"mooooooo-oooo-oooo-oooo-defaultmachi",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"machine_room_name":&nbsp"机房",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"important",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"description":&nbsp"单板服务器下线",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"start_time":&nbsp"2017/4/28T10:41:13+08:00"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>unrepaired_warnings</td>
+<td>array</td>
+<td>未修复服务器告警数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_moid</td>
+<td>str</td>
+<td>服务器moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_name</td>
+<td>str</td>
+<td>服务器名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_type</td>
+<td>str</td>
+<td>服务器类型</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_ip</td>
+<td>str</td>
+<td>服务器IP</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>服务器所属平台域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_name</td>
+<td>str</td>
+<td>服务器所属平台域名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmachine_room_moid</td>
+<td>str</td>
+<td>虚拟机房moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmachine_room_name</td>
+<td>str</td>
+<td>虚拟机房名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspwarning_level</td>
+<td>str</td>
+<td>告警级别 critical；important；normal；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdescription</td>
+<td>str</td>
+<td>告警描述</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspstart_time</td>
+<td>str</td>
+<td>产生时间</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/terminals/{terminal_moid}/unrepaired_warnings"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求终端未修复告警信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/terminals/{terminal_moid}/unrepaired_warnings</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求终端未修复告警信息，参数{terminal_moid}为终端moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"unrepaired_warnings":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_moid":&nbsp"0e56fc73-898d-4817-976e-e026c0c5bb15",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_name":&nbsp"1234560003528",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_type":&nbsp"TrueLink",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_ip":&nbsp"172.16.81.138",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"device_e164":&nbsp"1234560003528",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"kz2qc8bfxu97chlvhep7gvz9",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_name":&nbsp"测试用户域1",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"warning_level":&nbsp"important",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"description":&nbsp"终端版本非推荐版本(最新版本)",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"start_time":&nbsp"2017/4/28T10:41:13+08:00"<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>unrepaired_warnings</td>
+<td>array</td>
+<td>未修复终端告警数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_moid</td>
+<td>str</td>
+<td>终端moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_name</td>
+<td>str</td>
+<td>终端名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_type</td>
+<td>str</td>
+<td>终端类型</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_ip</td>
+<td>str</td>
+<td>终端IP</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdevice_e164</td>
+<td>str</td>
+<td>终端e164号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>终端所属用户域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_name</td>
+<td>str</td>
+<td>终端所属用户域名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspwarning_level</td>
+<td>int</td>
+<td>告警级别 critical；important；normal；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdescription</td>
+<td>str</td>
+<td>告警描述</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspstart_time</td>
+<td>str</td>
+<td>产生时间</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/service_domains/{service_moid}/meetings"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求服务域正在召开的会议信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/service_domains/{service_moid}/meetings</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求服务域正在召开的会议信息，参数{service_moid}为服务域moid</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"meeting":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"conf_type":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"特种公司",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0001781",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"bitrate":&nbsp1024,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"729qq1rywt88fzuccqvbccj5",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"start_time":&nbsp"2017/4/28T10:41:13+08:00",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"end_time":&nbsp"2017/4/28T10:41:13+08:00",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"meeting_terminals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"729qq1rywt88fzuccqvbccj5",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"大客户部会议室2",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"version":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"74a9a32e-7498-4681-9c74-3b3a9dca9036",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0512111996002",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp""<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"telephone_terminals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"17602192183",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"18818216847"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"cascades":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0001781",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"特种公司"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0002694",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"9998880000001的会议"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip_e164":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"172.16.80.46",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"192.168.1.23"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"conf_type":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"caller_name":&nbsp"0511001000032",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"caller_type":&nbsp"H323n",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"caller_e164":&nbsp"0511001000032",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"caller_domain_moid":&nbsp"729qq1rywt88fzuccqvbccj5",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"callee_name":&nbsp"0511001000034",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"callee_type":&nbsp"H323n",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"callee_e164":&nbsp"0511001000034",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"callee_domain_moid":&nbsp"729qq1rywt88fzuccqvbccj5",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"bitrate":&nbsp192,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"start_time":&nbsp"2017/4/28T10:41:13+08:00"<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"conf_type":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"张家亮的会议",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0000840",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"bitrate":&nbsp256,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"729qq1rywt88fzuccqvbccj5",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"start_time":&nbsp"2017/4/28T10:41:13+08:00",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"end_time":&nbsp"2017/4/28T10:41:13+08:00",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"meeting_terminals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"domain_moid":&nbsp"729qq1rywt88fzuccqvbccj5",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"0512121880866",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"version":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"moid":&nbsp"5cb90b98-048f-4682-95c9-e5449930dce7",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0512121880866",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp""<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"telephone_terminals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"17602192183",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"18818216847"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"cascades":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0001781",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"特种公司"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0002694",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"9998880000001的会议"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"meeting_device":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"JD2000",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"172.16.81.101",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"mixer_count":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"abas_count":&nbsp3,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vbas_count":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vmp_count":&nbsp1<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip_e164":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"172.16.80.46",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"192.168.1.23"<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>meeting</td>
+<td>array</td>
+<td>服务域正在召开的会议数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspconf_type</td>
+<td>int</td>
+<td>会议类型 <br />0-传统会议；<br />1-端口会议；<br />2-点对点会议；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>会议名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>会议e164号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbitrate</td>
+<td>int</td>
+<td>会议带宽</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>所属域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspstart_time</td>
+<td>str</td>
+<td>开始时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspend_time</td>
+<td>str</td>
+<td>结束时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmeeting_terminals</td>
+<td>array</td>
+<td>会议中软硬终端数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdomain_moid</td>
+<td>str</td>
+<td>所属域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>终端名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspversion</td>
+<td>str</td>
+<td>终端版本</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsptype</td>
+<td>str</td>
+<td>终端类型</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmoid</td>
+<td>str</td>
+<td>终端moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>终端e164号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspip</td>
+<td>str</td>
+<td>终端IP</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptelephone_terminals</td>
+<td>array</td>
+<td>与会电话终端数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcascades</td>
+<td>array</td>
+<td>级联会议e164数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>会议名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>会议号码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsptype</td>
+<td>int</td>
+<td>会议类型 <br />0-下行会议；<br />1-上行会议；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip_e164</td>
+<td>array</td>
+<td>友商IpE164数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmeeting_device</td>
+<td>array</td>
+<td>与会外设数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsptype</td>
+<td>str</td>
+<td>终端类型</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspip</td>
+<td>str</td>
+<td>终端IP</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspmixer_count</td>
+<td>int</td>
+<td>混音器数量</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspabas_count</td>
+<td>int</td>
+<td>音频适配器数量</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvbas_count</td>
+<td>int</td>
+<td>视频适配器数量</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvmp_count</td>
+<td>int</td>
+<td>画面合成器数量</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcaller_name</td>
+<td>str</td>
+<td>主叫终端名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcaller_type</td>
+<td>str</td>
+<td>主叫终端类型</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcaller_e164</td>
+<td>str</td>
+<td>主叫终端e164</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcaller_domain_moid</td>
+<td>str</td>
+<td>主叫终端所属域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcallee_name</td>
+<td>str</td>
+<td>被叫终端名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcallee_type</td>
+<td>str</td>
+<td>被叫终端类型</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcallee_e164</td>
+<td>str</td>
+<td>被叫终端e164</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcallee_domain_moid</td>
+<td>str</td>
+<td>被叫终端所属域moid</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v1/nms/meetings/{conf_id}/terminal_detail"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>请求会议终端信息详情</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v1/nms/meetings/{conf_id}/terminal_detail</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>请求会议终端信息详情，参数{conf_id}为会议号码</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"terminals":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"isp":&nbsp8,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"nat_ip":&nbsp"10.23.46.40",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp"172.16.184.10",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"version":&nbsp"V5.0.0.4.0.20170115",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"type":&nbsp"sky_x500_1080p60",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"name":&nbsp"视讯4F_会议室6",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"e164":&nbsp"0512121996975",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"bitrate":&nbsp1024,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"primary_video":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"chan_id":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"up_or_down":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_format":&nbsp"H264",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_framerate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_up_bitrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_down_bitrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_packets_lose":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"audio_format":&nbsp"Opus",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"audio_up_bitrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"audio_packets_lose":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"audio_packets_loserate":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"chan_id":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"up_or_down":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_format":&nbsp"H264",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_framerate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_down_bitrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_packets_lose":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_packets_loserate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"audio_format":&nbsp"Opus",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"audio_down_bitrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"audio_packets_lose":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"audio_packets_loserate":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"dual_video":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"chan_id":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"up_or_down":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_format":&nbsp"H264",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_framerate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_up_bitrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_packets_lose":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_packets_loserate":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"chan_id":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"up_or_down":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_format":&nbsp"H264",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_framerate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_down_bitrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_packets_lose":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"video_packets_loserate":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>terminals</td>
+<td>array</td>
+<td>终端数组</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspisp</td>
+<td>int</td>
+<td>运营商 <br />1-中国电信；<br />2-中国联通；<br />3-中国移动；<br />4-有线通；<br />5-铁通；<br />6-海外；<br />7-本地；<br />8-其他；<br />0-未知；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspnat_ip</td>
+<td>str</td>
+<td>NAT IP</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip</td>
+<td>str</td>
+<td>终端ip</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspversion</td>
+<td>str</td>
+<td>软件版本</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptype</td>
+<td>str</td>
+<td>终端型号</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspname</td>
+<td>str</td>
+<td>终端名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspe164</td>
+<td>str</td>
+<td>终端号码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbitrate</td>
+<td>int</td>
+<td>终端呼叫码率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprimary_video</td>
+<td>array</td>
+<td>主视频数据</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspchan_id</td>
+<td>int</td>
+<td>第几路数据</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspup_or_down</td>
+<td>int</td>
+<td>上行或下行 <br />0-下行；<br />1-上行；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_format</td>
+<td>str</td>
+<td>视频格式</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_framerate</td>
+<td>int</td>
+<td>视频帧率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_up_bitrate</td>
+<td>int</td>
+<td>视频码率(上行)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_down_bitrate</td>
+<td>int</td>
+<td>视频码率(下行)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_packets_lose</td>
+<td>int</td>
+<td>视频丢包总数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_packets_loserate</td>
+<td>int</td>
+<td>视频丢包率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspaudio_format</td>
+<td>str</td>
+<td>音频格式</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspaudio_up_bitrate</td>
+<td>int</td>
+<td>音频码率(上行)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspaudio_down_bitrate</td>
+<td>int</td>
+<td>音频码率(下行)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspaudio_packets_lose</td>
+<td>int</td>
+<td>音频丢包总数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspaudio_packets_loserate</td>
+<td>int</td>
+<td>音频丢包率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdual_video</td>
+<td>array</td>
+<td>辅视频数据</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspchan_id</td>
+<td>int</td>
+<td>第几路数据</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspup_or_down</td>
+<td>int</td>
+<td>上行或下行 <br />0-下行；<br />1-上行；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_format</td>
+<td>str</td>
+<td>视频格式</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_framerate</td>
+<td>int</td>
+<td>视频帧率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_up_bitrate</td>
+<td>int</td>
+<td>视频码率(上行)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_down_bitrate</td>
+<td>int</td>
+<td>视频码率(下行)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_packets_lose</td>
+<td>int</td>
+<td>视频丢包总数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvideo_packets_loserate</td>
+<td>int</td>
+<td>视频丢包率</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp123456<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table id="param_table" border="1" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+</div>
+</div>
+<script>function AjustContentHeight(){
+    var div_content = document.getElementById("div_content");
+    var div_body = document.getElementById("div_body")
+    var clientHeight = document.documentElement.clientHeight;
+    clientHeight -= 69;
+    div_content.style.height = clientHeight + "px";
+    div_body.style.height = clientHeight + "px";
+
+}
+
+window.onload=function(){AjustContentHeight();}
+window.onresize=function(){AjustContentHeight();}</script></body>
+</html>

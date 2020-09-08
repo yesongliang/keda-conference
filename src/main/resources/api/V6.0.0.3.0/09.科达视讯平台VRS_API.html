@@ -1,0 +1,3661 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>科达视讯平台VRS API</title>
+<meta content="text/html" charset="utf-8"></meta>
+<style type = "text/css">body{background: #f5f5f5;margin: 0px;    margin-top: -20px;padding: 0px;}#div_title{    background: #2171c2;    color: #fff;    height: 60px;    box-shadow: 0 .25em .75em #CCC;    padding-top: 15px;    margin-top: 0px;    font-family: "Microsoft Yahei" normal;    font-size: 12px;    z-index: 20;    position: fixed;    width: 100%;}#div_title_inner{    width: 1004px;    margin-left: auto;    margin-right: auto;}#div_title h3{    width: 0px;    display: inline-block;    float: right;    margin-top: 1%;    font-size: 18px;}#div_title h2{    width: 130px;    display: inline-block;    float: right;    margin-top: 3.5%;}#div_title h1{    font-weight: normal;    margin-left: auto;    margin-right: auto;    display: inline-block;    font-family: "Microsoft YaHei" !important;}#div_title_occupy{    height: 69px;}#div_main{width: 1004px;font-family: "Microsoft Yahei",helvetica,'Lucida Grande',Tahoma,Verdana,Simsun,Arial,Clean;margin-left: auto;margin-right: auto;    margin-top: 15px;}#div_content{    position: fixed;    width: 250px;    overflow: auto;    background-color: #f2f2f2;    padding-left: 15px;    margin-top: 2px;}#div_content_body h3{    height: 10px;}#div_body{    margin-left: 250px;    width: 824px;    overflow: auto}#example_div{width: 650px;border: 1px dashed #cecfcf;background : #f5f6f7;font-family: Consolas,Menlo,"Liberation Mono",Courier,monospace!important;padding-left: 2px;padding-top: 5px;padding-bottom: 5px;font-size: 13px;min-height: 50px;}#uri_list_div a {    color: #5f940a;    text-decoration: none;    font-size: 13px;    height: 10px}#uri_list_div a:hover{    text-decoration: underline;}#data_style{    width:70px;}table.uri_t td{padding-left: 10px;    width: 550px;}table.uri_t th{text-align: left;    width: 110px;}table.t {    font-size: 13px;    margin-top: 5px;    margin-bottom: 5px;    width: 655px;    border: 1px solid #e4e4e4;    border-right: 0;    border-collapse: collapse;}table.t tr {    min-height: 25px;    line-height: 20px;}table.t th {    background-color: #efefef;    text-align: center;    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;}table.t td {    border-right: 1px solid #e4e4e4;    border-bottom: 1px solid #e4e4e4;    color: #000;    background-color: #fff;    text-align: left;    padding-left: 5px;}#div_get, #div_post, #div_push{   background-color: #fff;   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);   padding: 64px;   margin: 2px 20px 20px 20px;}</style><link rel="icon" href="api.ico" type="image/x-icon"></head>
+<body><div id="div_title"><div id="div_title_inner"><h1>科达视讯平台VRS API</h1>
+<h2>V6.0.0.3.0.20191108</h2>
+<h3>API_Level:1</h3>
+</div>
+</div>
+<div id="div_title_occupy"></div>
+<div id="div_main"><div id="div_content"><div id="div_content_body"><h3>录播服务器</h3>
+<div id="uri_list_div"><a href="#POST_/api/v2/vrs/login">1. 本地用户登录</a>
+<br />
+<a href="#GET_/api/v2/vrs/program_folder">2. 获取文件夹列表</a>
+<br />
+<a href="#POST_/api/v2/vrs/program_folder">3. 添加文件夹</a>
+<br />
+<a href="#PUT_/api/v2/vrs/program_folder/{id}">4. 修改文件夹</a>
+<br />
+<a href="#DELETE_/api/v2/vrs/program_folder/{id}">5. 删除文件夹</a>
+<br />
+<a href="#GET_/api/v2/vrs/program">6. 获取节目列表</a>
+<br />
+<a href="#DELETE_/api/v2/vrs/program">7. 批量删除节目</a>
+<br />
+<a href="#PUT_/api/v2/vrs/program_release_batch">8. 批量发布节目</a>
+<br />
+<a href="#PUT_/api/v2/vrs/program_to_folder">9. 节目批量移动</a>
+<br />
+<a href="#GET_/api/v2/vrs/liveroom">10. 获取直播室列表</a>
+<br />
+<a href="#GET_/api/v2/vrs/resroom">11. 获取预约直播室列表</a>
+<br />
+<a href="#GET_/api/v2/vrs/recroom">12. 获取录像室列表</a>
+<br />
+<a href="#POST_/api/v2/vrs/recroom">13. 添加录像室</a>
+<br />
+<a href="#DELETE_/api/v2/vrs/recroom/{id}">14. 删除录像室</a>
+<br />
+<a href="#PUT_/api/v2/vrs/recroom/{id}">15. 修改录像室</a>
+<br />
+<a href="#PUT_/api/v2/vrs/recroom/{id}/startrec">16. 录像室开始录像</a>
+<br />
+<a href="#PUT_/api/v2/vrs/recroom/{id}/stoprec">17. 录像室停止录像</a>
+<br />
+<a href="#PUT_/api/v2/vrs/recroom/{id}/pauserec">18. 录像室暂停录像</a>
+<br />
+<a href="#PUT_/api/v2/vrs/recroom/{id}/resumerec">19. 录像室恢复录像</a>
+<br />
+<a href="#PUT_/api/v2/vrs/recroom/{id}/startlive">20. 录像室开始直播</a>
+<br />
+<a href="#PUT_/api/v2/vrs/recroom/{id}/stoplive">21. 录像室停止直播</a>
+<br />
+<a href="#GET_/api/v2/vrs/playroom">22. 获取放像室列表</a>
+<br />
+<a href="#POST_/api/v2/vrs/playroom">23. 添加放像室</a>
+<br />
+<a href="#DELETE_/api/v2/vrs/playroom/{id}">24. 删除放像室</a>
+<br />
+<a href="#PUT_/api/v2/vrs/playroom/{id}">25. 修改放像室</a>
+<br />
+<a href="#PUT_/api/v2/vrs/playroom/{id}/startplay">26. 放像室开始放像</a>
+<br />
+<a href="#PUT_/api/v2/vrs/playroom/{id}/stopplay">27. 放像室停止放像</a>
+<br />
+<a href="#PUT_/api/v2/vrs/playroom/{id}/pauseplay">28. 放像室暂停放像</a>
+<br />
+<a href="#PUT_/api/v2/vrs/playroom/{id}/resumeplay">29. 放像室恢复放像</a>
+<br />
+<a href="#GET_/api/v2/vrs/transtask">30. 获取转码任务信息</a>
+<br />
+<a href="#POST_/api/v2/vrs/transtask">31. 批量添加转码任务</a>
+<br />
+<a href="#PUT_/api/v2/vrs/transtask">32. 批量操作转码任务</a>
+<br />
+<a href="#GET_/api/v2/vrs/vrsip">33. 获取VRS的IP组</a>
+<br />
+<a href="#GET_/api/vrs/ver2sion">34. 获取VRS API版本信息</a>
+<br />
+</div>
+</div>
+</div>
+<div id="div_body"><div id="div_posts"><a name="POST_/api/v2/vrs/login"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>本地用户登录</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/login</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>本地用户登录</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"username":&nbsp"admin",<br/>&nbsp&nbsp"psd":&nbsp"admin"<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>username*</td>
+<td>str</td>
+<td>用户名</td>
+</tr>
+<tr id="param_row"><td>psd*</td>
+<td>str</td>
+<td>密码</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"username":&nbsp"admin",<br/>&nbsp&nbsp"usermoid":&nbsp"65ddde67-7d4f-11e6-ac2d-001410095e12",<br/>&nbsp&nbsp"userdomainmoid":&nbsp"64fed808-7d4f-11e6-ac2d-001410095e12",<br/>&nbsp&nbsp"rightmask":&nbsp3,<br/>&nbsp&nbsp"userrole":&nbsp1,<br/>&nbsp&nbsp"token":&nbsp"0b8160ecc057b369b19926818666829d",<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>username</td>
+<td>str</td>
+<td>用户名</td>
+</tr>
+<tr id="param_row"><td>usermoid</td>
+<td>str</td>
+<td>用户moid</td>
+</tr>
+<tr id="param_row"><td>userdomainmoid</td>
+<td>str</td>
+<td>用户域moid</td>
+</tr>
+<tr id="param_row"><td>rightmask</td>
+<td>int</td>
+<td>用户权限掩码<br />1-可下载；<br />2-可直播；<br />3-可下载可直播；<br />4-可点播；<br />5-可下载可点播；<br />6-可直播可点播；<br />7-可下载可直播可点播；</td>
+</tr>
+<tr id="param_row"><td>userrole</td>
+<td>int</td>
+<td>用户角色 <br />0-超级管理员；<br />1-普通管理员；<br />2-普通用户；</td>
+</tr>
+<tr id="param_row"><td>token</td>
+<td>str</td>
+<td>返回的SSO cookie值</td>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"maxlocknum":&nbsp3,<br/>&nbsp&nbsp"currentnum":&nbsp1,<br/>&nbsp&nbsp"unlocktime":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>maxlocknum</td>
+<td>int</td>
+<td>最大尝试次数</td>
+</tr>
+<tr id="param_row"><td>currentnum</td>
+<td>int</td>
+<td>当前尝试次数</td>
+</tr>
+<tr id="param_row"><td>unlocktime</td>
+<td>int</td>
+<td>锁定时间</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v2/vrs/program_folder"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取文件夹列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/program_folder</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取文件夹列表</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>userdomainmoid</td>
+<td>str</td>
+<td>获取信息的用户域moid,获取多个时以逗号隔开，默认获取本集团域下的所有用户域信息</td>
+</tr>
+<tr id="param_row"><td>prgtypemask</td>
+<td>int</td>
+<td>请求节目类型掩码<br />0-ALL(默认)；<br />1-ASF；<br />2-MP4；</td>
+</tr>
+<tr id="param_row"><td>remoteprgtypemask</td>
+<td>int</td>
+<td>远端节目类型掩码<br />0-ALL(默认)；<br />1-ASF；<br />2-MP4；</td>
+</tr>
+<tr id="param_row"><td>localvrs</td>
+<td>int</td>
+<td>是否限定本台vrs(一个用户域下有多台vrs的情况下有意义)<br />0-不限(默认)；<br />1-本vrs；</td>
+</tr>
+<tr id="param_row"><td>prgencmask</td>
+<td>int</td>
+<td>节目加密类型<br />0-全部(默认)；<br />1-不加密；<br />2-标准加密；<br />4-国密加密；<br />6-标准加密或国密加密；</td>
+</tr>
+<tr id="param_row"><td>prgauthmask</td>
+<td>int</td>
+<td>认证类型<br />0-全部(默认)；<br />1-普通；<br />2-强认证；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"folderinfo":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"folderid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"foldername":&nbsp"ALL",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgcount":&nbsp219,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"userdomainmoid":&nbsp""<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"folderid":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"foldername":&nbsp"UnGroup",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgcount":&nbsp209,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"userdomainmoid":&nbsp""<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp],<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>folderinfo</td>
+<td>array</td>
+<td>文件夹信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspfoldername</td>
+<td>str</td>
+<td>文件夹名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspfolderid</td>
+<td>int</td>
+<td>文件夹id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgcount</td>
+<td>int</td>
+<td>文件夹中的文件数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspuserdomainmoid</td>
+<td>str</td>
+<td>节目所属用户域</td>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="POST_/api/v2/vrs/program_folder"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>添加文件夹</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/program_folder</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>添加文件夹</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"foldername":&nbsp"test_folder"<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>foldername*</td>
+<td>str</td>
+<td>文件夹名</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"folderid":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>folderid</td>
+<td>int</td>
+<td>文件夹id</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/program_folder/{id}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>修改文件夹</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/program_folder/{id}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>修改文件夹</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"foldername":&nbsp"test_folder"<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>foldername*</td>
+<td>str</td>
+<td>文件夹名</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="DELETE_/api/v2/vrs/program_folder/{id}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>删除文件夹</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/program_folder/{id}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>DELETE</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>修改文件夹</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"isdelprogram":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>foldername*</td>
+<td>str</td>
+<td>文件夹名</td>
+</tr>
+<tr id="param_row"><td>isdelprogram*</td>
+<td>int</td>
+<td>是否删除文件夹下的节目<br />0-否；<br />1-是；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v2/vrs/program"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取节目列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/program</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取节目列表</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>folderid*</td>
+<td>int</td>
+<td>文件夹id</td>
+</tr>
+<tr id="param_row"><td>userdomainmoid</td>
+<td>str</td>
+<td>获取信息的用户域moid,获取多个时以逗号隔开，默认获取本集团域下的所有用户域信息</td>
+</tr>
+<tr id="param_row"><td>prgs1page</td>
+<td>int</td>
+<td>每个页面显示节目数 默认显示20个节目</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>请求的页码 默认显示第1页</td>
+</tr>
+<tr id="param_row"><td>includename</td>
+<td>str</td>
+<td>搜索节目的显示名称</td>
+</tr>
+<tr id="param_row"><td>orderindex</td>
+<td>int</td>
+<td>排序引索 默认为按发布状态升序，创建时间降序<br />1-名称；<br />2-创建时间；<br />3-时长；<br />4-大小；<br />5-发布状态；<br />6-格式；<br />7-热度（节目点播次数）；</td>
+</tr>
+<tr id="param_row"><td>desc</td>
+<td>int</td>
+<td>升降序 默认为0，无orderindex则不生效<br />0-升；<br />1-降；</td>
+</tr>
+<tr id="param_row"><td>starttime</td>
+<td>int</td>
+<td>按时间搜索时的起始时间 默认时间搜索不生效 时间格式为UNIX时间戳</td>
+</tr>
+<tr id="param_row"><td>endtime</td>
+<td>int</td>
+<td>按时间搜索时的结束时间 默认时间搜索不生效 时间格式为UNIX时间戳</td>
+</tr>
+<tr id="param_row"><td>prgtypemask</td>
+<td>int</td>
+<td>请求节目类型，默认为0<br />0-all；<br />1-asf；<br />2-mp4；</td>
+</tr>
+<tr id="param_row"><td>remoteprgtypemask</td>
+<td>int</td>
+<td>远端节目类型掩码，默认为0<br />0-all；<br />1-asf；<br />2-mp4；</td>
+</tr>
+<tr id="param_row"><td>localvrs</td>
+<td>int</td>
+<td>是否限定本台vrs(一个用户域下有多台vrs的情况下有意义)<br />0-不限(默认)；<br />1-本vrs；</td>
+</tr>
+<tr id="param_row"><td>prgencmask</td>
+<td>int</td>
+<td>节目加密类型<br />0-全部(默认)；<br />1-不加密；<br />2-标准加密；<br />4-国密加密；<br />6-标准加密或国密加密；</td>
+</tr>
+<tr id="param_row"><td>prgauthmask</td>
+<td>int</td>
+<td>认证类型<br />0-全部(默认)；<br />1-普通；<br />2-强认证；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"prgcount":&nbsp219,<br/>&nbsp&nbsp"pageid":&nbsp1,<br/>&nbsp&nbsp"prginfo":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp749,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgalias":&nbsp"0512110000040-20161028172529544",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"createtime":&nbsp1478071908,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"issuetime":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgstate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgencmode":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgauthmode":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgwatermark":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgskid":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgdesc":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgallduration":&nbsp585,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgallsize":&nbsp5809,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"streamjsonpath":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vrsmoid":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"userdomainmoid":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgdetail":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgid":&nbsp292,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggindex":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgname":&nbsp"0512110000040-20161028172529544.asf",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgtype":&nbsp"asf",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp2130706433,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"relativepath":&nbsp"/uploadmedia/",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgsize":&nbsp5809,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgduration":&nbsp585,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgvideostreamcount":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"presenter":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vodnum":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"coverpath":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgtab":&nbsp[],<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"covername":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"downloadnum":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp],<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>prgcount</td>
+<td>int</td>
+<td>节目总个数</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>返回的页码</td>
+</tr>
+<tr id="param_row"><td>prginfo</td>
+<td>array</td>
+<td>节目信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid</td>
+<td>int</td>
+<td>节目gid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgalias</td>
+<td>str</td>
+<td>节目显示名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcreatetime</td>
+<td>int</td>
+<td>节目创建时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspissuetime</td>
+<td>int</td>
+<td>节目发布时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgstate</td>
+<td>int</td>
+<td>节目状态 <br />0-未发布；<br />1-发布；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgencmode</td>
+<td>int</td>
+<td>文件加密模式<br />1-不加密；<br />2-标准加密；<br />4-国密加密；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgauthmode</td>
+<td>int</td>
+<td>认证模式<br />1-普通；<br />2-强认证；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgwatermark</td>
+<td>int</td>
+<td>水印开关<br />0-关闭；<br />1-开启；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgskid</td>
+<td>str</td>
+<td>文件skid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgdesc</td>
+<td>str</td>
+<td>节目描述</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgallduration</td>
+<td>int</td>
+<td>节目总时长（秒）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgallsize</td>
+<td>int</td>
+<td>节目总大小（byte）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspstreamjsonpath</td>
+<td>str</td>
+<td>Json文件位置</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvrsmoid</td>
+<td>str</td>
+<td>节目所属vrs的moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspuserdomainmoid</td>
+<td>str</td>
+<td>节目所属用户域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgdetail</td>
+<td>array</td>
+<td>节目详细信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgid</td>
+<td>int</td>
+<td>节目id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprggindex</td>
+<td>int</td>
+<td>节目索引</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgname</td>
+<td>str</td>
+<td>节目名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgtype</td>
+<td>str</td>
+<td>节目文件后缀</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspip</td>
+<td>int</td>
+<td>ip</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsprelativepath</td>
+<td>str</td>
+<td>存放相对路径</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgsize</td>
+<td>int</td>
+<td>节目大小（byte）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgduration</td>
+<td>int</td>
+<td>节目时长(秒)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgvideostreamcount</td>
+<td>int</td>
+<td>文件视频流数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsppresenter</td>
+<td>str</td>
+<td>主持人</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvodnum</td>
+<td>int</td>
+<td>点播次数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspcoverpath</td>
+<td>str</td>
+<td>封面文件路径</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgtab</td>
+<td>array</td>
+<td>标签(定义一个包含五个元素的数组)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspcovername</td>
+<td>str</td>
+<td>封面文件名</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspdownloadnum</td>
+<td>int</td>
+<td>下载次数</td>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="DELETE_/api/v2/vrs/program"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>批量删除节目</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/program</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>DELETE</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>批量删除节目</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"prgdelpckinfo":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"enforcedel":&nbsp1<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>prgdelpckinfo*</td>
+<td>array</td>
+<td>删除节目信息列表</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid*</td>
+<td>str</td>
+<td>节目gid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspenforcedel*</td>
+<td>int</td>
+<td>是否强制删除<br />0-否；<br />1-是；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"prgdelpckinfo":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"delerrno":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>prgdelpckinfo</td>
+<td>array</td>
+<td>节目信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid</td>
+<td>int</td>
+<td>节目gid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdelerrno</td>
+<td>int</td>
+<td>删除错误码</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/program_release_batch"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>批量发布节目</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/program_release_batch</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>批量发布节目</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"info":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgstate":&nbsp1<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>info*</td>
+<td>array</td>
+<td>上传信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid*</td>
+<td>int</td>
+<td>节目gid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgstate*</td>
+<td>int</td>
+<td>是否发布<br />0-否；<br />1-是；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"info":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgstate":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"relerrno":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>info</td>
+<td>array</td>
+<td>上传信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid</td>
+<td>int</td>
+<td>节目gid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgstate</td>
+<td>int</td>
+<td>是否发布<br />0-否；<br />1-是；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsprelerrno</td>
+<td>int</td>
+<td>发布错误码 0代表成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/program_to_folder"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>节目批量移动</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/program_to_folder</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>节目批量移动</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"prginfo":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1<br/>&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp2<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp],<br/>&nbsp&nbsp"dstfolderid":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>prginfo*</td>
+<td>array</td>
+<td>所要移动的节目gid列表</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid*</td>
+<td>int</td>
+<td>节目gid</td>
+</tr>
+<tr id="param_row"><td>dstfolderid*</td>
+<td>int</td>
+<td>目标文件夹id</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v2/vrs/liveroom"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取直播室列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/liveroom</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取直播室列表</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>userdomainmoid</td>
+<td>str</td>
+<td>获取信息的用户域moid,获取多个时以逗号隔开，默认获取本集团域下的所有用户域信息</td>
+</tr>
+<tr id="param_row"><td>livetype</td>
+<td>int</td>
+<td>请求节目的类型<br />0-HTML5直播(默认)；<br />1-ASF直播；<br />2-HTML5与ASF直播；</td>
+</tr>
+<tr id="param_row"><td>prgs1page</td>
+<td>int</td>
+<td>每个页面显示节目数 默认显示20个节目</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>请求的页码 默认显示第1页</td>
+</tr>
+<tr id="param_row"><td>includename</td>
+<td>str</td>
+<td>搜索字符</td>
+</tr>
+<tr id="param_row"><td>orderindex</td>
+<td>int</td>
+<td>排序引索 默认为按创建时间升序<br />1-名称；<br />2-创建时间；<br />7-热度（节目点播次数）；</td>
+</tr>
+<tr id="param_row"><td>desc</td>
+<td>int</td>
+<td>升降序 默认为0，无orderindex则不生效<br />0-升；<br />1-降；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"roomcount":&nbsp1,<br/>&nbsp&nbsp"pageid":&nbsp1,<br/>&nbsp&nbsp"roomstate":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomid":&nbsp33554433,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomidstr":&nbsp"33554433",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomname":&nbsp"mcu488544-1-20141024173658",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"userdomainmoid":&nbsp"64fed808-7d4f-11e6-ac2d-001410095e12",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgid":&nbsp2128,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"elapse":&nbsp15,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"lcastpoint":&nbsp"mcu488544-1-20141024173658",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"livestreampath":&nbsp"/hlsfile/2016/10/14/20161014172709_86/Readme.json",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"livesnapshotpath":&nbsp"hlsfile/2017/08/25/20170825135029_884001/snapshot.jpeg",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"mte164":&nbsp"0008841",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"livestatnum":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"createtime":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"encmode":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"authmode":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgwatermark":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"shorturl":&nbsp""<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp],<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>返回的页码</td>
+</tr>
+<tr id="param_row"><td>roomcount</td>
+<td>int</td>
+<td>直播室的数量</td>
+</tr>
+<tr id="param_row"><td>roomstate</td>
+<td>array</td>
+<td>直播室信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomid</td>
+<td>int</td>
+<td>直播室id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomidstr</td>
+<td>str</td>
+<td>直播室id的字符串</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomname</td>
+<td>str</td>
+<td>直播室名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspuserdomainmoid</td>
+<td>str</td>
+<td>直播室所属用户域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgid</td>
+<td>int</td>
+<td>节目id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspelapse</td>
+<td>int</td>
+<td>节目已播放时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplcastpoint</td>
+<td>str</td>
+<td>直播点</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplivestreampath</td>
+<td>str</td>
+<td>直播源描述文件，直播所需IP取‘获取VRS的IP组’API返回的IP，需要将COOKIE中的SSO_COOKIE_KEY以参数带入，参数名sso_token(URL后'?'分割，如?sso_token=***)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplivesnapshotpath</td>
+<td>str</td>
+<td>直播截帧图片的路径</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmte164</td>
+<td>str</td>
+<td>会议E164号/终端E164号(终端呼叫)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplivestatnum</td>
+<td>int</td>
+<td>直播统计人数</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcreatetime</td>
+<td>int</td>
+<td>直播室创建时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspencmode</td>
+<td>int</td>
+<td>文件加密模式，非商密VRS一律为不加密<br />1-不加密；<br />2-标准加密；<br />4-国密加密；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspauthmode</td>
+<td>int</td>
+<td>认证模式，非商密VRS一律为普通<br />1-普通；<br />2-强认证；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgwatermark</td>
+<td>int</td>
+<td>水印开关<br />0-关闭；<br />1-开启；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspshorturl</td>
+<td>str</td>
+<td>短链接</td>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v2/vrs/resroom"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取预约直播室列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/resroom</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取预约直播室列表</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>userdomainmoid</td>
+<td>str</td>
+<td>获取信息的用户域moid,获取多个时以逗号隔开，默认获取本集团域下的所有用户域信息</td>
+</tr>
+<tr id="param_row"><td>prgs1page</td>
+<td>int</td>
+<td>每个页面显示节目数 默认显示20个节目</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>请求的页码 默认显示第1页</td>
+</tr>
+<tr id="param_row"><td>includename</td>
+<td>str</td>
+<td>搜索字符</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"livecount":&nbsp1,<br/>&nbsp&nbsp"pageid":&nbsp1,<br/>&nbsp&nbsp"liveinfo":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"confname":&nbsp"liveconf",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"starttime":&nbsp"2016-10-18&nbsp15:00:00",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"encmode":&nbsp1<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>livecount</td>
+<td>int</td>
+<td>预约直播总数</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>返回的页码</td>
+</tr>
+<tr id="param_row"><td>liveinfo</td>
+<td>array</td>
+<td>预约直播信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspconfname</td>
+<td>str</td>
+<td>会议名</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspstarttime</td>
+<td>str</td>
+<td>会议时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspencmode</td>
+<td>int</td>
+<td>文件加密模式，非商密VRS一律为不加密<br />1-不加密；<br />2-标准加密；<br />4-国密加密；</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v2/vrs/recroom"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取录像室列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取录像室列表</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>userdomainmoid</td>
+<td>str</td>
+<td>获取信息的用户域moid,获取多个时以逗号隔开，默认获取本集团域下的所有用户域信息</td>
+</tr>
+<tr id="param_row"><td>roomid</td>
+<td>int</td>
+<td>录像室号码 默认0，返回全部，指定roomid后，则下面参数全不生效</td>
+</tr>
+<tr id="param_row"><td>prgs1page</td>
+<td>int</td>
+<td>每个页面显示节目数 默认显示20个节目</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>请求的页码 默认显示第1页</td>
+</tr>
+<tr id="param_row"><td>includename</td>
+<td>str</td>
+<td>搜索字符</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"roomcount":&nbsp1,<br/>&nbsp&nbsp"pageid":&nbsp1,<br/>&nbsp&nbsp"roomstate":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomcfg":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomid":&nbsp6,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"userdomainmoid":&nbsp"64fed808-7d4f-11e6-ac2d-001410095e12",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomname":&nbsp"0512110000077-rec",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomno":&nbsp"0512110000077",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roompwd":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomtype":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"opertype":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vflag":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vformat":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vwidth":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vheight":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vtype":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vframe":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"atype":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"aformat":&nbsp98,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"aflag":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"confrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"preprgname":&nbsp"0512110000077",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgtype":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"bpublish":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"livetype":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"createtime":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomstate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"recstate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"lcaststate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"gkstate":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sipstate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"recelapse":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"lcastelapse":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"recobj":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgname":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"lcastname":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"livestreampath":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"livesnapshotpath":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"mte164":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"livestarttime":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"encmode":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"authmode":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"detail":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vformat":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vwidth":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vheight":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"vframe":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp]<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp],<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>roomcount</td>
+<td>int</td>
+<td>录像室总数</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>返回页码</td>
+</tr>
+<tr id="param_row"><td>roomstate</td>
+<td>array</td>
+<td>录像室详细信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomcfg</td>
+<td>object</td>
+<td>录像室基本信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproomid</td>
+<td>int</td>
+<td>录像室id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspuserdomainmoid</td>
+<td>str</td>
+<td>录像室所属用户域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproomname</td>
+<td>str</td>
+<td>录像室名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproomno</td>
+<td>str</td>
+<td>录像室E164</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproompwd</td>
+<td>str</td>
+<td>录像室E164注册密码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproomtype</td>
+<td>int</td>
+<td>录像室类型<br />0-仅录像；<br />1-仅直播；<br />2-边录边播；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspopertype</td>
+<td>int</td>
+<td>操作类型 <br />0-自动；<br />1-手动；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvtype</td>
+<td>int</td>
+<td>视频格式是否自定义<br />0-自动；<br />1-自定义；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvformat</td>
+<td>int</td>
+<td>视频格式<br />31-H.261；<br />34-H.263；<br />97-MPEG4；<br />106-H.264；<br />108-H.265；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvwidth</td>
+<td>int</td>
+<td>视频宽</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvheight</td>
+<td>int</td>
+<td>视频高</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvflag</td>
+<td>int</td>
+<td>视频标识 <br />0-BP；<br />1-HP；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvframe</td>
+<td>int</td>
+<td>视频帧率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspatype</td>
+<td>int</td>
+<td>音频格式是否自定义 <br />0-自动；<br />1-自定义格式；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspaformat</td>
+<td>int</td>
+<td>音频格式<br />102-MPEG-4 AAC LC；<br />103-MPEG-4 AAC LD；<br />99-G.719；<br />98-G.722.1 C；<br />96-MP3；<br />18-G.729；<br />15-G.728；<br />9-G.722；<br />8-G.711 A；<br />0-G.711 U；<br />127-OPUS；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspaflag</td>
+<td>int</td>
+<td>音频标识<br />1-非立体声；<br />2-立体声；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspconfrate</td>
+<td>int</td>
+<td>会议码率，0表示自适应</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsppreprgname</td>
+<td>str</td>
+<td>文件显示名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgtype</td>
+<td>int</td>
+<td>文件名后缀类型 <br />1-asf；<br />2-wmv；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspbpublish</td>
+<td>int</td>
+<td>是否发布<br />0-否；<br />1-是；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsplivetype</td>
+<td>int</td>
+<td>保留字段，目前不使用</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspcreatetime</td>
+<td>int</td>
+<td>录像室创建时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomstate</td>
+<td>int</td>
+<td>录像室状态 <br />0-空闲；<br />1-占用；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsprecstate</td>
+<td>int</td>
+<td>录像室状态 <br />0-未录制；<br />1-录制中；<br />2-录像暂停；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplcaststate</td>
+<td>int</td>
+<td>直播状态 <br />0-未直播；<br />1-直播中；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspgkstate</td>
+<td>int</td>
+<td>GK注册状态 <br />0-未配置；<br />1-注册成功；<br />2-注册失败；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspsipstate</td>
+<td>int</td>
+<td>sip状态 <br />0-未配置；<br />1-注册成功；<br />2-注册失败；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsprecelapse</td>
+<td>int</td>
+<td>录像时间（秒），录像室开始录像（仅直播的录像室开始直播）到当前的时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplcastelapse</td>
+<td>int</td>
+<td>直播时间（秒），直播开始到当前的时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsprecobj</td>
+<td>str</td>
+<td>正在录像设备</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgname</td>
+<td>str</td>
+<td>节目完整名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplcastname</td>
+<td>str</td>
+<td>直播名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplivestreampath</td>
+<td>str</td>
+<td>直播描述文件</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplivesnapshotpath</td>
+<td>str</td>
+<td>直播截帧图片的路径</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspmte164</td>
+<td>str</td>
+<td>会议E164号/终端E164号(终端呼叫)</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsplivestarttime</td>
+<td>int</td>
+<td>直播开始时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspencmode</td>
+<td>int</td>
+<td>文件加密模式，非商密VRS一律为不加密<br />0-录像室未被占用；<br />1-不加密；<br />2-标准加密；<br />4-国密加密；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspauthmode</td>
+<td>int</td>
+<td>认证模式，非商密VRS一律为普通<br />0-录像室未被占用；<br />1-普通；<br />2-强认证；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdetail</td>
+<td>array</td>
+<td>录像室开启后具体状态</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvformat</td>
+<td>int</td>
+<td>视频格式<br />31-H.261；<br />34-H.263；<br />97-MPEG4；<br />106-H.264；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvwidth</td>
+<td>int</td>
+<td>视频宽</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvheight</td>
+<td>int</td>
+<td>视频高</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspvframe</td>
+<td>int</td>
+<td>视频帧率</td>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="POST_/api/v2/vrs/recroom"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>添加录像室</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>添加录像室</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"room":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp"roomname":&nbsp"0512110000077-rec",<br/>&nbsp&nbsp&nbsp&nbsp"roomno":&nbsp"0512110000077",<br/>&nbsp&nbsp&nbsp&nbsp"roompwd":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp"roomtype":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp"opertype":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vtype":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vformat":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vwidth":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vheight":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vflag":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vframe":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"atype":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp"aformat":&nbsp98,<br/>&nbsp&nbsp&nbsp&nbsp"aflag":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp"confrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"preprgname":&nbsp"0512110000077",<br/>&nbsp&nbsp&nbsp&nbsp"prgtype":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp"bpublish":&nbsp0<br/>&nbsp&nbsp}<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>room*</td>
+<td>object</td>
+<td>录像室信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomname*</td>
+<td>str</td>
+<td>录像室名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomno*</td>
+<td>str</td>
+<td>录像室E164</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproompwd*</td>
+<td>str</td>
+<td>录像室E164注册密码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomtype*</td>
+<td>int</td>
+<td>录像室类型<br />0-仅录像；<br />1-仅直播；<br />2-边录边播；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspopertype</td>
+<td>int</td>
+<td>预留字段，目前不使用</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvtype*</td>
+<td>int</td>
+<td>视频格式是否自定义 默认自动<br />0-自动；<br />1-自定义；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvformat*</td>
+<td>int</td>
+<td>视频格式 <br />106-H.264；<br />108-H.265；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvwidth*</td>
+<td>int</td>
+<td>视频宽</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvheight*</td>
+<td>int</td>
+<td>视频高</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvflag</td>
+<td>int</td>
+<td>视频标识 默认BP<br />0-BP；<br />1-HP；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvframe*</td>
+<td>int</td>
+<td>视频帧率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspatype*</td>
+<td>int</td>
+<td>音频格式是否自定义 默认自动<br />0-自动；<br />1-自定义；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaformat*</td>
+<td>int</td>
+<td>音频格式<br />102-MPEG-4 AAC LC；<br />103-MPEG-4 AAC LD；<br />99-G.719；<br />98-G.722.1 C；<br />96-MP3；<br />18-G.729；<br />15-G.728；<br />9-G.722；<br />8-G.711 A；<br />0-G.711 U；<br />127-OPUS；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaflag*</td>
+<td>int</td>
+<td>音频标识<br />1-非立体声；<br />2-立体声；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspconfrate*</td>
+<td>int</td>
+<td>会议码率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppreprgname*</td>
+<td>str</td>
+<td>文件显示名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgtype*</td>
+<td>int</td>
+<td>文件名后缀类型 <br />1-asf；<br />2-wmv；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbpublish*</td>
+<td>int</td>
+<td>是否发布<br />0-否；<br />1-是；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"roomid":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>roomid</td>
+<td>int</td>
+<td>录像室id</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="DELETE_/api/v2/vrs/recroom/{id}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>删除录像室</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom/{id}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>DELETE</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>删除录像室</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+<tr id="param_row"><td>_method</td>
+<td></td>
+<td>若浏览器不支持DELETE，则使用POST请求，并在请求参数中带上_method参数，并设置其值为DELETE</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/recroom/{id}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>修改录像室</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom/{id}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>修改录像室</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"room":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp"roomname":&nbsp"0512110000077-rec",<br/>&nbsp&nbsp&nbsp&nbsp"roomno":&nbsp"0512110000077",<br/>&nbsp&nbsp&nbsp&nbsp"roompwd":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp"roomtype":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp"opertype":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vtype":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vformat":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vwidth":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vheight":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vflag":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"vframe":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"atype":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp"aformat":&nbsp98,<br/>&nbsp&nbsp&nbsp&nbsp"aflag":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp"confrate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"preprgname":&nbsp"0512110000077",<br/>&nbsp&nbsp&nbsp&nbsp"prgtype":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp"bpublish":&nbsp0<br/>&nbsp&nbsp}<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>room*</td>
+<td>object</td>
+<td>录像室信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomname*</td>
+<td>str</td>
+<td>录像室名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomno*</td>
+<td>str</td>
+<td>录像室E164</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproompwd*</td>
+<td>str</td>
+<td>录像室E164注册密码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomtype*</td>
+<td>int</td>
+<td>录像室类型<br />0-仅录像；<br />1-仅直播；<br />2-边录边播；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspopertype</td>
+<td>int</td>
+<td>预留字段，目前不使用</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvtype*</td>
+<td>int</td>
+<td>视频格式是否自定义 默认自动<br />0-自动；<br />1-自定义；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvformat*</td>
+<td>int</td>
+<td>视频格式 <br />106-H.264；<br />108-H.265；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvwidth*</td>
+<td>int</td>
+<td>视频宽</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvheight*</td>
+<td>int</td>
+<td>视频高</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvflag</td>
+<td>int</td>
+<td>视频标识 默认BP<br />0-BP；<br />1-HP；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspvframe*</td>
+<td>int</td>
+<td>视频帧率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspatype*</td>
+<td>int</td>
+<td>音频格式是否自定义 默认自动<br />0-自动；<br />1-自定义；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaformat*</td>
+<td>int</td>
+<td>音频格式<br />102-MPEG-4 AAC LC；<br />103-MPEG-4 AAC LD；<br />99-G.719；<br />98-G.722.1 C；<br />96-MP3；<br />18-G.729；<br />15-G.728；<br />9-G.722；<br />8-G.711 A；<br />0-G.711 U；<br />127-OPUS；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspaflag*</td>
+<td>int</td>
+<td>音频标识<br />1-非立体声；<br />2-立体声；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspconfrate*</td>
+<td>int</td>
+<td>会议码率</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppreprgname*</td>
+<td>str</td>
+<td>文件显示名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgtype*</td>
+<td>int</td>
+<td>文件名后缀类型 <br />1-asf；<br />2-wmv；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspbpublish*</td>
+<td>int</td>
+<td>是否发布<br />0-否；<br />1-是；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/recroom/{id}/startrec"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>录像室开始录像</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom/{id}/startrec</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>录像室开始录像</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/recroom/{id}/stoprec"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>录像室停止录像</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom/{id}/stoprec</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>录像室停止录像</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/recroom/{id}/pauserec"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>录像室暂停录像</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom/{id}/pauserec</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>录像室暂停录像</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/recroom/{id}/resumerec"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>录像室恢复录像</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom/{id}/resumerec</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>录像室恢复录像</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/recroom/{id}/startlive"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>录像室开始直播</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom/{id}/startlive</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>录像室开始直播</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/recroom/{id}/stoplive"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>录像室停止直播</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/recroom/{id}/stoplive</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>录像室停止直播</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v2/vrs/playroom"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取放像室列表</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/playroom</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取放像室列表</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>userdomainmoid</td>
+<td>str</td>
+<td>获取信息的用户域moid,获取多个时以逗号隔开，默认获取本集团域下的所有用户域信息</td>
+</tr>
+<tr id="param_row"><td>roomid</td>
+<td>int</td>
+<td>录像室号码 默认0，返回全部，指定roomid后，则下面参数全不生效</td>
+</tr>
+<tr id="param_row"><td>prgs1page</td>
+<td>int</td>
+<td>每个页面显示节目数 默认显示20个节目</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>请求的页码 默认显示第1页</td>
+</tr>
+<tr id="param_row"><td>includename</td>
+<td>str</td>
+<td>搜索字符</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"roomcount":&nbsp1,<br/>&nbsp&nbsp"pageid":&nbsp1,<br/>&nbsp&nbsp"roomstate":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomcfg":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"userdomainmoid":&nbsp"64fed808-7d4f-11e6-ac2d-001410095e12",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"streamjsonpath":&nbsp"/api/v2/vrs/upstream/ee040aae-b4d3-11e8-98b0-a4bf0103b6b8/uploadmedia/1234560000082-320180702162103300-7-3/Readme.json",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomname":&nbsp"0512110000070-player",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomno":&nbsp"0512110000070",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roompwd":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"autoplay":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"encrypt":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"encryptkey":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"cryptkeylen":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgalias":&nbsp"ggg11",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgid":&nbsp652,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp2130706433,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"path":&nbsp"/uploadmedia/",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgname":&nbsp"ggg-20160531013150623_1_4.asf",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"createtime":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp},<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"roomstate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"playstate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"gkstate":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"sipstate":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"encmode":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"authmode":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"elapse":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"duraion":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"playobj":&nbsp""<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>roomcount</td>
+<td>int</td>
+<td>放像室总数</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>返回的页码</td>
+</tr>
+<tr id="param_row"><td>roomstate</td>
+<td>array</td>
+<td>放像室详细信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomcfg</td>
+<td>object</td>
+<td>放像室基本信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproomid</td>
+<td>int</td>
+<td>放像室的id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspuserdomainmoid</td>
+<td>str</td>
+<td>放像室所属用户域moid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspstreamjsonpath</td>
+<td>str</td>
+<td>放像文件的MP4格式，Json文件位置</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproomname</td>
+<td>str</td>
+<td>放像室名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproomno</td>
+<td>str</td>
+<td>放像室的E164</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsproompwd</td>
+<td>str</td>
+<td>放像室的E164注册密码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspautoplay</td>
+<td>int</td>
+<td>预留字段，目前不使用</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspencrypt</td>
+<td>int</td>
+<td>加密<br />0-自适应；<br />1-不加密；<br />2-Aes加密；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspencryptkey</td>
+<td>str</td>
+<td>密钥</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspcryptkeylen</td>
+<td>int</td>
+<td>加密长度</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgalias</td>
+<td>str</td>
+<td>显示名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgid</td>
+<td>int</td>
+<td>节目id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspip</td>
+<td>int</td>
+<td>ip</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsppath</td>
+<td>str</td>
+<td>相对路径</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspprgname</td>
+<td>str</td>
+<td>节目名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspcreatetime</td>
+<td>int</td>
+<td>放像室创建时间</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomstate</td>
+<td>int</td>
+<td>放像室状态<br />0-未占用；<br />1-占用；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspplaystate</td>
+<td>int</td>
+<td>放像状态<br />0-已停止；<br />1-正在播放；<br />2-暂停；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspgkstate</td>
+<td>int</td>
+<td>Gk状态<br />0-未配置；<br />1-注册成功；<br />2-注册失败；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspsipstate</td>
+<td>int</td>
+<td>Sip状态<br />0-未配置；<br />1-注册成功；<br />2-注册失败；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspencmode</td>
+<td>int</td>
+<td>加密模式，非商密VRS一律为不加密<br />0-放像室未被占用；<br />1-不加密；<br />2-标准加密；<br />4-国密加密；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspauthmode</td>
+<td>int</td>
+<td>认证模式，非商密VRS一律为普通<br />0-放像室未被占用；<br />1-普通；<br />2-强认证；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspelapse</td>
+<td>int</td>
+<td>节目已经放了多久（秒）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspduraion</td>
+<td>int</td>
+<td>节目总时长（秒）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspplayobj</td>
+<td>str</td>
+<td>放像给哪个会议</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="POST_/api/v2/vrs/playroom"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>添加放像室</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/playroom</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>添加放像室</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"room":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp"roomname":&nbsp"0512110000071-player",<br/>&nbsp&nbsp&nbsp&nbsp"roomno":&nbsp"0512110000071",<br/>&nbsp&nbsp&nbsp&nbsp"roompwd":&nbsp"888888",<br/>&nbsp&nbsp&nbsp&nbsp"autoplay":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"encrypt":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"encryptkey":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp"cryptkeylen":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"prgalias":&nbsp"79rec-20160718225654524",<br/>&nbsp&nbsp&nbsp&nbsp"prgid":&nbsp453,<br/>&nbsp&nbsp&nbsp&nbsp"ip":&nbsp2886775670,<br/>&nbsp&nbsp&nbsp&nbsp"path":&nbsp"/asffile/",<br/>&nbsp&nbsp&nbsp&nbsp"prgname":&nbsp"79rec-20160718225654524.asf"<br/>&nbsp&nbsp}<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>room*</td>
+<td>object</td>
+<td>放像室信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomname*</td>
+<td>str</td>
+<td>放像室名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomno*</td>
+<td>str</td>
+<td>放像室的E164</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproompwd*</td>
+<td>str</td>
+<td>放像室的E164注册密码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspautoplay*</td>
+<td>int</td>
+<td>是否自动播放 <br />0-自动；<br />1-手动；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspencrypt*</td>
+<td>int</td>
+<td>加密<br />0-自适应；<br />1-不加密；<br />2-Aes加密；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspencryptkey*</td>
+<td>str</td>
+<td>密钥</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcryptkeylen*</td>
+<td>int</td>
+<td>加密长度（最大长度，密匙长度不够，则取密匙长度）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgalias*</td>
+<td>str</td>
+<td>指定放像的节目的显示名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgid*</td>
+<td>int</td>
+<td>节目id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip*</td>
+<td>int</td>
+<td>ip</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppath*</td>
+<td>str</td>
+<td>相对路径</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgname*</td>
+<td>str</td>
+<td>节目名字</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"roomid":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>roomid</td>
+<td>int</td>
+<td>放像室id</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="DELETE_/api/v2/vrs/playroom/{id}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>删除放像室</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/playroom/{id}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>DELETE</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>删除放像室</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+<tr id="param_row"><td>_method</td>
+<td></td>
+<td>若浏览器不支持DELETE，则使用POST请求，并在请求参数中带上_method参数，并设置其值为DELETE</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/playroom/{id}"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>修改放像室</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/playroom/{id}</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>修改放像室</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"room":&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp"roomname":&nbsp"0512110000071-player",<br/>&nbsp&nbsp&nbsp&nbsp"roomno":&nbsp"0512110000071",<br/>&nbsp&nbsp&nbsp&nbsp"roompwd":&nbsp"888888",<br/>&nbsp&nbsp&nbsp&nbsp"autoplay":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"encrypt":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"encryptkey":&nbsp"",<br/>&nbsp&nbsp&nbsp&nbsp"cryptkeylen":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp"prgalias":&nbsp"79rec-20160718225654524",<br/>&nbsp&nbsp&nbsp&nbsp"prgid":&nbsp453,<br/>&nbsp&nbsp&nbsp&nbsp"ip":&nbsp2886775670,<br/>&nbsp&nbsp&nbsp&nbsp"path":&nbsp"/asffile/",<br/>&nbsp&nbsp&nbsp&nbsp"prgname":&nbsp"79rec-20160718225654524.asf"<br/>&nbsp&nbsp}<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>room*</td>
+<td>object</td>
+<td>放像室信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomname*</td>
+<td>str</td>
+<td>放像室名字</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproomno*</td>
+<td>str</td>
+<td>放像室的E164</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsproompwd*</td>
+<td>str</td>
+<td>放像室的E164注册密码</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspautoplay*</td>
+<td>int</td>
+<td>是否自动播放 <br />0-自动；<br />1-手动；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspencrypt*</td>
+<td>int</td>
+<td>加密 <br />0-自适应；<br />1-不加密；<br />2-Aes加密；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspencryptkey*</td>
+<td>str</td>
+<td>密钥</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspcryptkeylen*</td>
+<td>int</td>
+<td>加密长度（最大长度，密匙长度不够，则取密匙长度）</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgalias*</td>
+<td>str</td>
+<td>指定放像的节目的显示名称</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgid*</td>
+<td>int</td>
+<td>节目id</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip*</td>
+<td>int</td>
+<td>ip</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppath*</td>
+<td>str</td>
+<td>相对路径</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgname*</td>
+<td>str</td>
+<td>节目名字</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/playroom/{id}/startplay"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>放像室开始放像</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/playroom/{id}/startplay</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>放像室开始放像</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/playroom/{id}/stopplay"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>放像室停止放像</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/playroom/{id}/stopplay</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>放像室停止放像</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/playroom/{id}/pauseplay"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>放像室暂停放像</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/playroom/{id}/pauseplay</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>放像室暂停放像</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/playroom/{id}/resumeplay"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>放像室恢复放像</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/playroom/{id}/resumeplay</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>放像室恢复放像</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v2/vrs/transtask"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取转码任务信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/transtask</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取转码任务信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>userdomainmoid</td>
+<td>str</td>
+<td>获取信息的用户域moid,获取多个时以逗号隔开，默认获取本集团域下的所有用户域信息</td>
+</tr>
+<tr id="param_row"><td>prggid</td>
+<td>int</td>
+<td>转码节目prggid</td>
+</tr>
+<tr id="param_row"><td>state</td>
+<td>int</td>
+<td>任务状态 默认返回全部<br />0-全部；<br />3-已完成；<br />4-未完成；</td>
+</tr>
+<tr id="param_row"><td>prgs1page</td>
+<td>int</td>
+<td>每个页面显示节目数 默认显示20个节目</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>请求的页码 默认显示第1页</td>
+</tr>
+<tr id="param_row"><td>includename</td>
+<td>str</td>
+<td>检索字符</td>
+</tr>
+<tr id="param_row"><td>orderindex</td>
+<td>int</td>
+<td>排序索引 默认不排序<br />1-节目名；<br />2-进度；<br />3-目标格式；<br />4-状态；</td>
+</tr>
+<tr id="param_row"><td>desc</td>
+<td>int</td>
+<td>升降序降 默认升序<br />0-升；<br />1-降；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"prgcount":&nbsp1,<br/>&nbsp&nbsp"pageid":&nbsp1,<br/>&nbsp&nbsp"taskinfo":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"dsttype":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"percent":&nbsp100,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"picmergerstyle":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgalias":&nbsp"wyy-1-20170712155951410",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp49,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"restype":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"state":&nbsp5,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"taskerrno":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>prgcount</td>
+<td>int</td>
+<td>转码任务总数</td>
+</tr>
+<tr id="param_row"><td>pageid</td>
+<td>int</td>
+<td>返回页码</td>
+</tr>
+<tr id="param_row"><td>taskinfo</td>
+<td>array</td>
+<td>录像室详细信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdsttype</td>
+<td>int</td>
+<td>目标文件格式 <br />2-MP4；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppercent</td>
+<td>int</td>
+<td>转码进度</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppicmergerstyle</td>
+<td>int</td>
+<td>画面合成风格<br />0-未开启画面合成；<br />200-两画面合成，主视频在辅视频内的右下角；<br />201-两画面合成，辅视频在主视频内的右下角；<br />202-两画面合成，两画面相等；<br />300-三画面合成，大小相等，一上两下；<br />301-三画面合成，大小相等，一左两右；<br />400-四画面合成,等大；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgalias</td>
+<td>str</td>
+<td>转码节目别名</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid</td>
+<td>int</td>
+<td>转码节目prggid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsprestype</td>
+<td>int</td>
+<td>输出分辨率类型<br />1-一转一；<br />2-一转多；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspstate</td>
+<td>int</td>
+<td>转码任务状态<br />1-就绪；<br />2-转码；<br />3-暂停；<br />4-中断；<br />5-完成；<br />6-异常；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsptaskerrno</td>
+<td>int</td>
+<td>转码任务异常码<br />0-无错误；<br />1-直播中断；<br />2-远端磁盘断链；<br />3-磁盘空间不足；<br />4-用户暂停；<br />5-CPU或GPU资源不足；<br />10-文件异常；</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="POST_/api/v2/vrs/transtask"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>批量添加转码任务</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/transtask</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>POST</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>批量添加转码任务</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"addparams":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"restype":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"picmergerstyle":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"dsttype":&nbsp2,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"enforcetrans":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>addparams*</td>
+<td>array</td>
+<td>添加转码节目参数</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid*</td>
+<td>int</td>
+<td>转码节目prggid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsprestype*</td>
+<td>int</td>
+<td>目标分辨率<br />1-原始；<br />2-1转多；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbsppicmergerstyle*</td>
+<td>int</td>
+<td>画面合成风格<br />0-不开启画面合成；<br />200-两画面合成，主视频在辅视频内的右下角；<br />201-两画面合成，辅视频在主视频内的右下角；<br />202-两画面合成，两画面相等；<br />300-三画面合成，大小相等，一上两下；<br />301-三画面合成，大小相等，一左两右；<br />400-四画面合成,等大；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspdsttype*</td>
+<td>int</td>
+<td>目标文件格式<br />2-MP4；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspenforcetrans</td>
+<td>int</td>
+<td>是否强制转码</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"addreturns":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgalias":&nbsp"abc",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"adderrno":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>addreturns</td>
+<td>array</td>
+<td>添加节目返回参数</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid</td>
+<td>int</td>
+<td>转码节目prggid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgalias</td>
+<td>str</td>
+<td>转码节目别名</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspadderrno</td>
+<td>int</td>
+<td>添加节目错误码，0表示成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_posts"><a name="PUT_/api/v2/vrs/transtask"></a>
+<div id="div_post"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>批量操作转码任务</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/transtask</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>PUT</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>批量操作转码任务</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+<tr id="param_row"><td>params</td>
+<td></td>
+<td>请求内容，以JSON形式发送，需进行UrlEncode</td>
+</tr>
+</table>
+<p id="example_title">params示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"operateparams":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"opcode":&nbsp2<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">params说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>operateparams*</td>
+<td>array</td>
+<td>操作转码节目参数</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid*</td>
+<td>int</td>
+<td>转码节目prggid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspopcode*</td>
+<td>int</td>
+<td>操作码 <br />1-开始；<br />2-暂停；<br />3-取消；</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"operatereturns":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prggid":&nbsp1,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"prgalias":&nbsp"abc",<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"operrno":&nbsp0<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>operatereturns</td>
+<td>array</td>
+<td>操作节目返回参数</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprggid</td>
+<td>int</td>
+<td>转码节目prggid</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspprgalias</td>
+<td>str</td>
+<td>转码节目别名</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspoperrno</td>
+<td>int</td>
+<td>操作节目错误码，0表示成功</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/v2/vrs/vrsip"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取VRS的IP组</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/v2/vrs/vrsip</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取VRS的IP组</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="param_title">参数说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>account_token*</td>
+<td>str</td>
+<td>登陆token</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"ipinfo":&nbsp[<br/>&nbsp&nbsp&nbsp&nbsp{<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"emisp":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"ip":&nbsp0,<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"port":&nbsp80<br/>&nbsp&nbsp&nbsp&nbsp}<br/>&nbsp&nbsp]<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>ipinfo</td>
+<td>array</td>
+<td>ip信息</td>
+</tr>
+<tr id="param_row"></tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspemisp</td>
+<td>int</td>
+<td>网络运营商ID,<br />0-未知；<br />1-中国电信；<br />2-中国联通；<br />3-中国移动；<br />4-有线通；<br />5-铁通；<br />6-海外；<br />7-本地；<br />8-其他；</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspip</td>
+<td>int</td>
+<td>ip</td>
+</tr>
+<tr id="param_row"><td>&nbsp&nbsp&nbsp&nbspport</td>
+<td>int</td>
+<td>port</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp0<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>错误码</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+<div id="div_gets"><a name="GET_/api/vrs/ver2sion"></a>
+<div id="div_get"><table id="uri_table" class="uri_t"><tr id="title_row"><th>名称</th>
+<td>获取VRS API版本信息</td>
+</tr>
+<tr id="uri_row"><th>URI</th>
+<td>/api/vrs/ver2sion</td>
+</tr>
+<tr id="method_row"><th>方法</th>
+<td>GET</td>
+</tr>
+<tr id="comment_row"><th>说明</th>
+<td>获取VRS API版本信息</td>
+</tr>
+<tr id="version_row"><th>最低支持版本</th>
+<td>1</td>
+</tr>
+</table>
+<p id="example_title">成功回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp1,<br/>&nbsp&nbsp"version":&nbsp"6.0.0.0.0.20190603",<br/>&nbsp&nbsp"api_level":&nbsp1<br/>}</a>
+</div>
+<p id="param_title">成功回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>version</td>
+<td>str</td>
+<td>版本信息</td>
+</tr>
+<tr id="param_row"><td>api_level</td>
+<td>int</td>
+<td>VRS API版本标识，请与VRS API说明文档中的各个接口的最低支持版本号作对比，若小于最低支持版本号，则该接口不支持当前版本的API调用</td>
+</tr>
+</table>
+<p id="example_title">失败回复示例</p>
+<div id="example_div"><a id="example_table">{<br/>&nbsp&nbsp"success":&nbsp0,<br/>&nbsp&nbsp"error_code":&nbsp112230<br/>}</a>
+</div>
+<p id="param_title">失败回复说明</p>
+<table border="1" id="param_table" class="t"><tr id="param_title_row"><th>参数名称</th>
+<th id="data_style">数据类型</th>
+<th>说明</th>
+</tr>
+<tr id="param_row"><td>success</td>
+<td>int</td>
+<td>是否成功</td>
+</tr>
+<tr id="param_row"><td>error_code</td>
+<td>int</td>
+<td>失败时的错误号</td>
+</tr>
+</table>
+</div>
+</div>
+<br />
+</div>
+</div>
+<script>function AjustContentHeight(){
+    var div_content = document.getElementById("div_content");
+    var div_body = document.getElementById("div_body")
+    var clientHeight = document.documentElement.clientHeight;
+    clientHeight -= 69;
+    div_content.style.height = clientHeight + "px";
+    div_body.style.height = clientHeight + "px";
+
+}
+
+window.onload=function(){AjustContentHeight();}
+window.onresize=function(){AjustContentHeight();}</script></body>
+</html>
