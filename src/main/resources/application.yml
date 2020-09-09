@@ -24,9 +24,9 @@ server:
 #      defaultZone: http://peer1:8001/eureka/
 
 #分布式||集群支持
-distribute: 
-  enable: true
-  capacity: 32
+#distribute: 
+#  enable: true
+#  capacity: 32
 
 #创建会议默认参数
 default-create-conference-param:

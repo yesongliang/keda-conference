@@ -58,36 +58,32 @@ public class HttpUtils {
 		return exchange;
 	}
 
-	public ResponseEntity<String> postFailed(String url, Map<String, String> params, List<String> cookies) {
+	public ResponseEntity<String> postFailed(String url, Map<String, String> params, List<String> cookies, Throwable throwable) {
+		throwable.printStackTrace();
 		log.error("熔断机制启动，http post request failed;url={}", url);
 		return null;
 	}
 
 	/**
-	 * get请求,可携带cookie
+	 * get请求,可携带cookie（请求参数在url）
 	 * 
 	 * @param url
-	 * @param cookies
+	 * @param cookie
 	 * @return
 	 */
 	@HystrixCommand(fallbackMethod = "getFailed")
-	public ResponseEntity<String> get(String url, Map<String, String> params, List<String> cookie) {
+	public ResponseEntity<String> get(String url, List<String> cookie) {
 		HttpHeaders headers = new HttpHeaders();
 		if (!CollectionUtils.isEmpty(cookie)) {
 			headers.put(HttpHeaders.COOKIE, cookie);
 		}
-		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-		if (params != null && params.size() > 0) {
-			for (Entry<String, String> entry : params.entrySet()) {
-				map.add(entry.getKey(), entry.getValue());
-			}
-		}
-		HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+		HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<MultiValueMap<String, String>>(null, headers);
 		ResponseEntity<String> exchange = restTemplate.exchange(url, HttpMethod.GET, httpEntity, String.class);
 		return exchange;
 	}
 
-	public ResponseEntity<String> getFailed(String url, Map<String, String> params, List<String> cookies) {
+	public ResponseEntity<String> getFailed(String url, List<String> cookies, Throwable throwable) {
+		throwable.printStackTrace();
 		log.error("熔断机制启动，http get request failed;url={}", url);
 		return null;
 	}

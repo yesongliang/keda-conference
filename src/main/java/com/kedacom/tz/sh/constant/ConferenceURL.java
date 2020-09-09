@@ -36,25 +36,25 @@ public enum ConferenceURL {
 	GET_CONF_LIST("获取视频会议列表", "http://%s:%s/api/v1/vc/confs", HttpMethod.GET),
 
 	// /api/v1/vc/confs/{conf_id}
-	GET_CONF_INFO("获取视频会议信息", "http://%s:%s/api/v1/vc/confs/%s", HttpMethod.GET),
+	GET_CONF_INFO("获取视频会议信息", "http://%s:%s/api/v1/vc/confs/%s?account_token=%s", HttpMethod.GET),
 
 	// /api/v1/vc/confs/{conf_id}/mts
 	GET_CONF_MT_LIST("获取本级会议终端列表", "http://%s:%s/api/v1/vc/confs/%s/mts", HttpMethod.GET),
 
 	// /api/v1/vc/confs/{conf_id}/mts/{mt_id}
-	GET_CONF_MT_INFO("获取与会终端信息", "http://%s:%s/api/v1/vc/confs/%s/mts/%s", HttpMethod.GET),
+	GET_CONF_MT_INFO("获取与会终端信息", "http://%s:%s/api/v1/vc/confs/%s/mts/%s?account_token=%s", HttpMethod.GET),
 
 	// /api/v1/vc/confs/{conf_id}/mts
-	ADD_MTS("批量添加本级终端", "http://%s:%s/api/v1/vc/confs/{conf_id}/mts", HttpMethod.POST),
+	ADD_MTS("批量添加本级终端", "http://%s:%s/api/v1/vc/confs/%s/mts", HttpMethod.POST),
 
 	// /api/v1/vc/confs/{conf_id}/mts
 	DELETE_MTS("批量删除终端", "http://%s:%s/api/v1/vc/confs/%s/mts", HttpMethod.DELETE),
 
 	// /api/v1/vc/confs/{conf_id}/online_mts
-	CALL_MTS("批量呼叫终端", "http://%s:%s/api/v1/vc/confs/%s/online_mts", HttpMethod.POST),
+	ONLINE_MTS("批量呼叫终端", "http://%s:%s/api/v1/vc/confs/%s/online_mts", HttpMethod.POST),
 
 	// /api/v1/vc/confs/{conf_id}/online_mts
-	ONLINE_MTS("批量挂断终端", "http://%s:%s/api/v1/vc/confs/%s/online_mts", HttpMethod.DELETE),
+	OFFLINE_MTS("批量挂断终端", "http://%s:%s/api/v1/vc/confs/%s/online_mts", HttpMethod.DELETE),
 
 	// /api/v1/vc/confs/{conf_id}/chairman
 	GET_CHAIRMAN("获取会议主席", "http://%s:%s/api/v1/vc/confs/%s/chairman", HttpMethod.GET),

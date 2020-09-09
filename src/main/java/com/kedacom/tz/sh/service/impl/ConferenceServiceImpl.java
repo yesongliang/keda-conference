@@ -1,5 +1,6 @@
 package com.kedacom.tz.sh.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.kedacom.tz.sh.constant.ConferenceConstant;
 import com.kedacom.tz.sh.exception.BusinessException;
+import com.kedacom.tz.sh.model.ConferenceInfoModel;
+import com.kedacom.tz.sh.model.MtInfoModel;
 import com.kedacom.tz.sh.service.IConferenceService;
 import com.kedacom.tz.sh.utils.HttpUtils;
+import com.kedacom.tz.sh.utils.JsonUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -109,7 +113,7 @@ public class ConferenceServiceImpl implements IConferenceService {
 
 	@Override
 	public String getVersion(String url, List<String> cookie) {
-		ResponseEntity<String> get = httpUtils.get(url, null, cookie);
+		ResponseEntity<String> get = httpUtils.get(url, cookie);
 		JSONObject jsonObject = conferenceResponseHandle(url, get);
 		String version = jsonObject.getString(ConferenceConstant.VERSION);
 		return version;
@@ -153,6 +157,72 @@ public class ConferenceServiceImpl implements IConferenceService {
 		JSONObject jsonObject = conferenceResponseHandle(url, post);
 		String chairmanId = jsonObject.getString(ConferenceConstant.MT_ID);
 		return chairmanId;
+	}
+
+	@Override
+	public void addMts(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void deleteMts(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
+		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void onlineMts(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void offlineMts(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
+		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public ConferenceInfoModel getConfInfo(String url, List<String> cookie) {
+		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		JSONObject jsonObject = conferenceResponseHandle(url, get);
+		try {
+			// 返回值构建
+			ConferenceInfoModel conferenceInfo = JsonUtil.analysis(ConferenceInfoModel.class, jsonObject);
+			return conferenceInfo;
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			throw new BusinessException("Json数据解析异常");
+		}
+	}
+
+	@Override
+	public MtInfoModel getMtInfo(String url, List<String> cookie) {
+		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		JSONObject jsonObject = conferenceResponseHandle(url, get);
+		try {
+			// 返回值构建
+			MtInfoModel mtInfo = JsonUtil.analysis(MtInfoModel.class, jsonObject);
+			return mtInfo;
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			throw new BusinessException("Json数据解析异常");
+		}
 	}
 
 }

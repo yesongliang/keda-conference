@@ -41,7 +41,7 @@ public class CreateConferenceParam {
 	/**
 	 * 会议中无终端时，是否自动结会，永久会议时默认为0 0-否； 1-是；
 	 **/
-	@ApiModelProperty(value = "会议中无终端时，是否自动结会, 0-否； 1-是；可选参数，默认：0")
+	@ApiModelProperty(value = "会议中无终端时，是否自动结会, 0-否； 1-是；")
 	@Min(value = 0, message = "无效参数")
 	@Max(value = 1, message = "无效参数")
 	private Integer auto_end;

@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@ApiModel(description = "创会请求参数")
+@ApiModel(description = "批量添加本级终端请求参数")
 public class AddMembersParam {
 
 	/** 会议平台唯一标识 **/

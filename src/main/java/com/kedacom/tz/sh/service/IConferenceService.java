@@ -2,6 +2,9 @@ package com.kedacom.tz.sh.service;
 
 import java.util.List;
 
+import com.kedacom.tz.sh.model.ConferenceInfoModel;
+import com.kedacom.tz.sh.model.MtInfoModel;
+
 public interface IConferenceService {
 
 	/**
@@ -100,5 +103,65 @@ public interface IConferenceService {
 	 * @return
 	 */
 	String getChairman(String url, String token, List<String> cookie);
+
+	/**
+	 * 批量添加本级终端
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void addMts(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 批量删除终端
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void deleteMts(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 批量呼叫终端
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void onlineMts(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 批量挂断终端
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void offlineMts(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 获取视频会议信息
+	 * 
+	 * @param url
+	 * @param token
+	 * @param cookie
+	 * @return
+	 */
+	ConferenceInfoModel getConfInfo(String url, List<String> cookie);
+
+	/**
+	 * 获取与会终端信息
+	 * 
+	 * @param url
+	 * @param token
+	 * @param cookie
+	 * @return
+	 */
+	MtInfoModel getMtInfo(String url, List<String> cookie);
 
 }

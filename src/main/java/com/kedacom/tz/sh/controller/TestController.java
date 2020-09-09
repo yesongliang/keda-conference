@@ -24,7 +24,7 @@ public class TestController {
 	@GetMapping("/test")
 	@ApiOperation(value = "对指定url发送不带参数的GET请求")
 	public String test(String url) {
-		ResponseEntity<String> responseEntity = httpUtils.get(url, null, null);
+		ResponseEntity<String> responseEntity = httpUtils.get(url, null);
 		String body;
 		if (responseEntity != null) {
 			body = responseEntity.getBody();
