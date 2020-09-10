@@ -44,6 +44,7 @@ public class JsonUtil {
 				value = jsonObject.getInteger(name);
 				methodClass = Integer.class;
 			}
+			// TODO 后续可支持更多的类型
 			clz.getMethod(methodName, methodClass).invoke(data, value);
 		}
 		return data;

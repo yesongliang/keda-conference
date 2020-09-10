@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kedacom.tz.sh.cache.PlatformBaseData;
 import com.kedacom.tz.sh.cache.PlatformExtendData;
+import com.kedacom.tz.sh.cache.RedisCacheConstant;
+import com.kedacom.tz.sh.constant.ConferenceConstant;
 import com.kedacom.tz.sh.controller.request.PlatformParam;
 import com.kedacom.tz.sh.controller.response.PlatformVo;
 import com.kedacom.tz.sh.exception.BusinessException;
@@ -56,23 +58,23 @@ public class ManagerController {
 		ConferencePlatform conferencePlatform = new ConferencePlatform(param.getIp(), param.getPort(), param.getOauth_consumer_key(), param.getOauth_consumer_secret(), param.getUsername(),
 				param.getPassword());
 		// 是否使用分布式||集群
-		Boolean distributed = environment.getProperty("distribute.enable", Boolean.class, false);
+		Boolean distributed = environment.getProperty(ConferenceConstant.DISTRIBUTE_ENABLE, Boolean.class, false);
 		// 分布式||集群
 		if (distributed) {
-			Object object = redisTemplate.opsForValue().get("platform_base_data:" + ipToLong);
+			Object object = redisTemplate.opsForValue().get(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + ipToLong);
 			if (Objects.nonNull(object)) {
 				throw new BusinessException("不允许重复添加会议平台");
 			}
-			Integer capacity = environment.getProperty("distribute.capacity", Integer.class, 32);
+			Integer capacity = environment.getProperty(ConferenceConstant.DISTRIBUTE_CAPACITY, Integer.class, 32);
 			String fetchLockValue = redisLock.fetchLockValue();
 			PlatformBaseData platform = new PlatformBaseData();
 			platform.transform(conferencePlatform);
 			// 加锁
 			if (redisLock.lock("add_platform", fetchLockValue)) {
 				try {
-					Set<String> keys = redisTemplate.keys("platform_base_data:*");
+					Set<String> keys = redisTemplate.keys(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + RedisCacheConstant.PATTERN_ALL);
 					if (keys.size() < capacity) {
-						redisTemplate.opsForValue().set("platform_base_data:" + ipToLong, platform, 60, TimeUnit.SECONDS);
+						redisTemplate.opsForValue().set(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + ipToLong, platform, 60, TimeUnit.SECONDS);
 					} else {
 						throw new BusinessException("会议平台数量已达上限:" + capacity);
 					}
@@ -108,10 +110,10 @@ public class ManagerController {
 	public List<PlatformVo> getPlatforms() {
 		List<PlatformVo> list = new ArrayList<>();
 		// 是否使用分布式||集群
-		Boolean distributed = environment.getProperty("distribute.enable", Boolean.class, false);
+		Boolean distributed = environment.getProperty(ConferenceConstant.DISTRIBUTE_ENABLE, Boolean.class, false);
 		// 分布式||集群
 		if (distributed) {
-			Set<String> keys = redisTemplate.keys("platform_base_data:*");
+			Set<String> keys = redisTemplate.keys(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + RedisCacheConstant.PATTERN_ALL);
 			for (String key : keys) {
 				PlatformVo vo = null;
 				// 获取缓存基础数据
@@ -127,7 +129,7 @@ public class ManagerController {
 					vo.setOauth_consumer_secret(platform.getOauth_consumer_secret());
 					vo.setUsername(platform.getUsername());
 					vo.setPassword(platform.getPassword());
-					object = redisTemplate.opsForValue().get("platform_extend_data:" + platformKey);
+					object = redisTemplate.opsForValue().get(RedisCacheConstant.PLATFORM_EXTEND_DATA_PRE + platformKey);
 					if (Objects.nonNull(object)) {
 						PlatformExtendData platformExtendData = (PlatformExtendData) object;
 						vo.setConnected(platformExtendData.isConnected());
@@ -166,15 +168,15 @@ public class ManagerController {
 	@ApiOperation(value = "根据key移除会议平台")
 	public void removePlatformByKey(Long key) {
 		// 是否使用分布式||集群
-		Boolean distributed = environment.getProperty("distribute.enable", Boolean.class, false);
+		Boolean distributed = environment.getProperty(ConferenceConstant.DISTRIBUTE_ENABLE, Boolean.class, false);
 		// 分布式||集群
 		if (distributed) {
 			// 获取缓存基础数据
-			Object object = redisTemplate.opsForValue().get("platform_base_data:" + key);
+			Object object = redisTemplate.opsForValue().get(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + key);
 			if (Objects.nonNull(object)) {
 				PlatformBaseData platform = (PlatformBaseData) object;
 				platform.setRunning(false);
-				redisTemplate.opsForValue().setIfPresent("platform_base_data:" + key, platform, 60, TimeUnit.SECONDS);
+				redisTemplate.opsForValue().setIfPresent(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + key, platform, 60, TimeUnit.SECONDS);
 			}
 		} else {
 			// 移除

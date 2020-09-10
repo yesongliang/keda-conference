@@ -1,6 +1,7 @@
 package com.kedacom.tz.sh.cometd;
 
 import java.net.HttpCookie;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -116,6 +117,11 @@ public class CometDClient {
 				if (message.isSuccessful()) {
 //					isSubscribed = true;
 					log.info("通道：" + strChannel + "订阅成功");
+					long ipToLong = IPUtils.ipToLong(ip);
+					Map<String, String> map = new HashMap<>();
+					map.put("type", "subScribe");
+					map.put("key", String.valueOf(ipToLong));
+					MessageHandelrManager.getInstance().addMessage(ipToLong, map);
 				} else {
 					log.info("通道：" + strChannel + "订阅失败");
 				}

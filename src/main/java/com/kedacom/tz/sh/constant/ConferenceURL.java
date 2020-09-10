@@ -33,13 +33,13 @@ public enum ConferenceURL {
 	/// api/v1/mc/confs/{conf_id}
 	END_CONF("结束会议", "http://%s:%s/api/v1/mc/confs/%s", HttpMethod.DELETE),
 
-	GET_CONF_LIST("获取视频会议列表", "http://%s:%s/api/v1/vc/confs", HttpMethod.GET),
+	GET_CONF_LIST("获取视频会议列表", "http://%s:%s/api/v1/vc/confs?account_token=%s&start=0&count=0", HttpMethod.GET),
 
 	// /api/v1/vc/confs/{conf_id}
 	GET_CONF_INFO("获取视频会议信息", "http://%s:%s/api/v1/vc/confs/%s?account_token=%s", HttpMethod.GET),
 
 	// /api/v1/vc/confs/{conf_id}/mts
-	GET_CONF_MT_LIST("获取本级会议终端列表", "http://%s:%s/api/v1/vc/confs/%s/mts", HttpMethod.GET),
+	GET_CONF_MT_LIST("获取本级会议终端列表", "http://%s:%s/api/v1/vc/confs/%s/mts?account_token=%s", HttpMethod.GET),
 
 	// /api/v1/vc/confs/{conf_id}/mts/{mt_id}
 	GET_CONF_MT_INFO("获取与会终端信息", "http://%s:%s/api/v1/vc/confs/%s/mts/%s?account_token=%s", HttpMethod.GET),

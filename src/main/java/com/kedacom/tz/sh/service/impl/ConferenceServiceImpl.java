@@ -1,6 +1,7 @@
 package com.kedacom.tz.sh.service.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kedacom.tz.sh.constant.ConferenceConstant;
 import com.kedacom.tz.sh.exception.BusinessException;
@@ -219,6 +221,45 @@ public class ConferenceServiceImpl implements IConferenceService {
 			// 返回值构建
 			MtInfoModel mtInfo = JsonUtil.analysis(MtInfoModel.class, jsonObject);
 			return mtInfo;
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			throw new BusinessException("Json数据解析异常");
+		}
+	}
+
+	@Override
+	public List<ConferenceInfoModel> getConfList(String url, List<String> cookie) {
+		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		JSONObject jsonObject = conferenceResponseHandle(url, get);
+		try {
+			List<ConferenceInfoModel> list = new ArrayList<>();
+			Integer integer = jsonObject.getInteger("total");
+			if (integer > 0) {
+				JSONArray jsonArray = jsonObject.getJSONArray("confs");
+				for (int i = 0; i < jsonArray.size(); i++) {
+					ConferenceInfoModel conferenceInfoModel = JsonUtil.analysis(ConferenceInfoModel.class, jsonArray.getJSONObject(i));
+					list.add(conferenceInfoModel);
+				}
+			}
+			return list;
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+			throw new BusinessException("Json数据解析异常");
+		}
+	}
+
+	@Override
+	public List<MtInfoModel> getMtList(String url, List<String> cookie) {
+		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		JSONObject jsonObject = conferenceResponseHandle(url, get);
+		try {
+			List<MtInfoModel> list = new ArrayList<>();
+			JSONArray jsonArray = jsonObject.getJSONArray("mts");
+			for (int i = 0; i < jsonArray.size(); i++) {
+				MtInfoModel mtInfoModel = JsonUtil.analysis(MtInfoModel.class, jsonArray.getJSONObject(i));
+				list.add(mtInfoModel);
+			}
+			return list;
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 			throw new BusinessException("Json数据解析异常");

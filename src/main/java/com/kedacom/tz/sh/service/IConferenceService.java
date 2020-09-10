@@ -164,4 +164,24 @@ public interface IConferenceService {
 	 */
 	MtInfoModel getMtInfo(String url, List<String> cookie);
 
+	/**
+	 * 获取视频会议列表
+	 * 
+	 * @param url
+	 * @param token
+	 * @param cookie
+	 * @return
+	 */
+	List<ConferenceInfoModel> getConfList(String url, List<String> cookie);
+
+	/**
+	 * 获取本级会议终端列表
+	 * 
+	 * @param url
+	 * @param token
+	 * @param cookie
+	 * @return
+	 */
+	List<MtInfoModel> getMtList(String url, List<String> cookie);
+
 }

@@ -2,6 +2,10 @@ package com.kedacom.tz.sh.constant;
 
 public interface ConferenceConstant {
 
+	// config--------------------------------
+	String DISTRIBUTE_ENABLE = "distribute.enable";
+	String DISTRIBUTE_CAPACITY = "distribute.capacity";
+
 	// common--------------------------------
 
 	/** 1:成功，0：失败 **/

@@ -7,16 +7,7 @@ import java.util.regex.Pattern;
 import org.cometd.bayeux.Message;
 import org.cometd.bayeux.client.ClientSessionChannel;
 
-import com.kedacom.tz.sh.cometd.handler.ChairmanHandler;
-import com.kedacom.tz.sh.cometd.handler.ConfInfoHandler;
-import com.kedacom.tz.sh.cometd.handler.DualstreamHandler;
-import com.kedacom.tz.sh.cometd.handler.InspectionHandler;
-import com.kedacom.tz.sh.cometd.handler.MixHandler;
-import com.kedacom.tz.sh.cometd.handler.MonitorHandler;
-import com.kedacom.tz.sh.cometd.handler.MtListHandler;
-import com.kedacom.tz.sh.cometd.handler.SpeakerHandler;
-import com.kedacom.tz.sh.cometd.handler.VmpHandler;
-import com.kedacom.tz.sh.utils.SpringBeanUtils;
+import com.kedacom.tz.sh.utils.IPUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -83,13 +74,11 @@ public class MsgListener implements ClientSessionChannel.MessageListener {
 		// 解析消息
 		Map<String, String> map = this.macthHandle(realChannel, method);
 
-		// 获取处理器
-		IHandler handle = this.getHandle(map.get("type"));
-		if (handle != null) {
-			map.put("key", String.valueOf(this.key));
-			handle.handle(map);
+		// 未定义处理器
+		if ("undefined".equals(map.get("type"))) {
+			log.info("程序暂未定义处理此类消息的处理器,platformIP={},realChannel={},method={}", IPUtils.longToIP(this.key), realChannel, method);
 		} else {
-			log.info("此消息处理暂未定义,realChannel:{},method={}", realChannel, method);
+			MessageHandelrManager.getInstance().addMessage(key, map);
 		}
 	}
 
@@ -103,6 +92,7 @@ public class MsgListener implements ClientSessionChannel.MessageListener {
 
 		Map<String, String> map = new HashMap<String, String>();
 
+		map.put("key", String.valueOf(this.key));
 		map.put("method", method);
 		String[] splits = channel.split("/");
 
@@ -195,48 +185,6 @@ public class MsgListener implements ClientSessionChannel.MessageListener {
 		// 未定义
 		map.put("type", "undefined");
 		return map;
-	}
-
-	/**
-	 * 获取处理器
-	 * 
-	 * @param type 消息类型
-	 * @return
-	 */
-	private IHandler getHandle(String type) {
-		IHandler handle = null;
-		switch (type) {
-		case "conf_info":
-			handle = SpringBeanUtils.getBeanByClass(ConfInfoHandler.class);
-			break;
-		case "mt_list":
-			handle = SpringBeanUtils.getBeanByClass(MtListHandler.class);
-			break;
-		case "mix":
-			handle = SpringBeanUtils.getBeanByClass(MixHandler.class);
-			break;
-		case "vmp":
-			handle = SpringBeanUtils.getBeanByClass(VmpHandler.class);
-			break;
-		case "speaker":
-			handle = SpringBeanUtils.getBeanByClass(SpeakerHandler.class);
-			break;
-		case "chairman":
-			handle = SpringBeanUtils.getBeanByClass(ChairmanHandler.class);
-			break;
-		case "dualstream":
-			handle = SpringBeanUtils.getBeanByClass(DualstreamHandler.class);
-			break;
-		case "inspection":
-			handle = SpringBeanUtils.getBeanByClass(InspectionHandler.class);
-			break;
-		case "monitor":
-			handle = SpringBeanUtils.getBeanByClass(MonitorHandler.class);
-			break;
-		default:
-			break;
-		}
-		return handle;
 	}
 
 }

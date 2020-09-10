@@ -27,7 +27,7 @@ public class ConferencePlatformManager {
 
 	private static Lock lock = new ReentrantLock();
 
-	// TODO 线程为死循环执行，队列设置容量为零
+	// TODO 线程为死循环执行，队列设置容量为零（此种情况是否有必要使用线程池调度线程？）
 	private static Executor executor = new ThreadPoolExecutor(1, capacity, 60, TimeUnit.SECONDS, new SynchronousQueue<>());
 
 	/**

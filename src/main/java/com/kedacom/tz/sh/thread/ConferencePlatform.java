@@ -10,7 +10,10 @@ import org.springframework.util.CollectionUtils;
 
 import com.kedacom.tz.sh.cache.PlatformBaseData;
 import com.kedacom.tz.sh.cache.PlatformExtendData;
+import com.kedacom.tz.sh.cache.RedisCacheConstant;
 import com.kedacom.tz.sh.cometd.CometDClient;
+import com.kedacom.tz.sh.cometd.MessageHandelrManager;
+import com.kedacom.tz.sh.constant.ConferenceConstant;
 import com.kedacom.tz.sh.constant.ConferenceURL;
 import com.kedacom.tz.sh.service.IConferenceService;
 import com.kedacom.tz.sh.service.impl.ConferenceServiceImpl;
@@ -73,14 +76,19 @@ public class ConferencePlatform implements Runnable {
 
 	@Override
 	public void run() {
+		log.debug("会议平台连接维护线程运行---start---,ip={}", this.ip);
 		// 服务接口类
 		IConferenceService conferenceService = SpringBeanUtils.getBeanByClass(ConferenceServiceImpl.class);
 		// TODO 是否使用分布式缓存？
 		RedisTemplate<String, Object> redisTemplate = SpringBeanUtils.getBean("redisTemplate");
 		Environment environment = SpringBeanUtils.getBeanByClass(Environment.class);
 		// 是否使用分布式缓存
-		Boolean distributed = environment.getProperty("distribute.enable", Boolean.class, false);
+		Boolean distributed = environment.getProperty(ConferenceConstant.DISTRIBUTE_ENABLE, Boolean.class, false);
 		long ipToLong = IPUtils.ipToLong(this.ip);
+
+		// 开启消息读取线程
+		MessageHandelrManager.getInstance().addThread(ipToLong);
+
 		while (this.running) {
 
 			try {
@@ -90,21 +98,21 @@ public class ConferencePlatform implements Runnable {
 					// TODO 写在死循环开始，登录成功后慢一个循环周期才能使用；写在死循环结束，出现异常会导致缓存数据失效，线程运行停止
 					if (distributed) {
 						// 获取缓存基础数据
-						Object object = redisTemplate.opsForValue().get("platform_base_data:" + ipToLong);
+						Object object = redisTemplate.opsForValue().get(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + ipToLong);
 						if (Objects.nonNull(object)) {
 							PlatformBaseData platform = (PlatformBaseData) object;
 							if (platform.isRunning()) {
 								// 更新基础数据过期时间
-								redisTemplate.expire("platform_base_data:" + ipToLong, 60, TimeUnit.SECONDS);
+								redisTemplate.expire(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + ipToLong, 60, TimeUnit.SECONDS);
 								// 更新扩展数据缓存
 								PlatformExtendData platformExtendData = new PlatformExtendData();
 								platformExtendData.transform(this);
-								redisTemplate.opsForValue().set("platform_extend_data:" + ipToLong, platformExtendData, 60, TimeUnit.SECONDS);
+								redisTemplate.opsForValue().set(RedisCacheConstant.PLATFORM_EXTEND_DATA_PRE + ipToLong, platformExtendData, 60, TimeUnit.SECONDS);
 							} else {
 								// 线程运行结束
 								// 删除缓存
-								redisTemplate.delete("platform_base_data:" + ipToLong);
-								redisTemplate.delete("platform_extend_data:" + ipToLong);
+								redisTemplate.delete(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + ipToLong);
+								redisTemplate.delete(RedisCacheConstant.PLATFORM_EXTEND_DATA_PRE + ipToLong);
 								break;
 							}
 						} else {
@@ -122,6 +130,7 @@ public class ConferencePlatform implements Runnable {
 						this.cookie = conferenceService.login(loginUrl, token, this.username, this.password);
 						log.debug("cookie={}", this.cookie);
 						if (!CollectionUtils.isEmpty(this.cookie)) {
+							this.islogin = true;
 							// 3、cometD初始化
 							// TODO 重复获取的token是否一致，重复登录返回的cookie是否一致？
 							if (this.client != null && this.client.isConnected()) {
@@ -130,7 +139,6 @@ public class ConferencePlatform implements Runnable {
 							this.client = new CometDClient(this.ip, this.port, this.cookie);
 							this.client.handShake();
 
-							this.islogin = true;
 						}
 					}
 				}
@@ -141,21 +149,21 @@ public class ConferencePlatform implements Runnable {
 					// TODO 写在死循环开始，登录成功后慢一个循环周期才能使用；写在死循环结束，出现异常会导致缓存数据失效，线程运行停止
 					if (distributed) {
 						// 获取缓存基础数据
-						Object object = redisTemplate.opsForValue().get("platform_base_data:" + ipToLong);
+						Object object = redisTemplate.opsForValue().get(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + ipToLong);
 						if (Objects.nonNull(object)) {
 							PlatformBaseData platform = (PlatformBaseData) object;
 							if (platform.isRunning()) {
 								// 更新基础数据过期时间
-								redisTemplate.expire("platform_base_data:" + ipToLong, 60, TimeUnit.SECONDS);
+								redisTemplate.expire(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + ipToLong, 60, TimeUnit.SECONDS);
 								// 更新扩展数据缓存
 								PlatformExtendData platformExtendData = new PlatformExtendData();
 								platformExtendData.transform(this);
-								redisTemplate.opsForValue().set("platform_extend_data:" + ipToLong, platformExtendData, 60, TimeUnit.SECONDS);
+								redisTemplate.opsForValue().set(RedisCacheConstant.PLATFORM_EXTEND_DATA_PRE + ipToLong, platformExtendData, 60, TimeUnit.SECONDS);
 							} else {
 								// 线程运行结束
 								// 删除缓存
-								redisTemplate.delete("platform_base_data:" + ipToLong);
-								redisTemplate.delete("platform_extend_data:" + ipToLong);
+								redisTemplate.delete(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + ipToLong);
+								redisTemplate.delete(RedisCacheConstant.PLATFORM_EXTEND_DATA_PRE + ipToLong);
 								break;
 							}
 						} else {
@@ -199,6 +207,8 @@ public class ConferencePlatform implements Runnable {
 			}
 		}
 		// 跳出死循环，执行线程退出前操作
+		// 关闭消息读取线程
+		MessageHandelrManager.getInstance().removeThread(ipToLong);
 
 		// 1.断开cometD连接
 		if (this.client != null && this.client.isConnected()) {
@@ -210,7 +220,7 @@ public class ConferencePlatform implements Runnable {
 			ConferencePlatformManager.removePlatformForIn(ipToLong);
 		}
 
-		log.debug("会议平台维护线程运行结束,ip={}", this.ip);
+		log.debug("会议平台连接维护线程运行---end---,ip={}", this.ip);
 	}
 
 }

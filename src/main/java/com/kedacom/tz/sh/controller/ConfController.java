@@ -255,7 +255,7 @@ public class ConfController {
 		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
 			throw new BusinessException("会议平台暂不可用");
 		}
-		// 构建URL
+		// TODO 可改造为从缓存获取
 		String url = String.format(ConferenceURL.GET_CONF_INFO.getUrl(), platform.getIp(), platform.getPort(), confId, platform.getToken());
 		ConferenceInfoModel confInfo = conferenceService.getConfInfo(url, platform.getCookie());
 		return confInfo;
@@ -263,16 +263,44 @@ public class ConfController {
 
 	@GetMapping("conf/mt/info/get")
 	@ApiOperation(value = "获取与会终端信息")
-	public MtInfoModel getConfInfo(Long key, String confId, String mtId) {
+	public MtInfoModel getMtInfo(Long key, String confId, String mtId) {
 		// 获取会议平台
 		PlatformVo platform = businessService.getPlatformByKey(key);
 		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
 			throw new BusinessException("会议平台暂不可用");
 		}
-		// 构建URL
+		// TODO 可改造为从缓存获取
 		String url = String.format(ConferenceURL.GET_CONF_MT_INFO.getUrl(), platform.getIp(), platform.getPort(), confId, mtId, platform.getToken());
 		MtInfoModel mtInfo = conferenceService.getMtInfo(url, platform.getCookie());
 		return mtInfo;
+	}
+
+	@GetMapping("conf/list/get")
+	@ApiOperation(value = "获取视频会议列表")
+	public List<ConferenceInfoModel> getConfList(Long key) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(key);
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		// TODO 可改造为从缓存获取
+		String url = String.format(ConferenceURL.GET_CONF_LIST.getUrl(), platform.getIp(), platform.getPort(), platform.getToken());
+		List<ConferenceInfoModel> confList = conferenceService.getConfList(url, platform.getCookie());
+		return confList;
+	}
+
+	@GetMapping("conf/mt/list/get")
+	@ApiOperation(value = "获取本级会议终端列表")
+	public List<MtInfoModel> getMtList(Long key, String confId) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(key);
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		// TODO 可改造为从缓存获取
+		String mt_list_url = String.format(ConferenceURL.GET_CONF_MT_LIST.getUrl(), platform.getIp(), platform.getPort(), confId, platform.getToken());
+		List<MtInfoModel> mtList = conferenceService.getMtList(mt_list_url, platform.getCookie());
+		return mtList;
 	}
 
 }

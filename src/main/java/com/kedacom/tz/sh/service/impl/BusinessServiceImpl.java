@@ -9,13 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.kedacom.tz.sh.cache.PlatformBaseData;
 import com.kedacom.tz.sh.cache.PlatformExtendData;
+import com.kedacom.tz.sh.cache.RedisCacheConstant;
+import com.kedacom.tz.sh.constant.ConferenceConstant;
 import com.kedacom.tz.sh.controller.response.PlatformVo;
 import com.kedacom.tz.sh.service.IBusinessService;
 import com.kedacom.tz.sh.thread.ConferencePlatform;
 import com.kedacom.tz.sh.utils.ConferencePlatformManager;
 
 @Service
-public class BusinessService implements IBusinessService {
+public class BusinessServiceImpl implements IBusinessService {
 
 	@Autowired
 	private Environment environment;
@@ -26,11 +28,11 @@ public class BusinessService implements IBusinessService {
 	public PlatformVo getPlatformByKey(Long key) {
 		PlatformVo vo = null;
 		// 是否使用分布式||集群
-		Boolean distributed = environment.getProperty("distribute.enable", Boolean.class, false);
+		Boolean distributed = environment.getProperty(ConferenceConstant.DISTRIBUTE_ENABLE, Boolean.class, false);
 		// 分布式||集群
 		if (distributed) {
 			// 获取缓存基础数据
-			Object object = redisTemplate.opsForValue().get("platform_base_data:" + key);
+			Object object = redisTemplate.opsForValue().get(RedisCacheConstant.PLATFORM_BASE_DATA_PRE + key);
 			if (Objects.nonNull(object)) {
 				PlatformBaseData platform = (PlatformBaseData) object;
 				vo = new PlatformVo();
@@ -41,7 +43,7 @@ public class BusinessService implements IBusinessService {
 				vo.setOauth_consumer_secret(platform.getOauth_consumer_secret());
 				vo.setUsername(platform.getUsername());
 				vo.setPassword(platform.getPassword());
-				object = redisTemplate.opsForValue().get("platform_extend_data:" + key);
+				object = redisTemplate.opsForValue().get(RedisCacheConstant.PLATFORM_EXTEND_DATA_PRE + key);
 				if (Objects.nonNull(object)) {
 					PlatformExtendData platformExtendData = (PlatformExtendData) object;
 					vo.setConnected(platformExtendData.isConnected());
