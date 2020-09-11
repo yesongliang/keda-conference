@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 
 /**
- * TODO
+ * TODO 架构已搭建完成，后续接口可根据需要补充
  * 
  * 1、一个会议平台需要两个线程，一个维护状态，一个消费消息
  * 

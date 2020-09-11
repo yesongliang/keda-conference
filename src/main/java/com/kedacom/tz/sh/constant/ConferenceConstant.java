@@ -24,6 +24,8 @@ public interface ConferenceConstant {
 	String METHOD_PUT = "PUT";
 	/** 会议中的终端编号 **/
 	String MT_ID = "mt_id";
+	/** 操作值 **/
+	String VALUE = "value";
 
 	// private-------------------------------
 

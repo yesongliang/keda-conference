@@ -1,6 +1,7 @@
 package com.kedacom.tz.sh.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,8 @@ public class TestController {
 	@GetMapping("/test")
 	@ApiOperation(value = "对指定url发送不带参数的GET请求")
 	public String test(String url) {
-		ResponseEntity<String> responseEntity = httpUtils.get(url, null);
+//		ResponseEntity<String> responseEntity = httpUtils.get(url, null);
+		ResponseEntity<String> responseEntity = httpUtils.request(url, HttpMethod.GET, null, null);
 		String body;
 		if (responseEntity != null) {
 			body = responseEntity.getBody();

@@ -5,6 +5,11 @@ import java.util.List;
 import com.kedacom.tz.sh.model.ConferenceInfoModel;
 import com.kedacom.tz.sh.model.MtInfoModel;
 
+/**
+ * @see com.kedacom.tz.sh.constant.ConferenceURL
+ * @author ysl
+ *
+ */
 public interface IConferenceService {
 
 	/**
@@ -18,9 +23,7 @@ public interface IConferenceService {
 	String getToken(String url, String oauth_consumer_key, String oauth_consumer_secret);
 
 	/**
-	 * 保持token心跳
-	 * 
-	 * 获取token成功后，token有效期为30m，若30m内无操作，则需手动调用该接口保持心跳
+	 * 保持token心跳，获取token成功后，token有效期为30m，若30m内无操作，则需手动调用该接口保持心跳
 	 * 
 	 * @param url    请求url
 	 * @param cookie
@@ -59,7 +62,7 @@ public interface IConferenceService {
 	 * @param cookie
 	 * @return 版本信息
 	 */
-	// TODO 6.0前没有此接口
+	// TODO 6.0前不支持此接口
 	String getVersion(String url, List<String> cookie);
 
 	/**
@@ -98,11 +101,31 @@ public interface IConferenceService {
 	 * 获取会议主席
 	 * 
 	 * @param url
-	 * @param token
 	 * @param cookie
 	 * @return
 	 */
-	String getChairman(String url, String token, List<String> cookie);
+	String getChairman(String url, List<String> cookie);
+
+	/**
+	 * 指定会议发言人
+	 * 
+	 * 指定会议发言人，同步操作
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void putSpeaker(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 获取会议发言人
+	 * 
+	 * @param url
+	 * @param cookie
+	 * @return
+	 */
+	String getSpeaker(String url, List<String> cookie);
 
 	/**
 	 * 批量添加本级终端
@@ -148,7 +171,6 @@ public interface IConferenceService {
 	 * 获取视频会议信息
 	 * 
 	 * @param url
-	 * @param token
 	 * @param cookie
 	 * @return
 	 */
@@ -158,7 +180,6 @@ public interface IConferenceService {
 	 * 获取与会终端信息
 	 * 
 	 * @param url
-	 * @param token
 	 * @param cookie
 	 * @return
 	 */
@@ -168,7 +189,6 @@ public interface IConferenceService {
 	 * 获取视频会议列表
 	 * 
 	 * @param url
-	 * @param token
 	 * @param cookie
 	 * @return
 	 */
@@ -178,10 +198,88 @@ public interface IConferenceService {
 	 * 获取本级会议终端列表
 	 * 
 	 * @param url
-	 * @param token
 	 * @param cookie
 	 * @return
 	 */
 	List<MtInfoModel> getMtList(String url, List<String> cookie);
+
+	/**
+	 * 指定会议双流源
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void putDualstream(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 取消会议双流源
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void deleteDualstream(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 获取会议双流源
+	 * 
+	 * @param url
+	 * @param cookie
+	 * @return
+	 */
+	String getDualstream(String url, List<String> cookie);
+
+	/**
+	 * 延长会议时间
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void delayConf(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 会场静音操作
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void confSilence(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 会场哑音操作
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void confMute(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 终端静音操作
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void confMTSilence(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 终端哑音操作
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void confMtMute(String url, String token, String param, List<String> cookie);
 
 }

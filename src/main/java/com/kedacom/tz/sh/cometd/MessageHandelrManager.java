@@ -84,6 +84,9 @@ public class MessageHandelrManager {
 	 */
 	public void addMessage(Long platformId, Map<String, String> map) {
 		LinkedBlockingQueue<Map<String, String>> linkedBlockingQueue = this.queueMap.get(platformId);
+		if (linkedBlockingQueue == null) {
+			return;
+		}
 		boolean offer = linkedBlockingQueue.offer(map);
 		if (!offer) {
 			// 1、数据量大导致；2、消费线程异常
@@ -92,7 +95,7 @@ public class MessageHandelrManager {
 	}
 
 	@Data
-	class MessageHandleThread implements Runnable {
+	private class MessageHandleThread implements Runnable {
 
 		/** 会议平台唯一标识 **/
 		private Long platformId;

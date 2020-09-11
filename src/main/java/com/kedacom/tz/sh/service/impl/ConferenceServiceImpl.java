@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kedacom.tz.sh.constant.ConferenceConstant;
+import com.kedacom.tz.sh.constant.ConferenceURL;
 import com.kedacom.tz.sh.exception.BusinessException;
 import com.kedacom.tz.sh.model.ConferenceInfoModel;
 import com.kedacom.tz.sh.model.MtInfoModel;
@@ -77,7 +78,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.OAUTH_CONSUMER_KEY, oauth_consumer_key);
 		params.put(ConferenceConstant.OAUTH_CONSUMER_SECRET, oauth_consumer_secret);
-		ResponseEntity<String> post = httpUtils.post(url, params, null);
+//		ResponseEntity<String> post = httpUtils.post(url, params, null);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.TOKEN.getHttpMethod(), params, null);
 		JSONObject jsonObject = conferenceResponseHandle(url, post);
 		String token = jsonObject.getString(ConferenceConstant.ACCOUNT_TOKEN);
 		return token;
@@ -85,7 +87,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 
 	@Override
 	public boolean heartbeatToken(String url, List<String> cookie) {
-		ResponseEntity<String> post = httpUtils.post(url, null, cookie);
+//		ResponseEntity<String> post = httpUtils.post(url, null, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.HEARTBEAT_TOKEN.getHttpMethod(), null, null);
 		conferenceResponseHandle(url, post);
 		return true;
 	}
@@ -96,7 +99,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.USERNAME, username);
 		params.put(ConferenceConstant.PASSWORD, password);
-		ResponseEntity<String> post = httpUtils.post(url, params, null);
+//		ResponseEntity<String> post = httpUtils.post(url, params, null);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.LOGIN.getHttpMethod(), params, null);
 		conferenceResponseHandle(url, post);
 		// 解析cookie
 		HttpHeaders headers = post.getHeaders();
@@ -108,14 +112,16 @@ public class ConferenceServiceImpl implements IConferenceService {
 	public boolean heartbeatUser(String url, String token, List<String> cookie) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.HEARTBEAT_USER.getHttpMethod(), params, cookie);
 		conferenceResponseHandle(url, post);
 		return true;
 	}
 
 	@Override
 	public String getVersion(String url, List<String> cookie) {
-		ResponseEntity<String> get = httpUtils.get(url, cookie);
+//		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		ResponseEntity<String> get = httpUtils.request(url, ConferenceURL.VERSION.getHttpMethod(), null, cookie);
 		JSONObject jsonObject = conferenceResponseHandle(url, get);
 		String version = jsonObject.getString(ConferenceConstant.VERSION);
 		return version;
@@ -126,7 +132,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.PARAMS, param);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CREATE_CONF.getHttpMethod(), params, cookie);
 		JSONObject jsonObject = conferenceResponseHandle(url, post);
 		String confId = jsonObject.getString(ConferenceConstant.CONF_ID);
 		return confId;
@@ -136,8 +143,9 @@ public class ConferenceServiceImpl implements IConferenceService {
 	public void endConf(String url, String token, List<String> cookie) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
-		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+//		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.END_CONF.getHttpMethod(), params, cookie);
 		conferenceResponseHandle(url, post);
 	}
 
@@ -146,19 +154,39 @@ public class ConferenceServiceImpl implements IConferenceService {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.PARAMS, param);
-		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_PUT);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+//		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_PUT);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.PUT_CHAIRMAN.getHttpMethod(), params, cookie);
 		conferenceResponseHandle(url, post);
 	}
 
 	@Override
-	public String getChairman(String url, String token, List<String> cookie) {
+	public String getChairman(String url, List<String> cookie) {
+//		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		ResponseEntity<String> get = httpUtils.request(url, ConferenceURL.GET_CHAIRMAN.getHttpMethod(), null, cookie);
+		JSONObject jsonObject = conferenceResponseHandle(url, get);
+		String chairman = jsonObject.getString(ConferenceConstant.MT_ID);
+		return chairman;
+	}
+
+	@Override
+	public void putSpeaker(String url, String token, String param, List<String> cookie) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
-		JSONObject jsonObject = conferenceResponseHandle(url, post);
-		String chairmanId = jsonObject.getString(ConferenceConstant.MT_ID);
-		return chairmanId;
+		params.put(ConferenceConstant.PARAMS, param);
+//		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_PUT);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.PUT_SPEAKER.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public String getSpeaker(String url, List<String> cookie) {
+//		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		ResponseEntity<String> get = httpUtils.request(url, ConferenceURL.GET_SPEAKER.getHttpMethod(), null, cookie);
+		JSONObject jsonObject = conferenceResponseHandle(url, get);
+		String speaker = jsonObject.getString(ConferenceConstant.MT_ID);
+		return speaker;
 	}
 
 	@Override
@@ -166,7 +194,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.PARAMS, param);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.ADD_MTS.getHttpMethod(), params, cookie);
 		conferenceResponseHandle(url, post);
 	}
 
@@ -175,8 +204,9 @@ public class ConferenceServiceImpl implements IConferenceService {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.PARAMS, param);
-		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+//		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.DELETE_MTS.getHttpMethod(), params, cookie);
 		conferenceResponseHandle(url, post);
 	}
 
@@ -185,7 +215,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.PARAMS, param);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.ONLINE_MTS.getHttpMethod(), params, cookie);
 		conferenceResponseHandle(url, post);
 	}
 
@@ -194,14 +225,16 @@ public class ConferenceServiceImpl implements IConferenceService {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.PARAMS, param);
-		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
-		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+//		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.OFFLINE_MTS.getHttpMethod(), params, cookie);
 		conferenceResponseHandle(url, post);
 	}
 
 	@Override
 	public ConferenceInfoModel getConfInfo(String url, List<String> cookie) {
-		ResponseEntity<String> get = httpUtils.get(url, cookie);
+//		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		ResponseEntity<String> get = httpUtils.request(url, ConferenceURL.GET_CONF_INFO.getHttpMethod(), null, cookie);
 		JSONObject jsonObject = conferenceResponseHandle(url, get);
 		try {
 			// 返回值构建
@@ -215,7 +248,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 
 	@Override
 	public MtInfoModel getMtInfo(String url, List<String> cookie) {
-		ResponseEntity<String> get = httpUtils.get(url, cookie);
+//		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		ResponseEntity<String> get = httpUtils.request(url, ConferenceURL.GET_CONF_MT_INFO.getHttpMethod(), null, cookie);
 		JSONObject jsonObject = conferenceResponseHandle(url, get);
 		try {
 			// 返回值构建
@@ -229,7 +263,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 
 	@Override
 	public List<ConferenceInfoModel> getConfList(String url, List<String> cookie) {
-		ResponseEntity<String> get = httpUtils.get(url, cookie);
+//		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		ResponseEntity<String> get = httpUtils.request(url, ConferenceURL.GET_CONF_LIST.getHttpMethod(), null, cookie);
 		JSONObject jsonObject = conferenceResponseHandle(url, get);
 		try {
 			List<ConferenceInfoModel> list = new ArrayList<>();
@@ -250,7 +285,8 @@ public class ConferenceServiceImpl implements IConferenceService {
 
 	@Override
 	public List<MtInfoModel> getMtList(String url, List<String> cookie) {
-		ResponseEntity<String> get = httpUtils.get(url, cookie);
+//		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		ResponseEntity<String> get = httpUtils.request(url, ConferenceURL.GET_CONF_MT_LIST.getHttpMethod(), null, cookie);
 		JSONObject jsonObject = conferenceResponseHandle(url, get);
 		try {
 			List<MtInfoModel> list = new ArrayList<>();
@@ -264,6 +300,82 @@ public class ConferenceServiceImpl implements IConferenceService {
 			e.printStackTrace();
 			throw new BusinessException("Json数据解析异常");
 		}
+	}
+
+	@Override
+	public void putDualstream(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+//		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_PUT);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.PUT_DUALSTREAM.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void deleteDualstream(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+//		params.put(ConferenceConstant.METHOD, ConferenceConstant.METHOD_DELETE);
+//		ResponseEntity<String> post = httpUtils.post(url, params, cookie);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.DELETE_DUALSTREAM.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public String getDualstream(String url, List<String> cookie) {
+//		ResponseEntity<String> get = httpUtils.get(url, cookie);
+		ResponseEntity<String> get = httpUtils.request(url, ConferenceURL.GET_DUALSTREAM.getHttpMethod(), null, cookie);
+		JSONObject jsonObject = conferenceResponseHandle(url, get);
+		String dualstream = jsonObject.getString(ConferenceConstant.MT_ID);
+		return dualstream;
+	}
+
+	@Override
+	public void delayConf(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.DELAY_CONF.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void confSilence(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_SILENCE.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void confMute(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_MUTE.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void confMTSilence(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_MT_SILENCE.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void confMtMute(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_MT_MUTE.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
 	}
 
 }

@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.kedacom.tz.sh.constant.ConferenceConstant;
 import com.kedacom.tz.sh.constant.ConferenceURL;
 import com.kedacom.tz.sh.controller.request.AddMembersParam;
 import com.kedacom.tz.sh.controller.request.ConferenceMemberParam;
 import com.kedacom.tz.sh.controller.request.CreateConferenceParam;
+import com.kedacom.tz.sh.controller.request.OperateConfMtParam;
+import com.kedacom.tz.sh.controller.request.OperateConfParam;
 import com.kedacom.tz.sh.controller.request.OperateMembersParam;
 import com.kedacom.tz.sh.controller.response.PlatformVo;
 import com.kedacom.tz.sh.exception.BusinessException;
@@ -301,6 +305,160 @@ public class ConfController {
 		String mt_list_url = String.format(ConferenceURL.GET_CONF_MT_LIST.getUrl(), platform.getIp(), platform.getPort(), confId, platform.getToken());
 		List<MtInfoModel> mtList = conferenceService.getMtList(mt_list_url, platform.getCookie());
 		return mtList;
+	}
+
+	@GetMapping("conf/chairman/get")
+	@ApiOperation(value = "获取会议主席")
+	public String getChairman(Long key, String confId) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(key);
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		// TODO 可改造为从缓存获取
+		String url = String.format(ConferenceURL.GET_CHAIRMAN.getUrl(), platform.getIp(), platform.getPort(), confId, platform.getToken());
+		String chairman = conferenceService.getChairman(url, platform.getCookie());
+		return chairman;
+	}
+
+	// 取消主席mtId填空
+	@PostMapping("conf/chairman/put")
+	@ApiOperation(value = "指定会议主席")
+	public void putChairman(Long key, String confId, String mtId) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(key);
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		String url = String.format(ConferenceURL.PUT_CHAIRMAN.getUrl(), platform.getIp(), platform.getPort(), confId);
+		JSONObject jsonObject = new JSONObject();
+		if (StringUtils.isEmpty(mtId)) {
+			jsonObject.put(ConferenceConstant.MT_ID, "");
+		} else {
+			jsonObject.put(ConferenceConstant.MT_ID, mtId);
+		}
+		conferenceService.putChairman(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+	}
+
+	@GetMapping("conf/speaker/get")
+	@ApiOperation(value = "获取会议发言人")
+	public String getSpeaker(Long key, String confId) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(key);
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		// TODO 可改造为从缓存获取
+		String url = String.format(ConferenceURL.GET_SPEAKER.getUrl(), platform.getIp(), platform.getPort(), confId, platform.getToken());
+		String speaker = conferenceService.getSpeaker(url, platform.getCookie());
+		return speaker;
+	}
+
+	// 取消发言人mtId填空
+	@PostMapping("conf/speaker/put")
+	@ApiOperation(value = "指定会议发言人")
+	public void putSpeaker(Long key, String confId, String mtId) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(key);
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		String url = String.format(ConferenceURL.PUT_SPEAKER.getUrl(), platform.getIp(), platform.getPort(), confId);
+		JSONObject jsonObject = new JSONObject();
+		if (StringUtils.isEmpty(mtId)) {
+			jsonObject.put(ConferenceConstant.MT_ID, "");
+		} else {
+			jsonObject.put(ConferenceConstant.MT_ID, mtId);
+		}
+		conferenceService.putSpeaker(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+	}
+
+	@PostMapping("conf/conf_mt/operate")
+	@ApiOperation(value = "type:1-指定会议双流源;2-取消会议双流源;3-终端静音;4-取消终端静音;5-终端哑音;6-取消终端哑音;")
+	public void operateConfMt(@RequestBody @Validated OperateConfMtParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		JSONObject jsonObject = new JSONObject();
+		// type=1-指定会议双流源
+		if (param.getType() == 1) {
+			jsonObject.put(ConferenceConstant.MT_ID, param.getMtId());
+			String url = String.format(ConferenceURL.PUT_DUALSTREAM.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.putDualstream(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+			// type=2-取消会议双流源
+		} else if (param.getType() == 2) {
+			jsonObject.put(ConferenceConstant.MT_ID, param.getMtId());
+			String url = String.format(ConferenceURL.DELETE_DUALSTREAM.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.deleteDualstream(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+			// type=3-终端静音
+		} else if (param.getType() == 3) {
+			jsonObject.put(ConferenceConstant.VALUE, 1);
+			String url = String.format(ConferenceURL.CONF_MT_SILENCE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId(), param.getMtId());
+			conferenceService.confMTSilence(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+			// type=4-取消终端静音
+		} else if (param.getType() == 4) {
+			jsonObject.put(ConferenceConstant.VALUE, 0);
+			String url = String.format(ConferenceURL.CONF_MT_SILENCE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId(), param.getMtId());
+			conferenceService.confMtMute(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+			// type=5-终端哑音
+		} else if (param.getType() == 5) {
+			jsonObject.put(ConferenceConstant.VALUE, 1);
+			String url = String.format(ConferenceURL.CONF_MT_MUTE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId(), param.getMtId());
+			conferenceService.confMTSilence(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+			// type=6-取消终端哑音
+		} else if (param.getType() == 6) {
+			jsonObject.put(ConferenceConstant.VALUE, 0);
+			String url = String.format(ConferenceURL.CONF_MT_MUTE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId(), param.getMtId());
+			conferenceService.confMtMute(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+		}
+	}
+
+	@GetMapping("conf/dualstream/get")
+	@ApiOperation(value = "获取会议双流源")
+	public String getDualstream(Long key, String confId) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(key);
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		// TODO 可改造为从缓存获取
+		String url = String.format(ConferenceURL.GET_DUALSTREAM.getUrl(), platform.getIp(), platform.getPort(), confId, platform.getToken());
+		String dualstream = conferenceService.getDualstream(url, platform.getCookie());
+		return dualstream;
+	}
+
+	@PostMapping("conf/volume/operate")
+	@ApiOperation(value = "type:1-会场静音;2-取消会场静音;3-会场哑音;4-取消会场哑音;")
+	public void operateConfVolume(@RequestBody @Validated OperateConfParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		JSONObject jsonObject = new JSONObject();
+		// type=1-会场静音
+		if (param.getType() == 1) {
+			jsonObject.put(ConferenceConstant.VALUE, 1);
+			String url = String.format(ConferenceURL.CONF_SILENCE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.confSilence(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+			// type=2-取消会场静音
+		} else if (param.getType() == 2) {
+			jsonObject.put(ConferenceConstant.VALUE, 0);
+			String url = String.format(ConferenceURL.CONF_SILENCE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.confSilence(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+			// type=3-会场哑音
+		} else if (param.getType() == 3) {
+			jsonObject.put(ConferenceConstant.VALUE, 1);
+			String url = String.format(ConferenceURL.CONF_MUTE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.confMute(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+			// type=4-取消会场哑音
+		} else if (param.getType() == 4) {
+			jsonObject.put(ConferenceConstant.VALUE, 0);
+			String url = String.format(ConferenceURL.CONF_MUTE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.confMute(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+		}
 	}
 
 }
