@@ -108,7 +108,7 @@ public enum ConferenceURL {
 	GET_CONF_VMP("获取会议画面合成信息", "http://%s:%s/api/v1/vc/confs/%s/vmps/1", HttpMethod.GET),
 
 	// /api/v1/vc/confs/{conf_id}/vmps
-	START_CONF_VMP("开启会议画面合成", "http://%s:%s/api/v1/vc/confs/%s/vmps/1", HttpMethod.POST),
+	START_CONF_VMP("开启会议画面合成", "http://%s:%s/api/v1/vc/confs/%s/vmps", HttpMethod.POST),
 
 	// /api/v1/vc/confs/{conf_id}/vmps/{vmp_id},会议主画面合成，默认vmp_id为1
 	MODIFY_CONF_VMP("修改会议画面合成", "http://%s:%s/api/v1/vc/confs/%s/vmps/1", HttpMethod.POST),
@@ -126,7 +126,7 @@ public enum ConferenceURL {
 	CONF_MT_VOLUME("修改终端音量", "http://%s:%s/api/v1/vc/confs/%s/mts/%s/volume", HttpMethod.PUT),
 
 	// /api/v1/vc/confs/{conf_id}/mts/{mt_id}/camera
-	CONF_MT_CAMERA("终端摄像头控制", "http://%s:%s/api/v1/vc/confs/%s/mts/%s/camera", HttpMethod.DELETE),
+	CONF_MT_CAMERA("终端摄像头控制", "http://%s:%s/api/v1/vc/confs/%s/mts/%s/camera", HttpMethod.POST),
 
 	// /api/v1/vc/confs/{conf_id}/monitors/{dst_ip}/{dst_port}
 	GET_MONITORS_INFO("获取监控信息", "http://%s:%s/api/v1/vc/confs/%s/monitors/%s/%s", HttpMethod.GET),

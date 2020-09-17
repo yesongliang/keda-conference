@@ -334,7 +334,7 @@ public class ConferenceServiceImpl implements IConferenceService {
 	}
 
 	@Override
-	public void delayConf(String url, String token, String param, List<String> cookie) {
+	public void delayConfTime(String url, String token, String param, List<String> cookie) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.PARAMS, param);
@@ -375,6 +375,129 @@ public class ConferenceServiceImpl implements IConferenceService {
 		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
 		params.put(ConferenceConstant.PARAMS, param);
 		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_MT_MUTE.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void sendMessage(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_SMS.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void startMix(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.START_CONF_MIX.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void stopMix(String url, String token, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.STOP_CONF_MIX.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void addMixMember(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_MIX_MEMBER_ADD.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void deleteMixMember(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_MIX_MEMBER_DELETE.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void startVmp(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.START_CONF_VMP.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void modifyVmp(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.MODIFY_CONF_VMP.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void stopVmp(String url, String token, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.STOP_CONF_VMP.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void monitor(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.MONITORS_OPERATE.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void cancelMonitor(String url, String token, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.MONITORS_CANCEL.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void heartbeatMonitor(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.MONITORS_HEARTBEAT.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void neediframeMonitor(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.MONITORS_NEEDIFRAME.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void volumeControl(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_MT_VOLUME.getHttpMethod(), params, cookie);
+		conferenceResponseHandle(url, post);
+	}
+
+	@Override
+	public void cameraControl(String url, String token, String param, List<String> cookie) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(ConferenceConstant.ACCOUNT_TOKEN, token);
+		params.put(ConferenceConstant.PARAMS, param);
+		ResponseEntity<String> post = httpUtils.request(url, ConferenceURL.CONF_MT_CAMERA.getHttpMethod(), params, cookie);
 		conferenceResponseHandle(url, post);
 	}
 

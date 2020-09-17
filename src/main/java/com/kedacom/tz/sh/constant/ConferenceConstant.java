@@ -49,4 +49,15 @@ public interface ConferenceConstant {
 	/** 创建会议 **/
 	String CONF_ID = "conf_id";
 
+	/** 延长会议时间 **/
+	String DELAY_TIME = "delay_time";
+
+	/** 终端摄像头控制 **/
+	String STATE = "state";
+	String TYPE = "type";
+
+	/** 修改终端音量 **/
+	String VOL_MODE = "vol_mode";
+	String VOL_VALUE = "vol_value";
+
 }

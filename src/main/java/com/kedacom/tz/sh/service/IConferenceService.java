@@ -240,7 +240,7 @@ public interface IConferenceService {
 	 * @param param
 	 * @param cookie
 	 */
-	void delayConf(String url, String token, String param, List<String> cookie);
+	void delayConfTime(String url, String token, String param, List<String> cookie);
 
 	/**
 	 * 会场静音操作
@@ -281,5 +281,145 @@ public interface IConferenceService {
 	 * @param cookie
 	 */
 	void confMtMute(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 发送短消息
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	// TODO 此接口测试无效果
+	void sendMessage(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 开启会议混音
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void startMix(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 停止会议混音
+	 * 
+	 * @param url
+	 * @param token
+	 * @param cookie
+	 */
+	void stopMix(String url, String token, List<String> cookie);
+
+	/**
+	 * 添加混音成员
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void addMixMember(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 删除混音成员
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void deleteMixMember(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 开启会议画面合成
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void startVmp(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 修改会议画面合成
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void modifyVmp(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 停止会议画面合成
+	 * 
+	 * @param url
+	 * @param token
+	 * @param cookie
+	 */
+	void stopVmp(String url, String token, List<String> cookie);
+
+	/**
+	 * 将监控源的RTP码流发送到指定的IP端口，监控成功后，需要发送心跳消息保持链路，同步操作
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void monitor(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 取消监控
+	 * 
+	 * @param url
+	 * @param token
+	 * @param cookie
+	 */
+	void cancelMonitor(String url, String token, List<String> cookie);
+
+	/**
+	 * 监控心跳保活
+	 * 
+	 * 监控成功后，若30s内没收到心跳，将自动停止发送码流，同步操作
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void heartbeatMonitor(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 监控请求视频关键帧
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void neediframeMonitor(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 修改终端音量
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void volumeControl(String url, String token, String param, List<String> cookie);
+
+	/**
+	 * 终端摄像头控制
+	 * 
+	 * @param url
+	 * @param token
+	 * @param param
+	 * @param cookie
+	 */
+	void cameraControl(String url, String token, String param, List<String> cookie);
 
 }

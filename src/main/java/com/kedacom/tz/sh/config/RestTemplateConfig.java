@@ -3,7 +3,6 @@ package com.kedacom.tz.sh.config;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
@@ -23,7 +22,6 @@ public class RestTemplateConfig {
 
 	// 报错：method GET must not have a request body.
 	@Bean
-	@LoadBalanced
 	public RestTemplate restTemplate(/* RestTemplateBuilder builder */) {
 		// 默认使用httpClient
 		// TODO GET方法不支持通过Body携带参数

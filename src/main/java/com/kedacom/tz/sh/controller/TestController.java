@@ -23,7 +23,7 @@ public class TestController {
 	private HttpUtils httpUtils;
 
 	@GetMapping("/test")
-	@ApiOperation(value = "对指定url发送不带参数的GET请求")
+	@ApiOperation(value = "测试GET请求（参数放在url上）")
 	public String test(String url) {
 //		ResponseEntity<String> responseEntity = httpUtils.get(url, null);
 		ResponseEntity<String> responseEntity = httpUtils.request(url, HttpMethod.GET, null, null);

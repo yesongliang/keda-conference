@@ -1,6 +1,7 @@
 package com.kedacom.tz.sh.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -19,21 +20,36 @@ import com.alibaba.fastjson.JSONObject;
 import com.kedacom.tz.sh.constant.ConferenceConstant;
 import com.kedacom.tz.sh.constant.ConferenceURL;
 import com.kedacom.tz.sh.controller.request.AddMembersParam;
+import com.kedacom.tz.sh.controller.request.ConfMtCameraParam;
+import com.kedacom.tz.sh.controller.request.ConfMtVolumeParam;
+import com.kedacom.tz.sh.controller.request.ConfSMSParam;
 import com.kedacom.tz.sh.controller.request.ConferenceMemberParam;
 import com.kedacom.tz.sh.controller.request.CreateConferenceParam;
+import com.kedacom.tz.sh.controller.request.DelayConfTimeParam;
+import com.kedacom.tz.sh.controller.request.MixOperateParam;
+import com.kedacom.tz.sh.controller.request.MonitorOperateParam;
+import com.kedacom.tz.sh.controller.request.MonitorParam;
 import com.kedacom.tz.sh.controller.request.OperateConfMtParam;
 import com.kedacom.tz.sh.controller.request.OperateConfParam;
 import com.kedacom.tz.sh.controller.request.OperateMembersParam;
+import com.kedacom.tz.sh.controller.request.VmpOperateParam;
+import com.kedacom.tz.sh.controller.request.VmpOperateParam.Member;
 import com.kedacom.tz.sh.controller.response.PlatformVo;
 import com.kedacom.tz.sh.exception.BusinessException;
 import com.kedacom.tz.sh.model.AddMtsModel;
 import com.kedacom.tz.sh.model.AddMtsModel.MtModel;
+import com.kedacom.tz.sh.model.ConfSMSModel;
 import com.kedacom.tz.sh.model.ConferenceInfoModel;
 import com.kedacom.tz.sh.model.CreateConferenceModel;
 import com.kedacom.tz.sh.model.CreateConferenceModel.InviteMember;
 import com.kedacom.tz.sh.model.CreateConferenceModel.VideoFormat;
+import com.kedacom.tz.sh.model.MixOperateModel;
+import com.kedacom.tz.sh.model.MonitoNeediframeModel;
+import com.kedacom.tz.sh.model.MonitorHeartbeatModel;
+import com.kedacom.tz.sh.model.MonitorOperateModel;
 import com.kedacom.tz.sh.model.MtInfoModel;
 import com.kedacom.tz.sh.model.OperateMtsModel;
+import com.kedacom.tz.sh.model.VmpOperateModel;
 import com.kedacom.tz.sh.service.IBusinessService;
 import com.kedacom.tz.sh.service.IConferenceService;
 
@@ -217,9 +233,9 @@ public class ConfController {
 		conferenceService.addMts(url, platform.getToken(), JSON.toJSONString(addMtsModel), platform.getCookie());
 	}
 
-	@PostMapping("conf/mt/operate")
+	@PostMapping("conf/member/operate")
 	@ApiOperation(value = "操作会议成员：type=1-批量删除终端;type=2-批量呼叫终端;type=3-批量挂断终端")
-	public void operateMts(@RequestBody @Validated OperateMembersParam param) {
+	public void operateMembers(@RequestBody @Validated OperateMembersParam param) {
 		// 获取会议平台
 		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
 		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
@@ -373,7 +389,7 @@ public class ConfController {
 		conferenceService.putSpeaker(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
 	}
 
-	@PostMapping("conf/conf_mt/operate")
+	@PostMapping("conf/mt/operate")
 	@ApiOperation(value = "type:1-指定会议双流源;2-取消会议双流源;3-终端静音;4-取消终端静音;5-终端哑音;6-取消终端哑音;")
 	public void operateConfMt(@RequestBody @Validated OperateConfMtParam param) {
 		// 获取会议平台
@@ -459,6 +475,258 @@ public class ConfController {
 			String url = String.format(ConferenceURL.CONF_MUTE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
 			conferenceService.confMute(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
 		}
+	}
+
+	@PostMapping("conf/end/delay")
+	@ApiOperation(value = "延长会议时间")
+	public void DelayConfTime(@RequestBody @Validated DelayConfTimeParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put(ConferenceConstant.DELAY_TIME, param.getDelayTime());
+		String url = String.format(ConferenceURL.DELAY_CONF.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+		conferenceService.delayConfTime(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+	}
+
+	@PostMapping("conf/message/send")
+	@ApiOperation(value = "发送短消息")
+	public void sendMessage(@RequestBody @Validated ConfSMSParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+
+		if (!StringUtils.isEmpty(param.getMessage()) && param.getMessage().length() > 750) {
+			throw new BusinessException("消息内容长度超出限制");
+		}
+
+		ConfSMSModel confSMSModel = new ConfSMSModel();
+		for (String mtId : param.getMtIds()) {
+			if (StringUtils.isEmpty(mtId) || mtId.length() > 24) {
+				throw new BusinessException("会议成员唯一标识不符合规则");
+			}
+			confSMSModel.addMt(mtId);
+		}
+		confSMSModel.setRoll_num(param.getRollNum());
+		confSMSModel.setRoll_speed(param.getRollSpeed());
+		confSMSModel.setType(param.getType());
+		confSMSModel.setMessage(param.getMessage());
+		String url = String.format(ConferenceURL.CONF_SMS.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+		conferenceService.sendMessage(url, platform.getToken(), JSON.toJSONString(confSMSModel), platform.getCookie());
+	}
+
+	@PostMapping("conf/mix/operate")
+	@ApiOperation(value = "会议混音相关操作:type=1-开始会议混音；type=2-结束会议混音；type=3-添加会议混音成员；type=4-删除会议混音成员")
+	public void operateConfMix(@RequestBody @Validated MixOperateParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+
+		String url = null;
+		switch (param.getType()) {
+
+		case 1:// type=1-开始会议混音
+			if (param.getMode() == null || (param.getMode() != 1 && param.getMode() != 2)) {
+				throw new BusinessException("不支持的混音模式");
+			}
+			MixOperateModel start = new MixOperateModel();
+			start.setMode(param.getMode());
+			// 2-定制混音；
+			if (param.getMode() == 2) {
+				if (CollectionUtils.isEmpty(param.getMtIds())) {
+					throw new BusinessException("定制混音时混音列表不能为空");
+				} else {
+					for (String mtId : param.getMtIds()) {
+						if (StringUtils.isEmpty(mtId) || mtId.length() > 24) {
+							throw new BusinessException("会议成员唯一标识不符合规则");
+						}
+						start.addMember(mtId);
+					}
+				}
+			}
+			url = String.format(ConferenceURL.START_CONF_MIX.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.startMix(url, platform.getToken(), JSON.toJSONString(start), platform.getCookie());
+			break;
+		case 2:// type=2-结束会议混音
+			url = String.format(ConferenceURL.STOP_CONF_MIX.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.stopMix(url, platform.getToken(), platform.getCookie());
+			break;
+		case 3:// type=3-添加会议混音成员
+			MixOperateModel add = new MixOperateModel();
+			if (CollectionUtils.isEmpty(param.getMtIds())) {
+				throw new BusinessException("mtIds不能为空");
+			} else {
+				for (String mtId : param.getMtIds()) {
+					if (StringUtils.isEmpty(mtId) || mtId.length() > 24) {
+						throw new BusinessException("会议成员唯一标识不符合规则");
+					}
+					add.addMember(mtId);
+				}
+			}
+			url = String.format(ConferenceURL.CONF_MIX_MEMBER_ADD.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.addMixMember(url, platform.getToken(), JSON.toJSONString(add), platform.getCookie());
+			break;
+		case 4:// type=4-删除会议混音成员
+			MixOperateModel delete = new MixOperateModel();
+			if (CollectionUtils.isEmpty(param.getMtIds())) {
+				throw new BusinessException("mtIds不能为空");
+			} else {
+				for (String mtId : param.getMtIds()) {
+					if (StringUtils.isEmpty(mtId) || mtId.length() > 24) {
+						throw new BusinessException("会议成员唯一标识不符合规则");
+					}
+					delete.addMember(mtId);
+				}
+			}
+			url = String.format(ConferenceURL.CONF_MIX_MEMBER_DELETE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.deleteMixMember(url, platform.getToken(), JSON.toJSONString(delete), platform.getCookie());
+			break;
+		default:
+			break;
+		}
+	}
+
+	@PostMapping("conf/vmp/operate")
+	@ApiOperation(value = "会议画面合成相关操作:type=1-开始会议画面合成；type=2-修改会议画面合成；type=3-结束会议画面合成")
+	public void operateConfVmp(@RequestBody @Validated VmpOperateParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		String url = null;
+		// type=3-结束会议画面合成
+		if (param.getType() == 3) {
+			url = String.format(ConferenceURL.STOP_CONF_VMP.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.stopVmp(url, platform.getToken(), platform.getCookie());
+		} else {
+			VmpOperateModel vmpOperateModel = new VmpOperateModel();
+			// TODO 目前暂提高两种模式支持
+			if (param.getMode() == null || (param.getMode() != 1 && param.getMode() != 2)) {
+				throw new BusinessException("不支持的画面合成模式");
+			}
+			vmpOperateModel.setMode(param.getMode());
+
+			// 会议平台在某些情况下不需要但又必须填的数据，设置默认值
+			vmpOperateModel.setLayout(1);
+			vmpOperateModel.setMembers(new ArrayList<>());
+
+			// 1-定制画面合成
+			if (param.getMode() == 1) {
+				List<Integer> layouts = Arrays.asList(1, 2, 3, 61, 62, 63, 23, 45, 35, 6, 13, 7, 8, 18, 38, 39, 19, 17, 20, 11, 46, 48, 51, 14, 54, 56, 59, 27);
+				if (param.getLayout() == null || !layouts.contains(param.getLayout().intValue())) {
+					throw new BusinessException("不支持的画面合成风格");
+				}
+				vmpOperateModel.setLayout(param.getLayout());
+				if (!CollectionUtils.isEmpty(param.getMembers())) {
+					for (Member member : param.getMembers()) {
+						Integer chnIdx = member.getChnIdx();
+						String mtId = member.getMtId();
+						if (chnIdx == null || chnIdx < 0) {
+							throw new BusinessException("画面合成通道索引不符合规则");
+						}
+						if (StringUtils.isEmpty(mtId) || mtId.length() > 24) {
+							throw new BusinessException("通道终端号不符合规则");
+						}
+						vmpOperateModel.addMember(chnIdx, mtId);
+					}
+				}
+			}
+			// 1-开始会议画面合成
+			if (param.getType() == 1) {
+				url = String.format(ConferenceURL.START_CONF_VMP.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+				conferenceService.startVmp(url, platform.getToken(), JSON.toJSONString(vmpOperateModel), platform.getCookie());
+				// 2-修改会议画面合成
+			} else {
+				url = String.format(ConferenceURL.MODIFY_CONF_VMP.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+				conferenceService.modifyVmp(url, platform.getToken(), JSON.toJSONString(vmpOperateModel), platform.getCookie());
+			}
+		}
+	}
+
+	@PostMapping("conf/monitor/mt")
+	@ApiOperation(value = "监控操作:mode=0-会议终端视频监控；mode=1-会议终端音频监控；")
+	public void confMtMonitor(@RequestBody @Validated MonitorParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		// 参数构建
+		MonitorOperateModel model = new MonitorOperateModel();
+		model.setMode(param.getMode());
+		model.setSrc(param.getMtId());
+		model.setDst(param.getIp(), param.getPort());
+		// 构建URL
+		String url = String.format(ConferenceURL.MONITORS_OPERATE.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+		conferenceService.monitor(url, platform.getToken(), JSON.toJSONString(model), platform.getCookie());
+	}
+
+	@PostMapping("conf/monitor/operate")
+	@ApiOperation(value = "监控相关操作:1-取消监控；2-监控心跳保活；3-监控请求关键帧")
+	public void operateMonitor(@RequestBody @Validated MonitorOperateParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		String url = null;
+		switch (param.getType()) {
+		case 1:// 1-取消监控
+			url = String.format(ConferenceURL.MONITORS_CANCEL.getUrl(), platform.getIp(), platform.getPort(), param.getConfId(), param.getIp(), param.getPort());
+			conferenceService.cancelMonitor(url, platform.getToken(), platform.getCookie());
+			break;
+		case 2:// 2-监控心跳保活
+			MonitorHeartbeatModel monitorHeartbeatModel = new MonitorHeartbeatModel();
+			monitorHeartbeatModel.addMember(param.getIp(), param.getPort());
+			url = String.format(ConferenceURL.MONITORS_HEARTBEAT.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.heartbeatMonitor(url, platform.getToken(), JSON.toJSONString(monitorHeartbeatModel), platform.getCookie());
+			break;
+		case 3:// 3-监控请求关键帧
+			MonitoNeediframeModel monitoNeediframeModel = new MonitoNeediframeModel();
+			monitoNeediframeModel.setDst(param.getIp(), param.getPort());
+			url = String.format(ConferenceURL.MONITORS_NEEDIFRAME.getUrl(), platform.getIp(), platform.getPort(), param.getConfId());
+			conferenceService.neediframeMonitor(url, platform.getToken(), JSON.toJSONString(monitoNeediframeModel), platform.getCookie());
+			break;
+		default:
+			break;
+		}
+	}
+
+	@PostMapping("conf/mt/volume/operate")
+	@ApiOperation(value = "修改终端音量操作")
+	public void confMtVolumeOperate(@RequestBody @Validated ConfMtVolumeParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put(ConferenceConstant.VOL_MODE, param.getMode());
+		jsonObject.put(ConferenceConstant.VOL_VALUE, param.getValue());
+		String url = String.format(ConferenceURL.CONF_MT_VOLUME.getUrl(), platform.getIp(), platform.getPort(), param.getConfId(), param.getMtId());
+		conferenceService.volumeControl(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
+	}
+
+	@PostMapping("conf/mt/camera/operate")
+	@ApiOperation(value = "终端摄像头控制操作")
+	public void confMtCameraOperate(@RequestBody @Validated ConfMtCameraParam param) {
+		// 获取会议平台
+		PlatformVo platform = businessService.getPlatformByKey(param.getPlatformId());
+		if (platform == null || !platform.isLogin() || !platform.isConnected()) {
+			throw new BusinessException("会议平台暂不可用");
+		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put(ConferenceConstant.STATE, param.getState());
+		jsonObject.put(ConferenceConstant.TYPE, param.getType());
+		String url = String.format(ConferenceURL.CONF_MT_CAMERA.getUrl(), platform.getIp(), platform.getPort(), param.getConfId(), param.getMtId());
+		conferenceService.cameraControl(url, platform.getToken(), jsonObject.toString(), platform.getCookie());
 	}
 
 }
