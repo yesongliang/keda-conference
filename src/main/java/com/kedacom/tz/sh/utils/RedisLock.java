@@ -6,6 +6,8 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.connection.ReturnType;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.data.redis.core.script.RedisScript;
@@ -25,6 +27,8 @@ public class RedisLock {
 
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
+	@Autowired
+	private DefaultRedisScript<Long> ratelimitLua;
 
 	/** 执行结果标识 **/
 	private static final int SUCCESS = 1;
@@ -104,6 +108,17 @@ public class RedisLock {
 	 */
 	public String fetchLockValue() {
 		return UUID.randomUUID().toString() + "_" + System.currentTimeMillis();
+	}
+
+	// 令牌限流算法实现
+	public boolean rateLimit(String key, int max, int rate) {
+		Long res = redisTemplate.execute((RedisConnection connection) -> connection.eval(ratelimitLua.getScriptAsString().getBytes(), ReturnType.INTEGER, 1, key.getBytes(),
+				Integer.toString(max).getBytes(), Integer.toString(rate).getBytes(), Long.toString(System.currentTimeMillis()).getBytes()));
+		return 1 == res;
+		// TODO 以下方式获取不到传递的参数
+//		List<String> keyList = new ArrayList<>(1);
+//		keyList.add(key);
+//		return 1 == redisTemplate.execute(ratelimitLua, keyList, Integer.toString(max), Integer.toString(rate), Long.toString(System.currentTimeMillis()));
 	}
 
 }
